@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+.link-underline {
+    text-decoration: underline;
+    @apply text-gray-500 font-normal !important;
+}
+
+.single-line-list > a, li {
+    @apply inline-block !important;
+    @apply mx-1 underline;
+}
+
+.no-single-line-list > a, li {
+    @apply block no-underline !important;
+}
+}

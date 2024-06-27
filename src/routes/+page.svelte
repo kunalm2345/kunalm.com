@@ -1,59 +1,15 @@
-<script>
-	import Counter from './Counter.svelte';
-	import welcome from '$lib/images/svelte-welcome.webp';
-	import welcome_fallback from '$lib/images/svelte-welcome.png';
-</script>
+<h1 class="font-serif text-6xl mb-2">Kunal Mishra</h1>
+<p class="text-2xl">
+    Hi! I'm Kunal, an electronics major at BITS, Goa.
+    <br><br>
+    Right now, I'm interning at <a href="http://biocomputeinc.com">BioCompute, Inc</a> for computational research and working in <a href="http://arnabkrpaul.github.io/Dashlab/">DaSH lab</a> under Prof Arnab Paul among a few other engagements. 
+    <br><br>
 
-<svelte:head>
-	<title>Home</title>
-	<meta name="description" content="Svelte demo app" />
-</svelte:head>
-
-<section>
-	<h1>
-		<span class="welcome">
-			<picture>
-				<source srcset={welcome} type="image/webp" />
-				<img src={welcome_fallback} alt="Welcome" />
-			</picture>
-		</span>
-
-		to your new<br />SvelteKit app
-	</h1>
-
-	<h2>
-		try editing <strong>src/routes/+page.svelte</strong>
-	</h2>
-
-	<Counter />
-</section>
-
-<style>
-	section {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		flex: 0.6;
-	}
-
-	h1 {
-		width: 100%;
-	}
-
-	.welcome {
-		display: block;
-		position: relative;
-		width: 100%;
-		height: 0;
-		padding: 0 0 calc(100% * 495 / 2048) 0;
-	}
-
-	.welcome img {
-		position: absolute;
-		width: 100%;
-		height: 100%;
-		top: 0;
-		display: block;
-	}
-</style>
+    I fell in love with computers and the Internet when I was 10. 
+    Ever since, I have written a few newsletters, did content marketing
+    and SEO for startups and built a bunch of web-apps that earned me some
+    pocket money. 
+    <br><br>
+    
+    <small class="text-sm text-gray-500">design is inspired by <a href="http://ben.page/" class="link-underline">Ben Borger's person website</a>.</small>
+</p>

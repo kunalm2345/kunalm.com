@@ -8,10 +8,16 @@
     @apply text-gray-500 font-normal !important;
 }
 
-.single-line-list > a, li {
+.single-line-list > a {
     @apply inline-block !important;
     @apply mx-1 underline;
 }
+
+.single-line-list > li {
+    @apply inline-block !important;
+    @apply mx-1 underline;
+}
+
 
 .no-single-line-list > a, li {
     @apply block no-underline !important;

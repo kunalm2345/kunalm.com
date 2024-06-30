@@ -28,7 +28,7 @@
             <div class="md:sticky md:top-24 flex flex-row md:hidden"> 
                 <img src={me} alt="me, kunal" class="basis-1/3 w-36 h-full md:h-max border-white border-b-32 border-x-8 border-t-8 rotate-6 mb-7" />
                 <nav class="md:basis-2/3 list-none text-right">
-                    <ul class="md:no-single-line-list single-line-list md:h-full md:h-auto md:mb-0 mb-6">
+                    <ul class="md:no-single-ligitne-list single-line-list md:h-full md:h-auto md:mb-0 mb-6">
                         {#if current_url == ''} <a href="/" class="link-active"><li class="list-none">Home</li></a>{:else}<a href="/"><li class="list-none">Home</li></a>{/if}
 <<<<<<< HEAD
                         <!-- {#if current_url == 'blog'} <a href="/blog" class="link-active"><li class="list-none">Blog</li></a>{:else}<a href="/blog"><li class="list-none">Blog</li></a>{/if} -->

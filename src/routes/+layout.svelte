@@ -2,22 +2,12 @@
     import "../app.css";
     import me from '$lib/assets/me.jpeg';
 	import {
-<<<<<<< HEAD
-		beforeUpdate,
-		afterUpdate
-	} from 'svelte';
-    let current_url;
-
-    afterUpdate(() => {
-        current_url = window.location.href.split('/').pop();
-=======
 		afterUpdate
 	} from 'svelte';
     let current_url = '';
     afterUpdate(() => {
         current_url = window.location.href.split('/').pop();
         console.log(current_url);
->>>>>>> 8f34d47 (fixed navbar)
     });
 </script>
 
@@ -30,10 +20,7 @@
                 <nav class="md:basis-2/3 list-none text-right">
                     <ul class="md:no-single-ligitne-list single-line-list md:h-full md:h-auto md:mb-0 mb-6">
                         {#if current_url == ''} <a href="/" class="link-active"><li class="list-none">Home</li></a>{:else}<a href="/"><li class="list-none">Home</li></a>{/if}
-<<<<<<< HEAD
                         <!-- {#if current_url == 'blog'} <a href="/blog" class="link-active"><li class="list-none">Blog</li></a>{:else}<a href="/blog"><li class="list-none">Blog</li></a>{/if} -->
-=======
->>>>>>> 8f34d47 (fixed navbar)
                         {#if current_url == 'work'} <a href="/work" class="link-active"><li class="list-none">Work</li></a>{:else}<a href="/work"><li class="list-none">Work</li></a>{/if}
                         {#if current_url == 'projects'} <a href="/projects" class="link-active"><li class="list-none">Projects</li></a>{:else}<a href="/projects"><li class="list-none">Projects</li></a>{/if}
                         <br>

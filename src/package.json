@@ -34,12 +34,8 @@
 		"vitest": "^0.25.8",
 		"web-vitals": "^3.5.0"
 	},
-<<<<<<< HEAD
-	"type": "module"
-=======
 	"type": "module",
 	"dependencies": {
 		"svelte-spa-router": "^4.0.1"
 	}
->>>>>>> 8f34d47 (fixed navbar)
 }

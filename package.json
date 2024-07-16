@@ -36,6 +36,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@vercel/speed-insights": "^1.0.12",
 		"svelte-spa-router": "^4.0.1"
 	}
 }

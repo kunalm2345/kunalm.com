@@ -4,9 +4,14 @@
 	import {
 		afterUpdate
 	} from 'svelte';
+    import { injectSpeedInsights } from '@vercel/speed-insights/sveltekit';
+    injectSpeedInsights();
     let current_url = '';
     afterUpdate(() => {
-        current_url = window.location.href.split('/').pop();
+        let currurl = window.location.href.split('/').pop();
+        if (currurl) {
+            current_url = currurl;
+        }
         console.log(current_url);
     });
 </script>

@@ -4,7 +4,10 @@
 </p>
 <ul class="text-2xl list-inside no-single-line-list">
    
-    <li><b>Research Intern at BioCompute, Inc</b> — Bacterial DNA can store digital data thousands of times more densely than Seagate's current best tech. We're working on a device which would bring this in a form you can plug into your PC.
+    <li><b>Research Intern at BioCompute, Inc</b>
+        <br>
+
+        Bacterial DNA can store digital data thousands of times more densely than Seagate's current best tech. We're working on a device which would bring this in a form you can plug into your PC. 
     </li> <br>
 
     <li><b>Student Researcher at DaSH Lab</b> – I'm working under Prof Arnab Paul on building data prefetching for distributed ML training on resource constrained devices.    </li>

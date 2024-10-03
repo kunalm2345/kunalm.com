@@ -1,6 +1,5 @@
-<h1 class="font-serif text-6xl mb-2">Kunal Mishra</h1>
+<h1 class="font-serif text-6xl mb-4">Kunal Mishra</h1>
 <p class="text-2xl">
-    <br><br>
     Hi! I'm Kunal, an electronics major at BITS, Goa.
     <br><br>
     Right now, I'm part-time building new features at <a href="http://buttondown.email">Buttondown</a>, working on a research project on smart spaces at <a href="http://arnabkrpaul.github.io/Dashlab/">DaSH lab</a> and maintaining my indie-saas, <a href="https://socialscri.be/">socialscri.be</a>.

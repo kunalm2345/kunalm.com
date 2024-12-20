@@ -7,10 +7,10 @@
     Before that, I did computational research at <a href="https://biocomputeinc.com">BioCompute, Inc</a> (they got WTFund'ed).
     <br><br>
 
-    I fell in love with computers and the Internet when I was 10. 
+    I fell in love with computers and the Internet when I was 10.
     Ever since, I have written a few newsletters, did SEO, designing and consultant-work for startups and built a bunch of saas products that earned me some
-    pocket money. 
+    pocket money.
     <br><br>
-    
+
     <small class="text-sm text-gray-500">design is inspired by <a href="http://ben.page/" class="link-underline">Ben Borger's person website</a>.</small>
 </p>

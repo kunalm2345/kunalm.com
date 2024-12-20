@@ -1,8 +1,8 @@
 <h1 class="font-serif text-6xl mb-2">Projects</h1>
 <ul class="text-2xl list-inside">
     <br>
-   
-    <li><b>Socialscribe</b> — Socialscribe lets newsletter creators add social sign-up buttons (<span class="text-white text-sm uppercase font-mono px-3 py-1 rounded-lg bg-gray-500">sign-up with google</span>) to their websites without coding. I designed and built the entire thing up and grew it to about $900 in profits.
+
+    <li><b>Socialscribe</b> — Socialscribe lets newsletter creators add social sign-up buttons (<span class="text-white text-sm uppercase font-mono px-3 py-1 rounded-lg bg-gray-500">sign-up with google</span>) to their websites without coding. I designed and built the entire thing up and grew it to over $1k in profits.
     </li> <br>
 
     <li><b>Twift (now defunct)</b> – Now defunct, Twift helped creators run "reply with an 👋" giveaways on Twitter, handling sending thousands of DMs without being marked as spam. I built and designed the whole web-app and DM-ing engine while Prado (@pradologue) helped me with growing it to hundreds of users. We had to eventually shut down when the Twitter API pricing change made this too expensive to continue ($40k/month to be exact).    </li>

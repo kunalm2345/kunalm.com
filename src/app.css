@@ -3,23 +3,43 @@
 @import 'tailwindcss/utilities';
 
 @layer components {
-.link-underline {
-    text-decoration: underline;
-    @apply text-gray-500 font-normal !important;
-}
+	blockquote {
+		@apply border-l-4 bg-orange-200 border-orange-400 p-4;
+	}
 
-.single-line-list > a {
-    @apply inline-block !important;
-    @apply mx-1 underline;
-}
+	.note > li {
+		@apply font-bold text-4xl;
+	}
 
-.single-line-list > li {
-    @apply inline-block !important;
-    @apply mx-1 underline;
-}
+	.note > ul {
+		@apply space-y-4;
+	}
 
+	.note > ul > li {
+		@apply font-bold;
+	}
 
-.no-single-line-list > a, li {
-    @apply block no-underline !important;
-}
+	.note > ul > ul {
+		@apply space-y-4;
+	}
+
+	.link-underline {
+		text-decoration: underline;
+		@apply text-gray-500 font-normal !important;
+	}
+
+	.single-line-list > a {
+		@apply inline-block !important;
+		@apply mx-1 underline;
+	}
+
+	.single-line-list > li {
+		@apply inline-block !important;
+		@apply mx-1 underline;
+	}
+
+	.no-single-line-list > a,
+	li {
+		@apply block no-underline !important;
+	}
 }

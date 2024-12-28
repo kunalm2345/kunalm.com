@@ -39,7 +39,7 @@
 	}
 
 	.no-single-line-list > a,
-	li {
+	.no-single-line-list > li {
 		@apply block no-underline !important;
 	}
 }

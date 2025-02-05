@@ -16,8 +16,15 @@
     </label>
 </form>
 <ul class="text-2xl list-inside space-y-8">
+    {#if category.includes("hardware") || category.includes("research") || category.length === 0}
+    <li>
+        <b>CSI Based Activity Recognition</b> — A paper I'm working on under <a href="https://sougata-sen.com/">Prof Sougata Sen</a> where we're trying to train a model on CSI value plots of a WIFi network in a room to recognise what's going on between the sender and receiver. 
+    </li>
+    {/if}
+
     {#if category.includes("hardware") || category.length === 0}
-    <li><b>Smart Space</b> — My research project at DaSH lab, BITS Goa where we're putting 18 raspberry pis in a classroom to monitor student attention to help improve teaching pedagogy.
+    <li>
+        <b>Smart Space</b> — The research project I'm leading at DaSH lab, BITS Goa where we're putting raspberry pis and cameras in a classroom to monitor student attention to help improve teaching pedagogy.
     </li>
     {/if}
 
@@ -28,12 +35,12 @@
     {/if}
 
     {#if category.includes("webdev") || category.length === 0}
-    <li><b>Socialscribe</b> — Socialscribe lets newsletter creators add social sign-up buttons (<span class="text-white text-sm uppercase font-mono px-3 py-1 rounded-lg bg-gray-500">sign-up with google</span>) to their websites without coding. I designed and built the entire thing up and grew it to over $1k in profits.
+    <li><b><a href="http://socialscri.be/?ref=kunal">Socialscri.be</a></b> — Socialscribe lets newsletter creators add social sign-up buttons (<span class="text-white text-sm uppercase font-mono px-3 py-1 rounded-lg bg-gray-500">sign-up with google</span>) to their websites without coding. I designed and built the entire thing up and grew it to over $1k in profits.
     </li>
     {/if}
 
     {#if category.includes("webdev") || category.length === 0}
-    <li><b>Twift (now defunct)</b> – Now defunct, Twift helped creators run "reply with an 👋" giveaways on Twitter, handling sending thousands of DMs without being marked as spam. I built and designed the whole web-app and DM-ing engine while Prado (@pradologue) helped me with growing it to hundreds of users. We had to eventually shut down when the Twitter API pricing change made this too expensive to continue ($40k/month to be exact).    </li>
+    <li><b>Twift.xyz (now defunct)</b> – Now defunct, Twift helped creators run "reply with an 👋" giveaways on Twitter, handling sending thousands of DMs without being marked as spam. I built and designed the whole web-app and DM-ing engine while Prado (@pradologue) helped me with growing it to hundreds of users. We had to eventually shut down when the Twitter API pricing change made this too expensive to continue ($40k/month to be exact).    </li>
     {/if}
 
     {#if category.includes("webdev") || category.length === 0}
@@ -46,7 +53,7 @@
     {/if}
 
     {#if category.includes("content") || category.length === 0}
-      <li><b>Right Click (now defunct)</b> – I used to write a blog called <i>Theciva</i> about tech news and stuff like what would happen if Apple bought DuckDuckGo, flaws of India's COVID-times contact tracing app or what Google being carbon neutral meant. I also got a little bit of readers through SEO though mostly readers come through repost (w canonical urls) on Medium (unfortunately their partner program wasn't in India then) and HackerNoon (which won me 3 Noonies prizes!). Theciva evolved into Right Click (had to change the name!) which I tried to turn into Morning Brew for tech (also inspired by <a href="https://filtercoffee.co/?ref=kunal">Filter Coffee</a>). Later, I shut it down and sold the coolest twitter username I have ever owned yet—@rightclick—to rc.xyz, an NFT art platform for the easiest $1000 of my life.
+      <li><b><a href="https://rightclick.substack.com/">Right Click</a> (now defunct)</b> – I used to write a blog called <i>Theciva</i> about tech news and stuff like what would happen if Apple bought DuckDuckGo, flaws of India's COVID-times contact tracing app or what Google being carbon neutral meant. I also got a little bit of readers through SEO though most readers came through repost (w canonical urls) on Medium (unfortunately their partner program wasn't in India then) and HackerNoon (where I won me 3 Noonies prizes!). Theciva evolved into Right Click (had to change the name!) which I tried to turn into Morning Brew for tech (also inspired by <a href="https://filtercoffee.co/?ref=kunal">Filter Coffee</a>). Later, I shut it down and sold the coolest twitter username I have ever owned yet—@rightclick—to rc.xyz, an NFT art platform for the easiest $1000 of my life.
     </li>
     {/if}
 

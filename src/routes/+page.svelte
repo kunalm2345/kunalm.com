@@ -2,9 +2,9 @@
 <p class="text-2xl">
     Hi! I'm Kunal, an electronics major at BITS, Goa.
     <br><br>
-    Right now, I'm part-time building new features at <a href="http://buttondown.email">Buttondown</a>, working on a research project on smart spaces at <a href="http://arnabkrpaul.github.io/Dashlab/">DaSH lab</a> and maintaining my indie-saas, <a href="https://socialscri.be/">socialscri.be</a>.
+    Right now, I split my time between classes, working on research projects, working on a freelance hardware project, working on a CANSAT team and learning Computer Networks.
     <br><br>
-    Before that, I did computational research at <a href="https://biocomputeinc.com">BioCompute, Inc</a> (they got WTFund'ed).
+    Before that, I part-time built features at Buttondown and did computational research at <a href="https://biocomputeinc.com">BioCompute, Inc</a> (they got WTFund'ed!).
     <br><br>
 
     I fell in love with computers and the Internet when I was 10.

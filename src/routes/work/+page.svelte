@@ -23,4 +23,7 @@
     <li><b>Designed an infographic template for The Morning Context</b> — I designed a template for an newly launched, independent, subscription-based news publication called The Morning Context. Thanks Ashish K Mishra and Harveen Ahluwalia for this gig.
     </li> <br>
 
+    <li><b>Did Freelance Content Writing</b> — In 2018-19, I wrote a bunch of articles for Mobisium, a blog that later turned into a content platform but eventually shut down. They paid me peanuts (between ₹180-300 per 1000-2000 words) but it was my first time working for someone else and I loved it. I even pitched them a video that I did alongside a blog post. I also did a few gigs on Fiverr for their minimum $5. I'm just glad I can say I have never worked for anyone else for free and I don't think anyone should.
+    </li> <br>
+
 </ul>

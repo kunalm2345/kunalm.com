@@ -34,9 +34,9 @@
 							<a href="/projects" class="link-active"
 								><li class="list-none">Projects</li></a
 							>{:else}<a href="/projects"><li class="list-none">Projects</li></a>{/if}
-						{#if current_url.startsWith('/notes')}
+						<!-- {#if current_url.startsWith('/notes')}
 							<a href="/notes" class="link-active"><li class="list-none">Notes</li></a
-							>{:else}<a href="/notes"><li class="list-none">Notes</li></a>{/if}
+							>{:else}<a href="/notes"><li class="list-none">Notes</li></a>{/if} -->
 						{#if current_url.startsWith('/hire-me')}
 							<a href="/hire-me" class="link-active">
 								<li class="list-none flex flex-row-reverse">
@@ -205,9 +205,9 @@
 							<a href="/projects" class="link-active"
 								><li class="list-none">Projects</li></a
 							>{:else}<a href="/projects"><li class="list-none">Projects</li></a>{/if}
-						{#if current_url.startsWith('/notes')}
+						<!-- {#if current_url.startsWith('/notes')}
 							<a href="/notes" class="link-active"><li class="list-none">Notes</li></a
-							>{:else}<a href="/notes"><li class="list-none">Notes</li></a>{/if}
+							>{:else}<a href="/notes"><li class="list-none">Notes</li></a>{/if} -->
 						{#if current_url.startsWith('/hire-me')}
 							<a href="/hire-me" class="link-active">
 								<li class="list-none flex flex-row-reverse">

@@ -6,7 +6,7 @@
 
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 	{#each data.summaries as { slug, title, displayTitle, date }}
-		<a href="/notes/{slug}" class="block group">
+		<a href="/notes/{slug}" class="block group {!title ? 'md:col-span-2' : ''}">
 			<div class="relative h-36 w-full">
 				<!-- Card 3 (bottom of stack) -->
 				<div class="absolute inset-0 bg-white rounded-sm border border-gray-200 transform rotate-3 transition-all duration-300 group-hover:rotate-6 shadow-sm"></div>
@@ -20,7 +20,7 @@
 					<div class="h-1.5 bg-[#0091ad] group-hover:bg-[#e76f51] transition-colors duration-300"></div>
 					
 					<div class="p-4 h-[calc(100%-6px)] flex flex-col justify-between">
-						<p class="font-serif text-xl transition-colors group-hover:text-[#e76f51] overflow-hidden line-clamp-3">
+						<p class="{title ? 'font-serif text-xl line-clamp-3 transition-colors' : 'font-normal text-l line-clamp-4 text-[#1c1917]'} group-hover:text-[#e76f51] overflow-hidden">
 							{displayTitle}
 						</p>
 						

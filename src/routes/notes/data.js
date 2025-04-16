@@ -83,6 +83,33 @@ export const posts = [
     `
   },
   {
+    slug: 'bullish-or-bearish',
+    content: `A friend told me something I have been thinking about: “Pessimists sound smart but optimists make money.”
+    
+    This reminded me of something I observed a lot as kid: In social scenarios, it felt way more socially acceptable to be bearish than to be bullish. Say you recommend someone a flavour of ice cream and they try it because of your recommendation but don't like it. This disapproval, although subconcious, is a more negative reinforcement than if you had told them some flavour of ice cream that suck but they liked it.
+
+A few days earlier, I was thinking of the difference in how people form bullish or bearish opinions: 
+
+My working theory is that being correctly bearish is way easier than being correctly bullish. If i try to put the other two options in the same spectrum, ig it'd be:
+
+correctly bearish > incorrectly bullish > incorrectly bearish > correctly bullish
+
+This stems from the fact that most things fail.
+
+In my [research project](/projects#CSI), I learned that F1 scores are sometimes a better measure for an ML model than accuracy.
+
+F1 score = 2 × (precision × recall)/(precision + recall)
+
+precision = true positives / (true positives + false positives)
+ie, how often you were right when you said “yes”
+
+recall = true positives / (true positives + false negatives)
+ie, how often you caught all the actual yeses
+
+F1 score balances both when you care about not spamming yes and not missing yes.
+    `.replace(/\r?\n/g, '<br>')
+  },
+  {
     slug: 'seth-godin',
     title: 'Seth Godin',
     content: `
@@ -98,27 +125,6 @@ export const posts = [
     `
   },
   {
-    slug: 'bullish-or-bearish',
-    content: `a friend told me something I have been thinking about: “Pessimists sound smart but optimists make money.” 
-
-Earlier I was thinking of the difference in how people form bullish or bearish opinions: 
-
-working theory is being correctly bearish is way easier than being correctly bullish. If i try to put the other two options in the same spectrum, ig it'd be:
-
-correctly bearish > incorrectly bullish > incorrectly bearish > correctly bullish
-
-this stems from the fact that most things fail.
-
-in my research project, i learned that F1 scores are sometimes a better measure for an ML model than accuracy. ChatGPT said 
-
-F1 score = 2 × (precision × recall)/(precision + recall)
-
-precision = 
-
-recall = 
-    `.replace(/\r?\n/g, '<br>')
-  },
-  {
     slug: 'Bhavin Turakhia',
     title: 'Bhavin Turakhia',
     content: `- coach, don't manage.
@@ -129,19 +135,18 @@ recall =
 
   {
     slug: 'biology',
-    title: 'Why studying Biology sucks',
     content: `Biology is a particularly worse taught subject in high school level. Agreed that we really don't have answers to a lot of ‘why is smth this way?’ questions but that's also (sort of) the case with phy and chem yet they atleast focus on how we know what we know. Bio textbooks just tell you whatever we know about how cells work or how organs work without telling us how do we know that?`.replace(/\r?\n/g, '<br>')
   },
 
-  {
-    slug: 'relationships',
-    title: 'Love: Obsession, Closeness and Desires',
-    content: `a) obsession
-b) closeness
-c) sexual desire
+//   {
+//     slug: 'relationships',
+//     title: 'Love: Obsession, Closeness and Desires',
+//     content: `a) obsession
+// b) closeness
+// c) sexual desire
 
-The obsessive love is A + C, or sometimes just A. The mature love is B + C, with a smaller intensity of A returning shortly once in a while, usually when you break your stereotype in a good way, e.g. go together on an exotic vacation, or go dancing.
+// The obsessive love is A + C, or sometimes just A. The mature love is B + C, with a smaller intensity of A returning shortly once in a while, usually when you break your stereotype in a good way, e.g. go together on an exotic vacation, or go dancing.
 
-Source: <a class="overflow-x-hidden" href="https://www.lesswrong.com/posts/sHPN3RYiFgWkd7Gs7/is-love-a-good-idea?commentId=pvnJj5KftDTYiSGYY"> lesswrong.com</a>`.replace(/\r?\n/g, '<br>')
-  },
+// Source: <a class="overflow-x-hidden" href="https://www.lesswrong.com/posts/sHPN3RYiFgWkd7Gs7/is-love-a-good-idea?commentId=pvnJj5KftDTYiSGYY"> lesswrong.com</a>`.replace(/\r?\n/g, '<br>')
+//   },
 ];

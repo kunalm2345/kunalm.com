@@ -21,8 +21,8 @@ export function load() {
       if (!displayTitle) {
         // Strip HTML tags and get first 100 characters
         const plainText = stripHtml(post.content);
-        displayTitle = plainText.length > 100 
-          ? plainText.substring(0, 100) + '...' 
+        displayTitle = plainText.length > 280 
+          ? plainText.substring(0, 280) + '...' 
           : plainText;
       }
       
@@ -32,7 +32,7 @@ export function load() {
         displayTitle,      // Either the real title or content preview
         date: post.date || null,
         // Send a small portion of content for preview
-        contentPreview: post.content ? stripHtml(post.content).substring(0, 150) : ''
+        contentPreview: post.content ? stripHtml(post.content).substring(0, 280) : ''
       };
     })
   };

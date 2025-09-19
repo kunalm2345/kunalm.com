@@ -7,6 +7,75 @@
 		@apply border-l-4 bg-orange-200 border-orange-400 p-4;
 	}
 
+	p {
+		@apply text-2xl;
+	}
+
+	/* Apply margin-bottom only to content areas, not navigation */
+	main p,
+	.content-spacing p,
+	article p {
+		@apply mb-4;
+	}
+
+	h1 {
+		@apply font-serif text-6xl mb-6 italic tracking-tighter;
+	}
+
+	h2 {
+		@apply font-serif text-4xl mb-4;
+	}
+
+	h3 {
+		@apply font-serif text-3xl mb-3;
+	}
+
+	/* Remove global ul/ol/li margins that affect navigation */
+	main ul,
+	main ol,
+	.content-spacing ul,
+	.content-spacing ol,
+	article ul,
+	article ol {
+		@apply mb-4;
+	}
+
+	main li,
+	.content-spacing li,
+	article li {
+		@apply mb-2;
+	}
+
+	/* Content spacing utility class */
+	.content-spacing > * {
+		@apply mb-4;
+	}
+
+	.content-spacing > h1 {
+		@apply mb-6;
+	}
+
+	.content-spacing > h2 {
+		@apply mb-4;
+	}
+
+	.content-spacing > h3 {
+		@apply mb-3;
+	}
+
+	.content-spacing > ul,
+	.content-spacing > ol {
+		@apply mb-4;
+	}
+
+	.content-spacing > li {
+		@apply mb-2;
+	}
+
+	.a {
+		@apply no-underline;
+	}
+
 	.note > li {
 		@apply font-bold text-4xl;
 	}

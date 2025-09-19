@@ -1,4 +1,23 @@
-<h1 class="font-serif text-6xl mb-4">Kunal Mishra</h1>
+<script>
+    import { onMount } from 'svelte';
+    import { convex } from '$lib/convex';
+
+    let content = $state('');
+    let loading = $state(true);
+
+    onMount(async () => {
+        try {
+            const pageContent = await convex.query("pages:getPageContent", { path: "/" });
+            content = pageContent || getDefaultContent();
+        } catch (error) {
+            console.error('Failed to load content:', error);
+            content = getDefaultContent();
+        }
+        loading = false;
+    });
+
+    function getDefaultContent() {
+        return `<h1 class="font-serif text-6xl mb-4">Kunal Mishra</h1>
 <p class="text-2xl">
     Hi! I'm Kunal, an electronics major at BITS, Goa.
     <br><br>
@@ -13,4 +32,14 @@
     <br><br>
 
     <small class="text-sm text-gray-500">design is inspired by <a href="http://ben.page/" class="link-underline">Ben Borger's person website</a>.</small>
-</p>
+</p>`;
+    }
+</script>
+
+{#if loading}
+    <p>Loading...</p>
+{:else}
+    <div class="content-spacing">
+        {@html content}
+    </div>
+{/if}

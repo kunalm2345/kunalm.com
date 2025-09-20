@@ -14,7 +14,7 @@
 					<img
 						src={me}
 						alt="me, kunal"
-						class="basis-1/3 w-36 h-full md:h-max border-white border-x-8 border-y-8"
+						class="basis-2/6 w-36 h-full md:h-max border-white border-x-8 border-y-8"
 					/>
 					<p
 						class="text-center handwritten font-bold bg-white basis-1/3 px-0 mx-0 py-1 border-x-8 border-white text-sm"
@@ -22,7 +22,7 @@
 						Kunal Mishra
 					</p>
 				</div>
-				<nav class="md:basis-2/3 list-none text-right" data-sveltekit-reload>
+				<nav class="basis-4/6 list-none text-right" data-sveltekit-reload>
 					<ul class="md:no-single-ligitne-list single-line-list md:h-auto md:mb-0 mb-6">
 						{#if current_url == '/'}
 							<a href="/" class="link-active"><li class="list-none">Home</li></a

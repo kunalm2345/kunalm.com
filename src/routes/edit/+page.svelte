@@ -87,73 +87,101 @@
     {:else}
         <!-- Pages Section -->
         <section>
-            <h2 class="text-2xl font-bold mb-4">Pages</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {#each pages as page}
-                    <button
-                        onclick={() => editPage(page.path)}
-                        class="p-4 border rounded hover:border-orange-500 transition-all text-left {page.hasContent ? 'bg-green-50 border-green-200' : 'bg-gray-50'}"
-                    >
-                        <h3 class="font-semibold">{page.title}</h3>
-                        <p class="text-sm text-gray-600">{page.path}</p>
-                        {#if page.hasContent}
-                            <p class="text-xs text-green-600 mt-1">Last updated: {formatDate(page.lastUpdated)}</p>
-                        {:else}
-                            <p class="text-xs text-gray-500 mt-1">No content saved</p>
-                        {/if}
-                    </button>
-                {/each}
+            <div class="flex items-center justify-between mb-4">
+                <p class="text-2xl font-bold uppercase">Pages</p>
+                <div class="flex-1 mx-4 border-t border-gray-300"></div>
             </div>
+            <table class="w-full text-left">
+                <thead>
+                    <tr class="text-xs uppercase text-gray-700 border-gray-200 border-b">
+                        <th class="p-2">Title</th>
+                        <th class="p-2">Path</th>
+                        <th class="p-2">Last Updated</th>
+                        <th class="p-2"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {#each pages as page}
+                        <tr class="border-b border-gray-200">
+                            <td class="p-2">{page.title}</td>
+                            <td class="p-2">{page.path}</td>
+                            <td class="p-2">
+                                {#if page.hasContent}
+                                    {formatDate(page.lastUpdated)}
+                                {:else}
+                                    No content saved
+                                {/if}
+                            </td>
+                            <td class="p-2">
+                                <button
+                                    onclick={() => editPage(page.path)}
+                                    class="text-orange-600 hover:text-orange-700 p-1 rounded hover:bg-orange-50"
+                                    title="Edit page"
+                                >
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                    </svg>
+                                </button>
+                            </td>
+                        </tr>
+                    {/each}
+                </tbody>
+            </table>
         </section>
 
         <!-- Notes Section -->
         <section>
-            <div class="flex justify-between items-center mb-4">
-                <h2 class="text-2xl font-bold">Notes</h2>
+            <div class="flex items-center justify-between mb-4">
+                <p class="text-2xl font-bold uppercase">Notes</p>
+                <div class="flex-1 mx-4 border-t border-gray-300"></div>
                 <button
                     onclick={createNewNote}
-                    class="px-4 py-2 text-sm text-white bg-orange-600 rounded hover:bg-orange-700"
+                    class="px-4 py-2 text-sm uppercase font-bold text-white bg-orange-600 rounded hover:bg-orange-700"
                 >
                     + New Note
                 </button>
             </div>
 
             {#if notes.length > 0}
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {#each notes as note}
-                        <div class="p-4 bg-white rounded-lg shadow-sm border border-gray-200 hover:border-orange-500 transition-all relative group">
-                            <button
-                                onclick={() => editNote(note.path)}
-                                class="w-full text-left"
-                            >
-                                <h3 class="font-semibold text-gray-900">
-                                    {note.path.replace('/notes/', '').replace(/-/g, ' ')}
-                                </h3>
-                                <p class="text-sm text-gray-600 mt-1">{note.path}</p>
-                                <p class="text-xs text-gray-500 mt-2">
-                                    Last updated: {formatDate(note.updatedAt)}
-                                </p>
-                                <p class="text-xs text-gray-500 mt-1 truncate">
-                                    {note.content.replace(/<[^>]*>/g, '').substring(0, 100)}...
-                                </p>
-                            </button>
-
-                            <!-- Delete button -->
-                            <button
-                                onclick={(e) => {
-                                    e.stopPropagation();
-                                    deleteNote(note.path, note.path.replace('/notes/', '').replace(/-/g, ' '));
-                                }}
-                                class="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity p-1 text-red-500 hover:text-red-700 hover:bg-red-50 rounded"
-                                title="Delete note"
-                            >
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-                                </svg>
-                            </button>
-                        </div>
-                    {/each}
-                </div>
+                <table class="w-full text-left">
+                    <thead>
+                        <tr class="text-xs uppercase text-gray-700 border-gray-200 border-b">
+                            <th class="p-2">Title</th>
+                            <th class="p-2">Path</th>
+                            <th class="p-2">Last Updated</th>
+                            <th class="p-2"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {#each notes as note}
+                            <tr class="border-b border-gray-200">
+                                <td class="p-2">{note.path.replace('/notes/', '').replace(/-/g, ' ')}</td>
+                                <td class="p-2">{note.path}</td>
+                                <td class="p-2">{formatDate(note.updatedAt)}</td>
+                                <td class="p-2 flex">
+                                    <button
+                                        onclick={() => editNote(note.path)}
+                                        class="text-orange-600 hover:text-orange-700 p-1 rounded hover:bg-orange-50 mr-2"
+                                        title="Edit note"
+                                    >
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                        </svg>
+                                    </button>
+                                    <button
+                                        onclick={() => deleteNote(note.path, note.path.replace('/notes/', '').replace(/-/g, ' '))}
+                                        class="text-red-600 hover:text-red-700 p-1 rounded hover:bg-red-50"
+                                        title="Delete note"
+                                    >
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                        </svg>
+                                    </button>
+                                </td>
+                            </tr>
+                        {/each}
+                    </tbody>
+                </table>
             {:else}
                 <div class="text-center py-8 text-gray-500">
                     No notes created yet. Click "New Note" to get started.

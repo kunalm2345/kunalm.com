@@ -135,7 +135,7 @@
                 {#if history.length > 0}
                     <button
                         onclick={() => showHistory = !showHistory}
-                        class="px-3 py-2 text-sm border border-gray-300 rounded hover:bg-gray-50"
+                        class="text-sm text-gray-600 hover:underline"
                     >
                         History ({history.length})
                     </button>
@@ -143,7 +143,7 @@
 
                 <button
                     onclick={() => goto('/edit')}
-                    class="px-3 py-2 text-sm border border-gray-300 rounded hover:bg-gray-50"
+                    class="text-sm text-gray-600 hover:underline"
                 >
                     ← Back
                 </button>
@@ -159,25 +159,21 @@
         </div>
 
         {#if error}
-            <div class="p-4 bg-red-50 border border-red-200 rounded text-red-700">
-                {error}
-            </div>
+            <p class="text-red-700">{error}</p>
         {/if}
 
         {#if hasUnsavedChanges()}
-            <div class="p-3 bg-yellow-50 border border-yellow-200 rounded text-yellow-800 text-sm">
-                You have unsaved changes
-            </div>
+            <p class="text-yellow-800 text-sm">You have unsaved changes</p>
         {/if}
 
         <!-- History Panel -->
         {#if showHistory}
-            <div class="bg-gray-50 border rounded p-4">
+            <div>
                 <h3 class="font-semibold mb-3">Page History</h3>
                 {#if history.length > 0}
                     <div class="space-y-2 max-h-64 overflow-y-auto">
                         {#each history as item}
-                            <div class="bg-white p-3 rounded border">
+                            <div>
                                 <div class="flex justify-between items-start">
                                     <div class="flex-1">
                                         <p class="text-xs text-gray-500 mb-2">
@@ -204,7 +200,7 @@
         {/if}
 
         <!-- Editor -->
-        <div class="bg-white border rounded">
+        <div>
             <TipTapEditor bind:content={content} />
         </div>
     </div>

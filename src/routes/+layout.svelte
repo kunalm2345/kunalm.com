@@ -25,8 +25,8 @@
 				<nav class="basis-4/6 list-none text-right" data-sveltekit-reload>
 					<ul class="md:no-single-ligitne-list single-line-list md:h-auto md:mb-0 mb-6">
 						{#if current_url == '/'}
-							<a href="/" class="link-active"><li class="list-none">Home</li></a
-							>{:else}<a href="/"><li class="list-none">Home</li></a>{/if}
+							<a href="/" class="link-active"><li class="list-none">About</li></a
+							>{:else}<a href="/"><li class="list-none">About</li></a>{/if}
 						{#if current_url == '/work'}
 							<a href="/work" class="link-active"><li class="list-none">Work</li></a
 							>{:else}<a href="/work"><li class="list-none">Work</li></a>{/if}
@@ -194,10 +194,10 @@
 					</p>
 				</div>
 				<nav class="md:basis-2/3 list-none text-right" data-sveltekit-reload>
-					<ul class="md:no-single-line-list single-line-list md:h-auto md:mb-0 mb-6">
+					<ul class="md:no-single-line-list single-line-list md:h-auto md:mb-0 mb-6 text-2xl">
 						{#if current_url == '/'}
-							<a href="/" class="link-active"><li class="list-none">Home</li></a
-							>{:else}<a href="/"><li class="list-none">Home</li></a>{/if}
+							<a href="/" class="link-active"><li class="list-none">About</li></a
+							>{:else}<a href="/"><li class="list-none">About</li></a>{/if}
 						{#if current_url == '/work'}
 							<a href="/work" class="link-active"><li class="list-none">Work</li></a
 							>{:else}<a href="/work"><li class="list-none">Work</li></a>{/if}

@@ -1,7 +1,7 @@
 import { writable } from 'svelte/store';
 import { browser } from '$app/environment';
 
-const CORRECT_PIN = '123456'; // Make sure this matches what you're entering
+const CORRECT_PIN = import.meta.env.VITE_EDIT_PASSWORD; // Make sure this matches what you're entering
 const AUTH_KEY = 'admin_authenticated';
 
 interface AuthStore {

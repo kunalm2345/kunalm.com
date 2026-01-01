@@ -1,5 +1,5 @@
 <script lang="ts">
-	export type Tag = 'Content' | 'Design' | 'Web Dev' | 'Research' | undefined;
+	export type Tag = 'Content' | 'Design' | 'Web Dev' | 'Research' | 'Marketing' | undefined;
 	export type CardType = 'project' | 'work' | 'cta';
 
 	interface Props {
@@ -26,18 +26,36 @@
 	// Check if link is external
 	const isExternal = href && (href.startsWith('http://') || href.startsWith('https://') || href.startsWith('mailto:'));
 
+	// Overflow detection and expansion
+	let textSection: HTMLElement;
+	let isOverflowing = $state(false);
+	let isExpanded = $state(false);
+	
+	$effect(() => {
+		if (textSection && !isExpanded) {
+			isOverflowing = textSection.scrollHeight > textSection.clientHeight;
+		}
+	});
+
+	function handleTextClick() {
+		if (isOverflowing || isExpanded) {
+			isExpanded = !isExpanded;
+		}
+	}
+
 	// Tag colors
 	const tagColors: Record<string, string> = {
 		'Content': '#703d57',
 		'Design': '#84a59d',
 		'Web Dev': '#e76f51',
-		'Research': '#3d348b'
+		'Research': '#3d348b',
+		'Marketing': '#f4a261'
 	};
 
 	const tagColor = tag ? tagColors[tag] : '#0091ad';
 </script>
 
-<a {href} target={isExternal ? '_blank' : undefined} rel={isExternal ? 'noopener noreferrer' : undefined} class="block group" class:card-1x1={!is1x2} class:card-1x2={is1x2} class:card-cta={isCta}>
+<div class="block group" class:card-1x1={!is1x2} class:card-1x2={is1x2} class:card-cta={isCta} class:card-expanded={isExpanded}>
 	<div class="card-wrapper">
 		<!-- Card 3 (bottom of stack) -->
 		<div class="card-layer card-layer-3" class:cta-layer={isCta}></div>
@@ -62,7 +80,15 @@
 
 			<div class="card-content" class:cta-content={isCta}>
 				<!-- Text content area -->
-				<div class="text-section">
+				<!-- svelte-ignore a11y_click_events_have_key_events -->
+				<!-- svelte-ignore a11y_no_static_element_interactions -->
+				<div 
+					class="text-section" 
+					class:text-section-overflow={isOverflowing && !isCta && !isExpanded} 
+					class:text-section-clickable={(isOverflowing || isExpanded) && !isCta}
+					bind:this={textSection}
+					onclick={handleTextClick}
+				>
 					{#if title}
 						<p class="font-serif text-xl" class:text-white={isCta}>
 							{title}
@@ -78,6 +104,16 @@
 				<!-- Sine wave SVG separator with tracking shadow (hidden for CTA) -->
 				{#if !isCta}
 				<div class="wave-container z-10">
+					{#if isOverflowing || isExpanded}
+						<!-- svelte-ignore a11y_click_events_have_key_events -->
+						<!-- svelte-ignore a11y_no_static_element_interactions -->
+						<div class="read-more-pill" onclick={handleTextClick} class:read-more-expanded={isExpanded}>
+							<span>{isExpanded ? 'SHOW LESS' : 'READ MORE'}</span>
+							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="size-3" class:rotate-180={isExpanded}>
+								<path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
+							</svg>
+						</div>
+					{/if}
 					<svg class="wave-svg" viewBox="0 0 400 16" preserveAspectRatio="none">
 						<defs>
 							<linearGradient id="shadowGrad" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -161,18 +197,27 @@
 						<span></span>
 					{/if}
 					{#if href}
-						<span class="link-text flex items-center gap-1 text-xs font-mono uppercase tracking-wider transition-colors" class:text-white={isCta} class:group-hover:text-white={isCta} class:text-gray-400={!isCta} class:group-hover:text-[#e76f51]={!isCta}>
+						<a 
+							{href} 
+							target={isExternal ? '_blank' : undefined} 
+							rel={isExternal ? 'noopener noreferrer' : undefined}
+							class="link-text flex items-center gap-1 text-xs font-mono uppercase tracking-wider transition-colors" 
+							class:text-white={isCta}
+							class:hover:opacity-80={isCta}
+							class:text-gray-400={!isCta}
+							class:hover:text-[#e76f51]={!isCta}
+						>
 							{linkText}
 							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="size-3">
 								<path fill-rule="evenodd" d="M4.22 11.78a.75.75 0 0 1 0-1.06L9.44 5.5H5.75a.75.75 0 0 1 0-1.5h5.5a.75.75 0 0 1 .75.75v5.5a.75.75 0 0 1-1.5 0V6.56l-5.22 5.22a.75.75 0 0 1-1.06 0Z" clip-rule="evenodd" />
 							</svg>
-						</span>
+						</a>
 					{/if}
 				</div>
 			</div>
 		</div>
 	</div>
-</a>
+</div>
 
 <style>
 	/* Card sizing: 2 height units = 1 width unit */
@@ -262,8 +307,41 @@
 		flex: 1;
 		overflow: hidden;
 		min-height: 0;
-		-webkit-mask-image: linear-gradient(to bottom, black calc(100% - 20px), transparent 100%);
-		mask-image: linear-gradient(to bottom, black calc(100% - 20px), transparent 100%);
+	}
+
+	.text-section-clickable {
+		cursor: pointer;
+	}
+
+	.text-section-overflow {
+		-webkit-mask-image: linear-gradient(to bottom, black calc(100% - 24px), transparent 100%);
+		mask-image: linear-gradient(to bottom, black calc(100% - 24px), transparent 100%);
+	}
+
+	/* Expanded card state - removes aspect ratio constraint */
+	.card-expanded .card-wrapper {
+		aspect-ratio: unset !important;
+		min-height: auto;
+	}
+
+	.card-expanded .card-main {
+		position: relative;
+		height: auto !important;
+	}
+
+	.card-expanded .card-layer {
+		display: none;
+	}
+
+	.card-expanded .text-section {
+		flex: none;
+		overflow: visible;
+		height: auto !important;
+	}
+
+	.card-expanded .card-content {
+		overflow: visible;
+		height: auto !important;
 	}
 
 	.wave-container {
@@ -271,6 +349,44 @@
 		height: 16px;
 		margin: 0rem -1rem 0 -1rem;
 		flex-shrink: 0;
+	}
+
+	.read-more-pill {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		z-index: 20;
+		display: flex;
+		align-items: center;
+		gap: 0.25rem;
+		padding: 0.25rem 0.75rem;
+		background: white;
+		border: 1px solid #e5e7eb;
+		border-radius: 9999px;
+		font-size: 0.625rem;
+		font-family: ui-monospace, monospace;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		color: #6b7280;
+		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+		transition: all 0.2s ease;
+		cursor: pointer;
+	}
+
+	.read-more-pill svg {
+		transition: transform 0.2s ease;
+	}
+
+	.group:hover .read-more-pill {
+		color: #e76f51;
+		border-color: #e76f51;
+	}
+
+	.read-more-expanded {
+		color: #e76f51;
+		border-color: #e76f51;
 	}
 
 	.wave-svg {

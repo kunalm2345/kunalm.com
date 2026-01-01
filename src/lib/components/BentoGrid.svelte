@@ -16,24 +16,26 @@
 	.bento-grid {
 		display: grid;
 		/* Each column is 1fr, rows auto-sized based on content aspect ratios */
-		grid-template-columns: repeat(3, 1fr);
+		grid-template-columns: repeat(3, minmax(0, 1fr));
 		/* Row height is half of column width (since 2 height = 1 width) */
 		grid-auto-rows: 1fr;
 		row-gap: 2rem;
         column-gap: 1.75rem;
 		width: 100%;
+		max-width: 100%;
+		overflow: hidden;
 	}
 
 	/* Responsive adjustments */
 	@media (max-width: 768px) {
 		.bento-grid {
-			grid-template-columns: repeat(2, 1fr);
+			grid-template-columns: repeat(2, minmax(0, 1fr));
 		}
 	}
 
 	@media (max-width: 480px) {
 		.bento-grid {
-			grid-template-columns: 1fr;
+			grid-template-columns: minmax(0, 1fr);
 		}
 
 		/* Force 1x2 cards to single row on mobile */

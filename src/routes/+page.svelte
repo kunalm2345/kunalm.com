@@ -1,23 +1,4 @@
-<script>
-    import { onMount } from 'svelte';
-    import { convex } from '$lib/convex';
-
-    let content = $state('');
-    let loading = $state(true);
-
-    onMount(async () => {
-        try {
-            const pageContent = await convex.query("pages:getPageContent", { path: "/" });
-            content = pageContent || getDefaultContent();
-        } catch (error) {
-            console.error('Failed to load content:', error);
-            content = getDefaultContent();
-        }
-        loading = false;
-    });
-
-    function getDefaultContent() {
-        return `<h1 class="font-serif text-6xl mb-4">Kunal Mishra</h1>
+<h1 class="font-serif text-6xl mb-4">Kunal Mishra</h1>
 <p class="text-2xl">
     Hi! I'm Kunal, an electronics major at BITS, Goa.
     <br><br>
@@ -25,21 +6,8 @@
     <br><br>
     Before that, I part-time built features at Buttondown and did computational research at <a href="https://biocomputeinc.com">BioCompute, Inc</a> (they got WTFund'ed!).
     <br><br>
-
     I fell in love with computers and the Internet when I was 10.
-    Ever since, I have written a few newsletters, did SEO, designing and consultant-work for startups and built a bunch of saas products that earned me some
-    pocket money. See <a href="/projects">projects</a> I've done.
+    Ever since, I have written a few newsletters, did SEO, designing and consultant-work for startups and built a bunch of saas products that earned me some pocket money. See <a href="/projects">projects</a> I've done.
     <br><br>
-
-    <small class="text-sm text-gray-500">design is inspired by <a href="http://ben.page/" class="link-underline">Ben Borger's person website</a>.</small>
-</p>`;
-    }
-</script>
-
-{#if loading}
-    <p>Loading...</p>
-{:else}
-    <div class="content-spacing">
-        {@html content}
-    </div>
-{/if}
+    <!-- <small class="text-sm text-gray-500">Design inspired by <a href="http://ben.page/" class="link-underline">Ben Borger's website</a>.</small> -->
+</p>

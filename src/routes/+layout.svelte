@@ -1,359 +1,378 @@
 <script lang="ts">
 	import '../app.css';
 	import me from '$lib/assets/me.jpeg';
-	export let children: any;
-	let current_url: string = $page.url.pathname;
+	import type { Snippet } from 'svelte';
+	import CardStack, { type Tag } from '$lib/components/CardStack.svelte';
+	import BentoGrid from '$lib/components/BentoGrid.svelte';
+	
+	interface Props {
+		children: Snippet;
+	}
+	
+	let { children }: Props = $props();
 	import { page } from '$app/stores';
+	
+	// Reactive current URL
+	let current_url = $derived($page.url.pathname);
+	let isHomePage = $derived(current_url === '/');
+
+	// Filter state
+	let activeFilters = $state<Tag[]>([]);
+
+	const allTags: { name: Tag; color: string }[] = [
+		{ name: 'Research', color: '#3d348b' },
+		{ name: 'Web Dev', color: '#e76f51' },
+		{ name: 'Content', color: '#703d57' },
+		{ name: 'Design', color: '#84a59d' }
+	];
+
+	function toggleFilter(tag: Tag) {
+		if (activeFilters.includes(tag)) {
+			activeFilters = activeFilters.filter(t => t !== tag);
+		} else {
+			activeFilters = [...activeFilters, tag];
+		}
+	}
+
+	function isVisible(tag: Tag): boolean {
+		if (activeFilters.length === 0) return true;
+		return tag !== undefined && activeFilters.includes(tag);
+	}
 </script>
 
-<div class="md:relative md:p-none px-6">
-	<div class="md:flex md:flex-row max-w-screen-md mx-auto my-24 gap-8">
-		<div class="md:basis-1/6">
-			<div class="md:sticky md:top-24 flex flex-row md:hidden">
-				<div class="rotate-6 mb-20">
+<div class="min-h-screen">
+	<!-- First Fold: Header on top + content layout -->
+	<div class="md:relative md:p-none px-6">
+		<div class="max-w-screen-md mx-auto my-24">
+			<!-- Header with photo and social icons -->
+			<header class="flex items-start justify-between mb-12">
+				<div class="rotate-6">
 					<img
 						src={me}
 						alt="me, kunal"
-						class="basis-2/6 w-36 h-full md:h-max border-white border-x-8 border-y-8"
+						class="w-28 h-auto border-white border-x-8 border-t-8"
 					/>
 					<p
-						class="text-center handwritten font-bold bg-white basis-1/3 px-0 mx-0 py-1 border-x-8 border-white text-sm"
+						class="text-center handwritten font-bold bg-white px-0 mx-0 py-1 border-x-8 border-white text-sm"
 					>
 						Kunal Mishra
 					</p>
 				</div>
-				<nav class="basis-4/6 list-none text-right" data-sveltekit-reload>
-					<ul class="md:no-single-ligitne-list single-line-list md:h-auto md:mb-0 mb-6">
-						{#if current_url == '/'}
-							<a href="/" class="link-active"><li class="list-none">About</li></a
-							>{:else}<a href="/"><li class="list-none">About</li></a>{/if}
-						{#if current_url == '/work'}
-							<a href="/work" class="link-active"><li class="list-none">Work</li></a
-							>{:else}<a href="/work"><li class="list-none">Work</li></a>{/if}
-						{#if current_url == '/projects'}
-							<a href="/projects" class="link-active"
-								><li class="list-none">Projects</li></a
-							>{:else}<a href="/projects"><li class="list-none">Projects</li></a>{/if}
-						{#if current_url.startsWith('/notes')}
-							<a href="/notes" class="link-active"><li class="list-none">Notes</li></a
-							>{:else}<a href="/notes"><li class="list-none">Notes</li></a>{/if}
-						{#if current_url.startsWith('/hire-me')}
-							<a href="/hire-me" class="link-active">
-								<li class="list-none flex flex-row-reverse">
-									<svg
-										xmlns="http://www.w3.org/2000/svg"
-										viewBox="0 0 24 24"
-										fill="currentColor"
-										class="size-4"
-									>
-										<path
-											fill-rule="evenodd"
-											d="M9 4.5a.75.75 0 0 1 .721.544l.813 2.846a3.75 3.75 0 0 0 2.576 2.576l2.846.813a.75.75 0 0 1 0 1.442l-2.846.813a3.75 3.75 0 0 0-2.576 2.576l-.813 2.846a.75.75 0 0 1-1.442 0l-.813-2.846a3.75 3.75 0 0 0-2.576-2.576l-2.846-.813a.75.75 0 0 1 0-1.442l2.846-.813A3.75 3.75 0 0 0 7.466 7.89l.813-2.846A.75.75 0 0 1 9 4.5ZM18 1.5a.75.75 0 0 1 .728.568l.258 1.036c.236.94.97 1.674 1.91 1.91l1.036.258a.75.75 0 0 1 0 1.456l-1.036.258c-.94.236-1.674.97-1.91 1.91l-.258 1.036a.75.75 0 0 1-1.456 0l-.258-1.036a2.625 2.625 0 0 0-1.91-1.91l-1.036-.258a.75.75 0 0 1 0-1.456l1.036-.258a2.625 2.625 0 0 0 1.91-1.91l.258-1.036A.75.75 0 0 1 18 1.5ZM16.5 15a.75.75 0 0 1 .712.513l.394 1.183c.15.447.5.799.948.948l1.183.395a.75.75 0 0 1 0 1.422l-1.183.395c-.447.15-.799.5-.948.948l-.395 1.183a.75.75 0 0 1-1.422 0l-.395-1.183a1.5 1.5 0 0 0-.948-.948l-1.183-.395a.75.75 0 0 1 0-1.422l1.183-.395c.447-.15.799-.5.948-.948l.395-1.183A.75.75 0 0 1 16.5 15Z"
-											clip-rule="evenodd"
-										/>
-									</svg>
-									Hire me
-								</li>
-							</a>
-						{:else}
-							<a href="/hire-me">
-								<li class="list-none flex flex-row-reverse">
-									<svg
-										xmlns="http://www.w3.org/2000/svg"
-										viewBox="0 0 24 24"
-										fill="currentColor"
-										class="size-4"
-									>
-										<path
-											fill-rule="evenodd"
-											d="M9 4.5a.75.75 0 0 1 .721.544l.813 2.846a3.75 3.75 0 0 0 2.576 2.576l2.846.813a.75.75 0 0 1 0 1.442l-2.846.813a3.75 3.75 0 0 0-2.576 2.576l-.813 2.846a.75.75 0 0 1-1.442 0l-.813-2.846a3.75 3.75 0 0 0-2.576-2.576l-2.846-.813a.75.75 0 0 1 0-1.442l2.846-.813A3.75 3.75 0 0 0 7.466 7.89l.813-2.846A.75.75 0 0 1 9 4.5ZM18 1.5a.75.75 0 0 1 .728.568l.258 1.036c.236.94.97 1.674 1.91 1.91l1.036.258a.75.75 0 0 1 0 1.456l-1.036.258c-.94.236-1.674.97-1.91 1.91l-.258 1.036a.75.75 0 0 1-1.456 0l-.258-1.036a2.625 2.625 0 0 0-1.91-1.91l-1.036-.258a.75.75 0 0 1 0-1.456l1.036-.258a2.625 2.625 0 0 0 1.91-1.91l.258-1.036A.75.75 0 0 1 18 1.5ZM16.5 15a.75.75 0 0 1 .712.513l.394 1.183c.15.447.5.799.948.948l1.183.395a.75.75 0 0 1 0 1.422l-1.183.395c-.447.15-.799.5-.948.948l-.395 1.183a.75.75 0 0 1-1.422 0l-.395-1.183a1.5 1.5 0 0 0-.948-.948l-1.183-.395a.75.75 0 0 1 0-1.422l1.183-.395c.447-.15.799-.5.948-.948l.395-1.183A.75.75 0 0 1 16.5 15Z"
-											clip-rule="evenodd"
-										/>
-									</svg>
-									Hire me
-								</li>
-							</a>
-						{/if}
-						<br />
-					</ul>
-					<ul class="md:no-single-line-list single-line-list md:h-auto md:mb-0 mb-6">
+				<nav class="list-none">
+					<ul class="flex gap-4 items-center">
 						<li class="list-none">
-							<a
-								href="http://x.com/knlmsh/"
-								class="flex flex-row-reverse align-middle"
-							>
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
-									viewBox="0 0 16 16"
-									fill="currentColor"
-									class="size-4"
-								>
-									<path
-										fill-rule="evenodd"
-										d="M4.22 11.78a.75.75 0 0 1 0-1.06L9.44 5.5H5.75a.75.75 0 0 1 0-1.5h5.5a.75.75 0 0 1 .75.75v5.5a.75.75 0 0 1-1.5 0V6.56l-5.22 5.22a.75.75 0 0 1-1.06 0Z"
-										clip-rule="evenodd"
-									/>
+							<a href="http://x.com/knlmsh/" target="_blank" rel="noopener noreferrer" aria-label="Twitter" class="social-icon">
+							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-3">
+									<path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
 								</svg>
-								Twitter
 							</a>
 						</li>
 						<li class="list-none">
-							<a
-								href="http://github.com/kunalm2345/"
-								class="flex flex-row-reverse align-middle"
-							>
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
-									viewBox="0 0 16 16"
-									fill="currentColor"
-									class="size-4"
-								>
-									<path
-										fill-rule="evenodd"
-										d="M4.22 11.78a.75.75 0 0 1 0-1.06L9.44 5.5H5.75a.75.75 0 0 1 0-1.5h5.5a.75.75 0 0 1 .75.75v5.5a.75.75 0 0 1-1.5 0V6.56l-5.22 5.22a.75.75 0 0 1-1.06 0Z"
-										clip-rule="evenodd"
-									/>
+							<a href="http://github.com/kunalm2345/" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="social-icon">
+							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-3">
+									<path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
 								</svg>
-								Github</a
-							>
+							</a>
 						</li>
 						<li class="list-none">
-							<a
-								href="http://instagr.am/knlmsh/"
-								class="flex flex-row-reverse align-middle"
-							>
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
-									viewBox="0 0 16 16"
-									fill="currentColor"
-									class="size-4"
-								>
-									<path
-										fill-rule="evenodd"
-										d="M4.22 11.78a.75.75 0 0 1 0-1.06L9.44 5.5H5.75a.75.75 0 0 1 0-1.5h5.5a.75.75 0 0 1 .75.75v5.5a.75.75 0 0 1-1.5 0V6.56l-5.22 5.22a.75.75 0 0 1-1.06 0Z"
-										clip-rule="evenodd"
-									/>
+							<a href="http://instagr.am/knlmsh/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="social-icon">
+							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-3">
+									<path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
 								</svg>
-								Instagram</a
-							>
+							</a>
 						</li>
 						<li class="list-none">
-							<a
-								href="https://www.linkedin.com/in/kunal-mishra-8238bb187/"
-								class="flex flex-row-reverse align-middle"
-							>
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
-									viewBox="0 0 16 16"
-									fill="currentColor"
-									class="size-4"
-								>
-									<path
-										fill-rule="evenodd"
-										d="M4.22 11.78a.75.75 0 0 1 0-1.06L9.44 5.5H5.75a.75.75 0 0 1 0-1.5h5.5a.75.75 0 0 1 .75.75v5.5a.75.75 0 0 1-1.5 0V6.56l-5.22 5.22a.75.75 0 0 1-1.06 0Z"
-										clip-rule="evenodd"
-									/>
+							<a href="https://www.linkedin.com/in/kunal-mishra-8238bb187/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="social-icon">
+							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-3">
+									<path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
 								</svg>
-								LinkedIn</a
-							>
+							</a>
 						</li>
 						<li class="list-none">
-							<a
-								href="mailto:kunalm@duck.com"
-								class="flex flex-row-reverse align-middle"
-							>
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
-									viewBox="0 0 16 16"
-									fill="currentColor"
-									class="size-4"
-								>
-									<path
-										fill-rule="evenodd"
-										d="M4.22 11.78a.75.75 0 0 1 0-1.06L9.44 5.5H5.75a.75.75 0 0 1 0-1.5h5.5a.75.75 0 0 1 .75.75v5.5a.75.75 0 0 1-1.5 0V6.56l-5.22 5.22a.75.75 0 0 1-1.06 0Z"
-										clip-rule="evenodd"
-									/>
+							<a href="mailto:kunalm@duck.com" aria-label="Email" class="social-icon">
+							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-3">
+									<path d="M1.5 8.67v8.58a3 3 0 0 0 3 3h15a3 3 0 0 0 3-3V8.67l-8.928 5.493a3 3 0 0 1-3.144 0L1.5 8.67Z" />
+									<path d="M22.5 6.908V6.75a3 3 0 0 0-3-3h-15a3 3 0 0 0-3 3v.158l9.714 5.978a1.5 1.5 0 0 0 1.572 0L22.5 6.908Z" />
 								</svg>
-								Email</a
-							>
+							</a>
 						</li>
 					</ul>
 				</nav>
+			</header>
+			<!-- Main content -->
+			<div>
+				{@render children()}
 			</div>
-			<div class="md:sticky md:top-24 hidden md:block">
-				<div class="rotate-6 mb-7">
-					<img
-						src={me}
-						alt="me, kunal"
-						class="basis-1/3 w-36 h-full md:h-max border-white border-x-8 border-t-8"
-					/>
-					<p
-						class="text-center handwritten font-bold bg-white basis-1/3 px-0 mx-0 py-1 border-x-8 border-white text-sm"
-					>
-						Kunal Mishra
-					</p>
-				</div>
-				<nav class="md:basis-2/3 list-none text-right" data-sveltekit-reload>
-					<ul class="md:no-single-line-list single-line-list md:h-auto md:mb-0 mb-6 text-2xl">
-						{#if current_url == '/'}
-							<a href="/" class="link-active"><li class="list-none">About</li></a
-							>{:else}<a href="/"><li class="list-none">About</li></a>{/if}
-						{#if current_url == '/work'}
-							<a href="/work" class="link-active"><li class="list-none">Work</li></a
-							>{:else}<a href="/work"><li class="list-none">Work</li></a>{/if}
-						{#if current_url == '/projects'}
-							<a href="/projects" class="link-active"
-								><li class="list-none">Projects</li></a
-							>{:else}<a href="/projects"><li class="list-none">Projects</li></a>{/if}
-						{#if current_url.startsWith('/notes')}
-							<a href="/notes" class="link-active"><li class="list-none">Notes</li></a
-							>{:else}<a href="/notes"><li class="list-none">Notes</li></a>{/if}
-						{#if current_url.startsWith('/hire-me')}
-							<a href="/hire-me" class="link-active">
-								<li class="list-none flex flex-row-reverse">
-									<svg
-										xmlns="http://www.w3.org/2000/svg"
-										viewBox="0 0 24 24"
-										fill="currentColor"
-										class="size-4"
-									>
-										<path
-											fill-rule="evenodd"
-											d="M9 4.5a.75.75 0 0 1 .721.544l.813 2.846a3.75 3.75 0 0 0 2.576 2.576l2.846.813a.75.75 0 0 1 0 1.442l-2.846.813a3.75 3.75 0 0 0-2.576 2.576l-.813 2.846a.75.75 0 0 1-1.442 0l-.813-2.846a3.75 3.75 0 0 0-2.576-2.576l-2.846-.813a.75.75 0 0 1 0-1.442l2.846-.813A3.75 3.75 0 0 0 7.466 7.89l.813-2.846A.75.75 0 0 1 9 4.5ZM18 1.5a.75.75 0 0 1 .728.568l.258 1.036c.236.94.97 1.674 1.91 1.91l1.036.258a.75.75 0 0 1 0 1.456l-1.036.258c-.94.236-1.674.97-1.91 1.91l-.258 1.036a.75.75 0 0 1-1.456 0l-.258-1.036a2.625 2.625 0 0 0-1.91-1.91l-1.036-.258a.75.75 0 0 1 0-1.456l1.036-.258a2.625 2.625 0 0 0 1.91-1.91l.258-1.036A.75.75 0 0 1 18 1.5ZM16.5 15a.75.75 0 0 1 .712.513l.394 1.183c.15.447.5.799.948.948l1.183.395a.75.75 0 0 1 0 1.422l-1.183.395c-.447.15-.799.5-.948.948l-.395 1.183a.75.75 0 0 1-1.422 0l-.395-1.183a1.5 1.5 0 0 0-.948-.948l-1.183-.395a.75.75 0 0 1 0-1.422l1.183-.395c.447-.15.799-.5.948-.948l.395-1.183A.75.75 0 0 1 16.5 15Z"
-											clip-rule="evenodd"
-										/>
-									</svg>
-									Hire me
-								</li>
-							</a>
-						{:else}
-							<a href="/hire-me">
-								<li class="list-none flex flex-row-reverse">
-									<svg
-										xmlns="http://www.w3.org/2000/svg"
-										viewBox="0 0 24 24"
-										fill="currentColor"
-										class="size-4"
-									>
-										<path
-											fill-rule="evenodd"
-											d="M9 4.5a.75.75 0 0 1 .721.544l.813 2.846a3.75 3.75 0 0 0 2.576 2.576l2.846.813a.75.75 0 0 1 0 1.442l-2.846.813a3.75 3.75 0 0 0-2.576 2.576l-.813 2.846a.75.75 0 0 1-1.442 0l-.813-2.846a3.75 3.75 0 0 0-2.576-2.576l-2.846-.813a.75.75 0 0 1 0-1.442l2.846-.813A3.75 3.75 0 0 0 7.466 7.89l.813-2.846A.75.75 0 0 1 9 4.5ZM18 1.5a.75.75 0 0 1 .728.568l.258 1.036c.236.94.97 1.674 1.91 1.91l1.036.258a.75.75 0 0 1 0 1.456l-1.036.258c-.94.236-1.674.97-1.91 1.91l-.258 1.036a.75.75 0 0 1-1.456 0l-.258-1.036a2.625 2.625 0 0 0-1.91-1.91l-1.036-.258a.75.75 0 0 1 0-1.456l1.036-.258a2.625 2.625 0 0 0 1.91-1.91l.258-1.036A.75.75 0 0 1 18 1.5ZM16.5 15a.75.75 0 0 1 .712.513l.394 1.183c.15.447.5.799.948.948l1.183.395a.75.75 0 0 1 0 1.422l-1.183.395c-.447.15-.799.5-.948.948l-.395 1.183a.75.75 0 0 1-1.422 0l-.395-1.183a1.5 1.5 0 0 0-.948-.948l-1.183-.395a.75.75 0 0 1 0-1.422l1.183-.395c.447-.15.799-.5.948-.948l.395-1.183A.75.75 0 0 1 16.5 15Z"
-											clip-rule="evenodd"
-										/>
-									</svg>
-									Hire me
-								</li>
-							</a>
-						{/if}
-						<br />
-					</ul>
-					<ul class="md:no-single-line-list single-line-list md:h-auto md:mb-0 mb-6">
-						<li class="list-none">
-							<a
-								href="http://x.com/knlmsh/"
-								class="flex flex-row-reverse align-middle"
-							>
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
-									viewBox="0 0 16 16"
-									fill="currentColor"
-									class="size-4"
-								>
-									<path
-										fill-rule="evenodd"
-										d="M4.22 11.78a.75.75 0 0 1 0-1.06L9.44 5.5H5.75a.75.75 0 0 1 0-1.5h5.5a.75.75 0 0 1 .75.75v5.5a.75.75 0 0 1-1.5 0V6.56l-5.22 5.22a.75.75 0 0 1-1.06 0Z"
-										clip-rule="evenodd"
-									/>
-								</svg>
-								Twitter
-							</a>
-						</li>
-						<li class="list-none">
-							<a
-								href="http://github.com/kunalm2345/"
-								class="flex flex-row-reverse align-middle"
-							>
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
-									viewBox="0 0 16 16"
-									fill="currentColor"
-									class="size-4"
-								>
-									<path
-										fill-rule="evenodd"
-										d="M4.22 11.78a.75.75 0 0 1 0-1.06L9.44 5.5H5.75a.75.75 0 0 1 0-1.5h5.5a.75.75 0 0 1 .75.75v5.5a.75.75 0 0 1-1.5 0V6.56l-5.22 5.22a.75.75 0 0 1-1.06 0Z"
-										clip-rule="evenodd"
-									/>
-								</svg>
-								Github</a
-							>
-						</li>
-						<li class="list-none">
-							<a
-								href="http://instagr.am/knlmsh/"
-								class="flex flex-row-reverse align-middle"
-							>
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
-									viewBox="0 0 16 16"
-									fill="currentColor"
-									class="size-4"
-								>
-									<path
-										fill-rule="evenodd"
-										d="M4.22 11.78a.75.75 0 0 1 0-1.06L9.44 5.5H5.75a.75.75 0 0 1 0-1.5h5.5a.75.75 0 0 1 .75.75v5.5a.75.75 0 0 1-1.5 0V6.56l-5.22 5.22a.75.75 0 0 1-1.06 0Z"
-										clip-rule="evenodd"
-									/>
-								</svg>
-								Instagram</a
-							>
-						</li>
-						<li class="list-none">
-							<a
-								href="https://www.linkedin.com/in/kunal-mishra-8238bb187/"
-								class="flex flex-row-reverse align-middle"
-							>
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
-									viewBox="0 0 16 16"
-									fill="currentColor"
-									class="size-4"
-								>
-									<path
-										fill-rule="evenodd"
-										d="M4.22 11.78a.75.75 0 0 1 0-1.06L9.44 5.5H5.75a.75.75 0 0 1 0-1.5h5.5a.75.75 0 0 1 .75.75v5.5a.75.75 0 0 1-1.5 0V6.56l-5.22 5.22a.75.75 0 0 1-1.06 0Z"
-										clip-rule="evenodd"
-									/>
-								</svg>
-								LinkedIn</a
-							>
-						</li>
-						<li class="list-none">
-							<a
-								href="mailto:kunalm@duck.com"
-								class="flex flex-row-reverse align-middle"
-							>
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
-									viewBox="0 0 16 16"
-									fill="currentColor"
-									class="size-4"
-								>
-									<path
-										fill-rule="evenodd"
-										d="M4.22 11.78a.75.75 0 0 1 0-1.06L9.44 5.5H5.75a.75.75 0 0 1 0-1.5h5.5a.75.75 0 0 1 .75.75v5.5a.75.75 0 0 1-1.5 0V6.56l-5.22 5.22a.75.75 0 0 1-1.06 0Z"
-										clip-rule="evenodd"
-									/>
-								</svg>
-								Email</a
-							>
-						</li>
-					</ul>
-				</nav>
-			</div>
-		</div>
-		<div class="md:basis-5/6">
-			{@render children()}
 		</div>
 	</div>
+
+	<!-- Second Fold: Full-width project grid (only on home page) -->
+	{#if isHomePage}
+		<section class="second-fold">
+			<div class="max-w-screen-xl mx-auto px-6">
+				<!-- Filter header with title and buttons -->
+				<div class="flex flex-wrap items-center justify-between gap-4 mb-8">
+					<h2 class="text-2xl font-serif">Projects & Work Experience</h2>
+					<div class="flex flex-wrap gap-2">
+						{#each allTags as { name, color }}
+							<button
+								type="button"
+								onclick={() => toggleFilter(name)}
+								class="filter-btn flex items-center gap-1.5 px-3 py-1 rounded-md text-sm font-mono font-bold uppercase tracking-wider transition-all"
+								class:active={activeFilters.includes(name)}
+								style="--tag-color: {color}; border-color: {color}; {activeFilters.includes(name) ? `background-color: ${color}; color: white;` : `color: ${color};`}"
+							>
+								{#if activeFilters.includes(name)}
+									<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="size-3">
+										<path d="M5.28 4.22a.75.75 0 0 0-1.06 1.06L6.94 8l-2.72 2.72a.75.75 0 1 0 1.06 1.06L8 9.06l2.72 2.72a.75.75 0 1 0 1.06-1.06L9.06 8l2.72-2.72a.75.75 0 0 0-1.06-1.06L8 6.94 5.28 4.22Z" />
+									</svg>
+								{:else}
+									<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="size-3">
+										<path d="M8 1a.75.75 0 0 1 .75.75V6.5h4.75a.75.75 0 0 1 0 1.5H8.75v4.75a.75.75 0 0 1-1.5 0V8H2.5a.75.75 0 0 1 0-1.5h4.75V1.75A.75.75 0 0 1 8 1Z" />
+									</svg>
+								{/if}
+								{name}
+							</button>
+						{/each}
+					</div>
+				</div>
+
+				<BentoGrid>
+					<!-- Current Work -->
+					{#if isVisible('Research')}
+						<CardStack 
+							title="Indoor Positioning System"
+							content="Building a hi-precision indoor positioning system using WiFi (and other sensors) as a replacement for GPS. Supported by gradCapital and SIRE."
+							date="Now"
+							size="1x1"
+							tag="Research"
+							type="work"
+							featured={true}
+						/>
+					{/if}
+					<CardStack 
+						title="Marketing at CEL"
+						content="Heading Marketing for CEL, short for Center for Entrepreneurial Leadership. We help students on campus build startups."
+						date="Now"
+						size="1x1"
+						type="work"
+					/>
+
+					<!-- Projects -->
+					{#if isVisible('Research')}
+						<CardStack 
+							title="SLMs on the Edge"
+							content="A lot of mobile devices come with Neural Processing Units but they're underutilised for Small Language Model (SLM) inference processes. We're building an inference engine that solves this."
+							date="2025"
+							size="1x1"
+							tag="Research"
+							type="project"
+						/>
+					{/if}
+					{#if isVisible('Research')}
+						<CardStack 
+							title="CSI Based Activity Recognition"
+							content="A paper I'm working on under Prof Sougata Sen where we're trying to train a model on CSI value plots of a WIFi network in a room to recognise what's going on between the sender and receiver."
+							href="https://sougata-sen.com/"
+							linkText="VISIT"
+							date="2025"
+							size="1x1"
+							tag="Research"
+							type="project"
+						/>
+					{/if}
+					{#if isVisible('Research')}
+						<CardStack 
+							title="Smart Space"
+							content="The research project I'm leading at DaSH lab, BITS Goa where we're putting raspberry pis and cameras in a classroom to monitor student attention to help improve teaching pedagogy."
+							date="2025"
+							size="1x1"
+							tag="Research"
+							type="project"
+						/>
+					{/if}
+					{#if isVisible('Web Dev')}
+						<CardStack 
+							title="Telescope Webportal"
+							content="I'm leading a team building a webportal for SEDS Celestia, our college astronomy club's motorised telescope, so anybody could request a live image from it of the night sky."
+							date="2025"
+							size="1x1"
+							tag="Web Dev"
+							type="project"
+						/>
+					{/if}
+					{#if isVisible('Web Dev')}
+						<CardStack 
+							title="Socialscri.be"
+							content="Socialscribe lets newsletter creators add social sign-up buttons (sign-up with google) to their websites without coding. I designed and built the entire thing up and grew it to over $1k in profits."
+							href="http://socialscri.be/?ref=kunal"
+							linkText="VISIT"
+							date="2023"
+							size="1x2"
+							tag="Web Dev"
+							type="project"
+						/>
+					{/if}
+					{#if isVisible('Web Dev')}
+						<CardStack 
+							title="Twift.xyz (now defunct)"
+							content='Now defunct, Twift helped creators run "reply with an 👋" giveaways on Twitter, handling sending thousands of DMs without being marked as spam. I built and designed the whole web-app and DM-ing engine while Prado (@pradologue) helped me with growing it to hundreds of users. We had to eventually shut down when the Twitter API pricing change made this too expensive to continue ($40k/month to be exact).'
+							date="2023"
+							size="1x1"
+							tag="Web Dev"
+							type="project"
+						/>
+					{/if}
+					{#if isVisible('Web Dev')}
+						<CardStack 
+							title="Dump.ink (now defunct)"
+							content="Dump is a minimal micro-blogging platform I built for Deta Space which lets anybody create and host their own microblogs for free for ever. It is completely decentralised. Deta offered to buy it from me if I turned it into a decentralised social media protocol which I couldn't work on as life got in the way. I may continue this in the future."
+							date="2022"
+							size="1x1"
+							tag="Web Dev"
+							type="project"
+						/>
+					{/if}
+					{#if isVisible('Content')}
+						<CardStack 
+							title="Back of my Head (now defunct)"
+							content="I ran an email newsletter rounding up cool stuff I found throughout the week. It went on the get over a thousand subscribers but I couldn't be consistent and decided to drop it. It did lead me to build Socialscribe though."
+							date="2021"
+							size="1x1"
+							tag="Content"
+							type="project"
+						/>
+					{/if}
+					{#if isVisible('Content')}
+						<CardStack 
+							title="Right Click (now defunct)"
+							content="I used to write a blog called Theciva about tech news and stuff like what would happen if Apple bought DuckDuckGo, flaws of India's COVID-times contact tracing app or what Google being carbon neutral meant. I also got a little bit of readers through SEO though most readers came through repost (w canonical urls) on Medium (unfortunately their partner program wasn't in India then) and HackerNoon (where I won me 3 Noonies prizes!). Theciva evolved into Right Click (had to change the name!) which I tried to turn into Morning Brew for tech (also inspired by Filter Coffee). Later, I shut it down and sold the coolest twitter username I have ever owned yet—@rightclick—to rc.xyz, an NFT art platform for the easiest $1000 of my life."
+							href="https://rightclick.substack.com/"
+							linkText="VISIT"
+							date="2020"
+							size="1x2"
+							tag="Content"
+							type="project"
+						/>
+					{/if}
+
+					<!-- CTA Card -->
+					<CardStack 
+						title="Work with me"
+						content="I'm always up for working on cool things and also regularly take up freelance projects. It'll be a good fit if<br><br>• involves building (websites, products, newsletters, designs, hardware)<br>• is in an industry I like (newsletters, creators, marketing, internet, consumer tech...)<br>• appreciates high-agency and contrarian-ism.<br>"
+						href="https://cal.com/kunalm/30"
+						linkText="LET'S TALK"
+						size="1x2"
+						type="cta"
+						variant="cta"
+					/>
+
+					<!-- Previous Work Experience -->
+					{#if isVisible('Web Dev')}
+						<CardStack 
+							title="Full Stack at Buttondown"
+							content="Did full stack web-dev at Buttondown — I built a few features with Django and Vue.js. I've been generally interested in the email industry. It was a dream working with Justin."
+							date="2024"
+							size="1x1"
+							tag="Web Dev"
+							type="work"
+						/>
+					{/if}
+					{#if isVisible('Web Dev')}
+						<CardStack 
+							title="ServiceSetu Portal"
+							content="Built a jobs and announcements portal for ServiceSetu — I built a website for a higher ed job portal that a PhD at my college is running with her husband. They have a large following and routinely get 45-60k views a month."
+							date="2024"
+							size="1x1"
+							tag="Web Dev"
+							type="work"
+						/>
+					{/if}
+					{#if isVisible('Research')}
+						<CardStack 
+							title="BioCompute Research"
+							content="Researched and wrote scripts for BioCompute — Bacterial DNA can store digital data thousands of times more densely than Seagate's current best tech. We're working on a device which would bring this in a form you can plug into your PC."
+							date="2024"
+							size="1x1"
+							tag="Research"
+							type="work"
+						/>
+					{/if}
+					{#if isVisible('Research')}
+						<CardStack 
+							title="Smart Classroom at DaSH Lab"
+							content="Built a smart classroom at DaSH Lab – I worked under Prof Arnab Paul to build a smart classroom environment that monitors student attention to help improve teaching pedagogy."
+							date="2024"
+							size="1x1"
+							tag="Research"
+							type="work"
+						/>
+					{/if}
+					<CardStack 
+						title="Marketing at Deta.space"
+						content="Did marketing consulting for Deta.space — For a brief stint, Deta hired me to help them think new marketing strategies for their personal cloud product. About an year later, they pivoted to building a browser."
+						date="2023"
+						size="1x1"
+						type="work"
+					/>
+					<CardStack 
+						title="SEO at HelloMeets"
+						content="Did SEO for HelloMeets — I handled the entire publishing process for the HelloMeets blog while growing it from 600 to over 45k visits a month, in 8 months on a strict budget."
+						date="2022"
+						size="1x1"
+						type="work"
+					/>
+					{#if isVisible('Design')}
+						<CardStack 
+							title="Design for The Morning Context"
+							content="Designed an infographic template for The Morning Context — I designed a template for an newly launched, independent, subscription-based news publication. Thanks Ashish K Mishra and Harveen Ahluwalia for this gig."
+							date="2021"
+							size="1x1"
+							tag="Design"
+							type="work"
+						/>
+					{/if}
+					{#if isVisible('Content')}
+						<CardStack 
+							title="Freelance Content Writing"
+							content="Did Freelance Content Writing — In 2018-19, I wrote a bunch of articles for Mobisium, a blog that later turned into a content platform. They paid me peanuts (between ₹180-300 per 1000-2000 words) but it was my first time working for someone else and I loved it. I even pitched them a video that I did alongside a blog post. I also did a few gigs on Fiverr for their minimum $5."
+							date="2018-19"
+							size="1x1"
+							tag="Content"
+							type="work"
+						/>
+					{/if}
+				</BentoGrid>
+			</div>
+		</section>
+	{/if}
 </div>
+
+<style>
+	.second-fold {
+		width: 100%;
+	}
+
+	.filter-btn {
+		background: white;
+		border: 1.5px solid var(--tag-color);
+		cursor: pointer;
+	}
+
+	.filter-btn:hover {
+		opacity: 0.85;
+	}
+
+	.filter-btn.active {
+		border-color: var(--tag-color);
+	}
+
+	.social-icon {
+		color: #9ca3af;
+		transition: color 0.2s ease;
+	}
+
+	.social-icon:hover {
+		color: #e76f51;
+	}
+</style>

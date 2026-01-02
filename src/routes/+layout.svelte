@@ -76,71 +76,76 @@
 			<div>
 				{@render children()}
 			</div>
-			<!-- Newsletter signup form -->
-			<div class="mt-12">
-				<p class="text-[#e76f51] font-mono text-sm uppercase tracking-wider mb-3">Subscribe to get my weeknotes newsletter</p>
-				<form
-					action="https://buttondown.com/api/emails/embed-subscribe/kunal"
-					method="post"
-					class="flex flex-col sm:flex-row gap-3 max-w-md"
-				>
-					<input 
-						type="email" 
-						name="email" 
-						id="bd-email" 
-						placeholder="Enter your email"
-						class="flex-1 px-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#e76f51] focus:border-transparent"
-					/>
-					<button 
-						type="submit" 
-						class="px-6 py-2 bg-[#e76f51] text-white text-sm font-mono uppercase tracking-wider rounded-lg hover:bg-[#d4532a] transition-colors"
+			<!-- Newsletter signup form + Social icons row -->
+			<div class="mt-4 flex flex-col md:flex-row md:items-center gap-6">
+				<!-- Newsletter form -->
+				<div class="flex-1">
+					<p class="text-[#e76f51] font-mono text-sm uppercase tracking-wider mb-3">Subscribe to get my weeknotes newsletter</p>
+					<form
+						action="https://buttondown.com/api/emails/embed-subscribe/kunal"
+						method="post"
+						class="flex flex-col sm:flex-row gap-3"
 					>
-						Subscribe
-					</button>
-				</form>
+						<input 
+							type="email" 
+							name="email" 
+							id="bd-email" 
+							placeholder="Enter your email"
+							class="flex-1 px-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#e76f51] focus:border-transparent"
+						/>
+						<button 
+							type="submit" 
+							class="px-6 py-2 bg-[#e76f51] text-white text-sm font-mono uppercase tracking-wider rounded-lg hover:bg-[#d4532a] transition-colors"
+						>
+							Subscribe
+						</button>
+					</form>
+				</div>
+				<!-- Vertical separator -->
+				<div class="hidden md:block w-px h-16 bg-gray-300 dark-separator"></div>
+				<!-- Social icons -->
+				<nav class="list-none">
+					<ul class="flex gap-3 items-center">
+						<li class="list-none">
+							<a href="http://x.com/knlmsh/" target="_blank" rel="noopener noreferrer" aria-label="Twitter" class="twitter-button">
+								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" class="size-4">
+									<path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+								</svg>
+								<span class="font-mono text-sm text-white">@knlmsh</span>
+							</a>
+						</li>
+						<li class="list-none">
+							<a href="http://github.com/kunalm2345/" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="social-icon-btn">
+								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5">
+									<path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+								</svg>
+							</a>
+						</li>
+						<li class="list-none">
+							<a href="http://instagr.am/knlmsh/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="social-icon-btn">
+								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5">
+									<path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+								</svg>
+							</a>
+						</li>
+						<li class="list-none">
+							<a href="https://www.linkedin.com/in/kunal-mishra-8238bb187/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="social-icon-btn">
+								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5">
+									<path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+								</svg>
+							</a>
+						</li>
+						<li class="list-none">
+							<a href="mailto:kunalm@duck.com" aria-label="Email" class="social-icon-btn">
+								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5">
+									<path d="M1.5 8.67v8.58a3 3 0 0 0 3 3h15a3 3 0 0 0 3-3V8.67l-8.928 5.493a3 3 0 0 1-3.144 0L1.5 8.67Z" />
+									<path d="M22.5 6.908V6.75a3 3 0 0 0-3-3h-15a3 3 0 0 0-3 3v.158l9.714 5.978a1.5 1.5 0 0 0 1.572 0L22.5 6.908Z" />
+								</svg>
+							</a>
+						</li>
+					</ul>
+				</nav>
 			</div>
-			<!-- Social icons after content -->
-			<nav class="mt-8 list-none">
-				<ul class="flex gap-4 items-center">
-					<li class="list-none">
-						<a href="http://x.com/knlmsh/" target="_blank" rel="noopener noreferrer" aria-label="Twitter" class="twitter-button">
-							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-4">
-								<path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-							</svg>
-							<span class="font-mono text-sm text-white">@knlmsh</span>
-						</a>
-					</li>
-					<li class="list-none">
-						<a href="http://github.com/kunalm2345/" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="social-icon-btn">
-							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5">
-								<path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-							</svg>
-						</a>
-					</li>
-					<li class="list-none">
-						<a href="http://instagr.am/knlmsh/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="social-icon-btn">
-							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5">
-								<path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-							</svg>
-						</a>
-					</li>
-					<li class="list-none">
-						<a href="https://www.linkedin.com/in/kunal-mishra-8238bb187/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="social-icon-btn">
-							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5">
-								<path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-							</svg>
-						</a>
-					</li>
-					<li class="list-none">
-						<a href="mailto:kunalm@duck.com" aria-label="Email" class="social-icon-btn">
-							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5">
-								<path d="M1.5 8.67v8.58a3 3 0 0 0 3 3h15a3 3 0 0 0 3-3V8.67l-8.928 5.493a3 3 0 0 1-3.144 0L1.5 8.67Z" />
-								<path d="M22.5 6.908V6.75a3 3 0 0 0-3-3h-15a3 3 0 0 0-3 3v.158l9.714 5.978a1.5 1.5 0 0 0 1.572 0L22.5 6.908Z" />
-							</svg>
-						</a>
-					</li>
-				</ul>
-			</nav>
 		</div>
 	</div>
 
@@ -211,6 +216,8 @@
 							tag="Web Dev"
 							type="work"
 							featured={true}
+							href="https://servicesetu.org/?ref=kunal"
+							linkText="SERVICESTU.ORG"
 						/>
 					{/if}
 
@@ -248,6 +255,8 @@
 							size="1x1"
 							tag="Research"
 							type="project"
+							href="https://dashlab.in"
+							linkText="DASHLAB.IN"
 						/>
 					{/if}
 
@@ -257,10 +266,12 @@
 							title="Full Stack at Buttondown"
 							content="I built a few features with Django and Vue.js. I've been generally interested in the email industry. It was a dream working with Justin."
 							date="Jul – Oct 2024"
-							size="1x1"
+							size="1x2"
 							tag="Web Dev"
 							type="work"
 							featured={true}
+							href="https://buttondown.email"
+							linkText="BUTTONDOWN.com"
 						/>
 					{/if}
 
@@ -274,6 +285,8 @@
 							tag="Research"
 							type="work"
 							featured={true}
+							href="https://biocomputeinc.com"
+							linkText="BioComputeInc.com"
 						/>
 					{/if}
 
@@ -292,8 +305,8 @@
 					<!-- Jul 2023: Marketing at Deta.space -->
 					{#if isVisible('Marketing')}
 						<CardStack 
-							title="Marketing at Deta.space"
-							content="Did marketing consulting for Deta.space — For a brief stint, Deta hired me to help them think new marketing strategies for their personal cloud product. About an year later, they pivoted to building a browser."
+							title="Marketing Consulting at Deta.space"
+							content="For a brief stint, Deta hired me to help them think new marketing strategies for their personal cloud product. About an year later, they pivoted to building a browser. They recently shut down."
 							date="Jul 2023"
 							size="1x1"
 							tag="Marketing"
@@ -368,11 +381,13 @@
 					{#if isVisible('Design')}
 						<CardStack 
 							title="Design for The Morning Context"
-							content="Designed an infographic template for The Morning Context — I designed a template for an newly launched, independent, subscription-based news publication. Thanks Ashish K Mishra and Harveen Ahluwalia for this gig."
+							content="I designed the infographic template for an newly launched, independent, subscription-based news publication from the cofounders of The Ken. Thanks Ashish K Mishra and Harveen Ahluwalia for this gig."
 							date="2021"
 							size="1x1"
 							tag="Design"
 							type="work"
+							href="https://themorningcontext.com/?ref=kunalm.com"
+							linkText="THEMORNINGCONTEXT.COM"
 						/>
 					{/if}
 
@@ -382,7 +397,7 @@
 							title="Right Click (now defunct)"
 							content="I used to write a blog called Theciva about tech news and stuff like what would happen if Apple bought DuckDuckGo, flaws of India's COVID-times contact tracing app or what Google being carbon neutral meant. I also got a little bit of readers through SEO though most readers came through repost (w canonical urls) on Medium (unfortunately their partner program wasn't in India then) and HackerNoon (where I won me 3 Noonies prizes!). Theciva evolved into Right Click (had to change the name!) which I tried to turn into Morning Brew for tech (also inspired by Filter Coffee). Later, I shut it down and sold the coolest twitter username I have ever owned yet—@rightclick—to rc.xyz, an NFT art platform for the easiest $1000 of my life."
 							href="https://rightclick.substack.com/"
-							linkText="VISIT"
+							linkText="SUBSTACK"
 							date="Dec 2020 – Apr 2021"
 							size="1x1"
 							tag="Content"

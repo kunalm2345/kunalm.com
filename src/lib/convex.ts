@@ -1,6 +1,6 @@
 import { ConvexHttpClient } from "convex/browser";
 
-const CONVEX_URL = import.meta.env.VITE_CONVEX_URL || "https://perceptive-roadrunner-104.convex.cloud";
+const CONVEX_URL = import.meta.env.VITE_CONVEX_URL;
 
 if (!CONVEX_URL) {
     throw new Error("VITE_CONVEX_URL environment variable is not set");

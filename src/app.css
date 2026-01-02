@@ -188,3 +188,22 @@ html.dark .read-more-pill {
 	border-color: var(--border-color);
 	color: var(--text-muted);
 }
+
+/* Dark mode wave styles */
+html.dark .wave-svg path[stroke] {
+	stroke: rgba(148, 163, 184, 0.4);
+}
+
+html.dark .wave-svg path[fill^="url"] {
+	opacity: 0.6;
+}
+
+/* Dark mode vertical separator */
+html.dark .dark-separator {
+	background: var(--border-color);
+}
+
+/* Dark mode photo label text - stays dark on white bg */
+html.dark .handwritten {
+	color: #1f2937;
+}

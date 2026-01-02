@@ -31,7 +31,6 @@
 		"@tiptap/extension-placeholder": "^3.4.3",
 		"@tiptap/pm": "^3.4.3",
 		"@tiptap/starter-kit": "^3.4.3",
-		"convex": "^1.27.0",
 		"marked": "^15.0.4"
 	}
 }

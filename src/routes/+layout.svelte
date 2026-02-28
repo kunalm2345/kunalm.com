@@ -216,6 +216,8 @@
 							tag="Web Dev"
 							type="work"
 							featured={true}
+							image="servicesetu.png"
+							imageClass="bottom-10 -right-6 w-24 h-12 rotate-6"
 							href="https://servicesetu.org/?ref=kunal"
 							linkText="SERVICESTU.ORG"
 						/>
@@ -229,6 +231,8 @@
 							linkText="VISIT"
 							date="Jan — May 2025"
 							size="1x1"
+							image="sense.png"
+							imageClass="-bottom-4 -right-4 w-16 h-20 rotate-6"
 							tag="Research"
 							type="project"
 						/>
@@ -256,6 +260,8 @@
 							tag="Research"
 							type="project"
 							href="https://dashlab.in"
+							image="dash.png"
+							imageClass="-top-3 -right-3 w-16 h-20 rotate-6"
 							linkText="DASHLAB.IN"
 						/>
 					{/if}
@@ -271,6 +277,8 @@
 							type="work"
 							featured={true}
 							href="https://buttondown.email"
+							image="buttondown.png"
+							imageClass="bottom-20 -left-5 w-20 h-20 rotate-6"
 							linkText="BUTTONDOWN.com"
 						/>
 					{/if}
@@ -286,6 +294,8 @@
 							type="work"
 							featured={true}
 							href="https://biocomputeinc.com"
+							image="biocompute.jpeg"
+							imageClass="-top-3 right-16 w-14 h-14 rotate-6"
 							linkText="BioComputeInc.com"
 						/>
 					{/if}
@@ -309,6 +319,8 @@
 							content="For a brief stint, Deta hired me to help them think new marketing strategies for their personal cloud product. About an year later, they pivoted to building a browser. They recently shut down."
 							date="Jul 2023"
 							size="1x1"
+							image="deta.svg"
+							imageClass="-bottom-4 -right-4 w-20 h-20 rotate-6"
 							tag="Marketing"
 							type="work"
 						/>
@@ -321,6 +333,8 @@
 							content='Now defunct, Twift helped creators run "reply with an 👋" giveaways on Twitter, handling sending thousands of DMs without being marked as spam. I built and designed the whole web-app and DM-ing engine while Prado (@pradologue) helped me with growing it to hundreds of users. We had to eventually shut down when the Twitter API pricing change made this too expensive to continue ($40k/month to be exact).'
 							date="Jan 2022 – Apr 2023"
 							size="1x1"
+							image="twift.png"
+							imageClass="-top-3 -right-3 w-16 h-16 rotate-6"
 							tag="Web Dev"
 							type="project"
 							featured={true}
@@ -337,6 +351,8 @@
 							date="Jan 2022 — NOW"
 							size="1x2"
 							tag="Web Dev"
+							image="socialscribe.png"
+							imageClass="bottom-20 -right-2 w-20 h-20 rotate-6"
 							type="project"
 							featured={true}
 						/>
@@ -360,6 +376,8 @@
 							content="Did SEO for HelloMeets — I handled the entire publishing process for the HelloMeets blog while growing it from 600 to over 45k visits a month, in 8 months on a strict budget."
 							date="~May 2021 – May 2022"
 							size="1x1"
+							image="hellomeets.png"
+							imageClass="-bottom-4 -right-4 w-16 h-16 rotate-6"
 							tag="Marketing"
 							type="work"
 						/>
@@ -386,6 +404,8 @@
 							size="1x1"
 							tag="Design"
 							type="work"
+							image="themorningcontext.png"
+							imageClass="bottom-3 -right-4 w-20 h-20 rotate-6"
 							href="https://themorningcontext.com/?ref=kunalm.com"
 							linkText="THEMORNINGCONTEXT.COM"
 						/>
@@ -400,6 +420,8 @@
 							linkText="SUBSTACK"
 							date="Dec 2020 – Apr 2021"
 							size="1x1"
+							image="rightclick.png"
+							imageClass="-top-5 -right-2 w-20 h-30 rotate-6"
 							tag="Content"
 							type="project"
 						/>

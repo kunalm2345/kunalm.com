@@ -190,8 +190,8 @@
 					{#if isVisible('Web Dev')}
 						<CardStack
 							title="Manicule (YC P26)"
-							content="I joined @manicule 2 months ago as a founding engineer! Manicule is an AI-native technical docs agency for dev tools. $150K+ ARR, team of 5 cracked people. And last week, we got into YC P26!"
-							date="Feb 2026 — NOW"
+							content="I'm a founding engineer at @manicule, an AI-native technical docs agency for dev tools. $150K+ ARR, team of 5 cracked people. We got into YC P26!"
+							date="Jan 2026 — NOW"
 							size="1x1"
 							tag="Web Dev"
 							type="work"

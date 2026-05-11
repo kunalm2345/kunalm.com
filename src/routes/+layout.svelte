@@ -186,9 +186,22 @@
 				</div>
 
 				<BentoGrid>
+					<!-- Jan 2026 — NOW: Manicule (YC P26) -->
+					{#if isVisible('Web Dev')}
+						<CardStack
+							title="Manicule (YC P26)"
+							content="We're a team of 5 cracked engineers who write technical documentation for DevTool companies. We have helped Greptile, Supermemory, Reducto, Xpander and more get more product adoption, less support tickets and sign enterprise deals."
+							date="Jan 2026 — NOW"
+							size="1x1"
+							tag="Web Dev"
+							type="work"
+							featured={true}
+						/>
+					{/if}
+
 					<!-- Aug 2025 — NOW: Indoor Positioning System -->
 					{#if isVisible('Research')}
-						<CardStack 
+						<CardStack
 							title="Indoor Positioning System"
 							content="I'm building a wifi-based hi-precision indoor positioning system as a GPS alternative indoors. Supported by gradCapital and BITS SIRE."
 							date="Aug 2025 — NOW"

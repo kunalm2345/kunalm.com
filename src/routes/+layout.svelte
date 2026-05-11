@@ -196,6 +196,8 @@
 							tag="Web Dev"
 							type="work"
 							featured={true}
+							image="manicule.png"
+							imageClass="-bottom-4 -right-4 w-16 h-16 rotate-6"
 						/>
 					{/if}
 

@@ -33,7 +33,7 @@
 
 	const allTags: { name: Tag; color: string }[] = [
 		{ name: 'Research', color: '#3d348b' },
-		{ name: 'Web Dev', color: '#e76f51' },
+		{ name: 'Dev', color: '#e76f51' },
 		{ name: 'Content', color: '#703d57' },
 		{ name: 'Design', color: '#84a59d' },
 		{ name: 'Marketing', color: '#f4a261' }
@@ -47,10 +47,214 @@
 		}
 	}
 
-	function isVisible(tag: Tag): boolean {
+	// All project/work cards, in display order
+	const cards = [
+		{
+			title: 'Manicule (YC P26)',
+			content: "We're a team of 5 cracked engineers who write technical documentation for DevTool companies. We have helped Greptile, Supermemory, Reducto, Xpander and more get more product adoption, less support tickets and sign enterprise deals.",
+			date: 'Jan 2026 — NOW',
+			size: '1x2',
+			tags: ['Dev', 'Content'],
+			type: 'work',
+			featured: true,
+			image: 'manicule.png',
+			imageClass: '-bottom-4 -right-4 w-20 h-20 rotate-6'
+		},
+		{
+			title: 'Indoor Positioning System',
+			content: "I'm building a wifi-based hi-precision indoor positioning system as a GPS alternative indoors. Supported by gradCapital and BITS SIRE.",
+			date: 'Aug 2025 — NOW',
+			size: '1x1',
+			tags: ['Research'],
+			type: 'work',
+			featured: false
+		},
+		{
+			title: 'SLM Inference on Edge Devices',
+			content: "A lot of mobile devices come with Neural Processing Units but they're underutilised for Small Language Model (SLM) inference processes. We're building an inference engine that solves this.",
+			date: 'Aug 2025 — NOW',
+			size: '1x1',
+			tags: ['Research'],
+			type: 'project'
+		},
+		{
+			title: 'ServiceSetu Higher-Ed Job Portal',
+			content: 'Built a jobs and announcements portal for ServiceSetu, a higher ed job portal that a PhD at my college is running with her husband. They have a large following and routinely get 45-60k views a month.',
+			date: 'Apr – Aug 2025',
+			size: '1x1',
+			tags: ['Dev'],
+			type: 'work',
+			featured: true,
+			image: 'servicesetu.png',
+			imageClass: 'bottom-10 -right-6 w-24 h-12 rotate-6',
+			href: 'https://servicesetu.org/?ref=kunal',
+			linkText: 'SERVICESTU.ORG'
+		},
+		{
+			title: 'CSI Based Activity Recognition',
+			content: "A paper I worked on under Prof Sougata Sen where we're trying to train a model on CSI value plots of a WIFi network in a room to recognise what's going on between the sender and receiver.",
+			linkText: 'VISIT',
+			date: 'Jan — May 2025',
+			size: '1x1',
+			image: 'sense.png',
+			imageClass: '-bottom-4 -right-4 w-16 h-20 rotate-6',
+			tags: ['Research'],
+			type: 'project'
+		},
+		{
+			title: 'Telescope Webportal',
+			content: "I lead a team building a webportal for an automated telescope setup at SEDS Celestia, our college astronomy club's motorised telescope, so anybody could request a live image from it of the night sky.",
+			date: 'Jan – May 2025',
+			size: '1x1',
+			tags: ['Dev'],
+			type: 'project'
+		},
+		{
+			title: 'Smart Space at DaSH Lab',
+			content: "A research project I lead under Prof Arnab Paul at DaSH lab, BITS Goa. We're set up raspberry pis and cameras in a classroom to monitor student attention and help improve teaching pedagogy. It's been a wild ride getting hardware, ML, and real classrooms to play nice together.",
+			date: 'Aug — Dec 2024',
+			size: '1x1',
+			tags: ['Research'],
+			type: 'project',
+			href: 'https://dashlab.in',
+			image: 'dash.png',
+			imageClass: '-top-3 -right-3 w-16 h-20 rotate-6',
+			linkText: 'DASHLAB.IN'
+		},
+		{
+			title: 'Full Stack at Buttondown',
+			content: "I built a few features with Django and Vue.js. I've been generally interested in the email industry. It was a dream working with Justin.",
+			date: 'Jul – Oct 2024',
+			size: '1x2',
+			tags: ['Dev'],
+			type: 'work',
+			featured: true,
+			href: 'https://buttondown.email',
+			image: 'buttondown.png',
+			imageClass: 'bottom-20 -left-5 w-20 h-20 rotate-6',
+			linkText: 'BUTTONDOWN.com'
+		},
+		{
+			title: 'BioCompute Research',
+			content: "Researched and wrote scripts for BioCompute — Bacterial DNA can store digital data thousands of times more densely than Seagate's current best tech. We're working on a device which would bring this in a form you can plug into your PC.",
+			date: 'May – Jun 2024',
+			size: '1x1',
+			tags: ['Research'],
+			type: 'work',
+			featured: true,
+			href: 'https://biocomputeinc.com',
+			image: 'biocompute.jpeg',
+			imageClass: '-top-3 right-16 w-14 h-14 rotate-6',
+			linkText: 'BioComputeInc.com'
+		},
+		{
+			title: 'Dump.ink (now defunct)',
+			content: 'Dump is a minimal micro-blogging platform I built for Deta Space which lets anybody create and host their own microblogs for free for ever. It is completely decentralised. Deta offered to buy it from me if I turned it into a decentralised social media protocol which I couldn\'t work on as life got in the way. I may continue this in the future.',
+			date: 'Jul – Sep 2023',
+			size: '1x1',
+			tags: ['Dev'],
+			type: 'project'
+		},
+		{
+			title: 'Marketing Consulting at Deta.space',
+			content: 'For a brief stint, Deta hired me to help them think new marketing strategies for their personal cloud product. About an year later, they pivoted to building a browser. They recently shut down.',
+			date: 'Jul 2023',
+			size: '1x1',
+			image: 'deta.svg',
+			imageClass: '-bottom-4 -right-4 w-20 h-20 rotate-6',
+			tags: ['Marketing'],
+			type: 'work'
+		},
+		{
+			title: 'Twift.xyz (now defunct)',
+			content: 'Now defunct, Twift helped creators run "reply with an 👋" giveaways on Twitter, handling sending thousands of DMs without being marked as spam. I built and designed the whole web-app and DM-ing engine while Prado (@pradologue) helped me with growing it to hundreds of users. We had to eventually shut down when the Twitter API pricing change made this too expensive to continue ($40k/month to be exact).',
+			date: 'Jan 2022 – Apr 2023',
+			size: '1x1',
+			image: 'twift.png',
+			imageClass: '-top-3 -right-3 w-16 h-16 rotate-6',
+			tags: ['Dev'],
+			type: 'project',
+			featured: true
+		},
+		{
+			title: 'Socialscri.be',
+			content: 'I built a SaaS tool that lets newsletter creators add social sign-up buttons (sign-up with google) to their websites without coding. I designed and built the entire thing up and grew it to a few thousand dollars in profits.',
+			href: 'http://socialscri.be/?ref=kunal',
+			linkText: 'VISIT',
+			date: 'Jan 2022 — NOW',
+			size: '1x2',
+			tags: ['Dev'],
+			image: 'socialscribe.png',
+			imageClass: 'bottom-20 -right-2 w-20 h-20 rotate-6',
+			type: 'project',
+			featured: true
+		},
+		{
+			title: 'Work with me',
+			content: "I'm always up for working on cool things and also regularly take up freelance projects. It'll be a good fit if<br><br>• involves building (websites, products, newsletters, designs, hardware)<br>• is in an industry I like (newsletters, creators, marketing, internet, consumer tech...)<br>• appreciates high-agency and contrarian-ism.<br>",
+			href: 'https://cal.com/kunalm/30',
+			linkText: "LET'S TALK",
+			size: '1x2',
+			type: 'cta',
+			variant: 'cta'
+		},
+		{
+			title: 'Content Marketing at HelloMeets',
+			content: 'Did SEO for HelloMeets — I handled the entire publishing process for the HelloMeets blog while growing it from 600 to over 45k visits a month, in 8 months on a strict budget.',
+			date: '~May 2021 – May 2022',
+			size: '1x1',
+			image: 'hellomeets.png',
+			imageClass: '-bottom-4 -right-4 w-16 h-16 rotate-6',
+			tags: ['Marketing'],
+			type: 'work'
+		},
+		{
+			title: 'Back of my Head (now defunct)',
+			content: "I ran an email newsletter rounding up cool stuff I found throughout the week. It went on the get over a thousand subscribers but I couldn't be consistent and decided to drop it. It did lead me to build Socialscribe though.",
+			date: '~Apr – Aug 2021',
+			size: '1x1',
+			tags: ['Content'],
+			type: 'project'
+		},
+		{
+			title: 'Design for The Morning Context',
+			content: 'I designed the infographic template for an newly launched, independent, subscription-based news publication from the cofounders of The Ken. Thanks Ashish K Mishra and Harveen Ahluwalia for this gig.',
+			date: '2021',
+			size: '1x1',
+			tags: ['Design'],
+			type: 'work',
+			image: 'themorningcontext.png',
+			imageClass: 'bottom-3 -right-4 w-20 h-20 rotate-6',
+			href: 'https://themorningcontext.com/?ref=kunalm.com',
+			linkText: 'THEMORNINGCONTEXT.COM'
+		},
+		{
+			title: 'Right Click (now defunct)',
+			content: "I used to write a blog called Theciva about tech news and stuff like what would happen if Apple bought DuckDuckGo, flaws of India's COVID-times contact tracing app or what Google being carbon neutral meant. I also got a little bit of readers through SEO though most readers came through repost (w canonical urls) on Medium (unfortunately their partner program wasn't in India then) and HackerNoon (where I won me 3 Noonies prizes!). Theciva evolved into Right Click (had to change the name!) which I tried to turn into Morning Brew for tech (also inspired by Filter Coffee). Later, I shut it down and sold the coolest twitter username I have ever owned yet—@rightclick—to rc.xyz, an NFT art platform for the easiest $1000 of my life.",
+			href: 'https://rightclick.substack.com/',
+			linkText: 'SUBSTACK',
+			date: 'Dec 2020 – Apr 2021',
+			size: '1x1',
+			image: 'rightclick.png',
+			imageClass: '-top-5 -right-2 w-20 h-30 rotate-6',
+			tags: ['Content'],
+			type: 'project'
+		},
+		{
+			title: 'Freelance Content Writing',
+			content: 'Did Freelance Content Writing — In 2018-19, I wrote a bunch of articles for Mobisium, a blog that later turned into a content platform. They paid me peanuts (between ₹180-300 per 1000-2000 words) but it was my first time working for someone else and I loved it. I even pitched them a video that I did alongside a blog post. I also did a few gigs on Fiverr for their minimum $5.',
+			date: '2018-20',
+			size: '1x1',
+			tags: ['Content'],
+			type: 'work'
+		}
+	];
+
+	let visibleCards = $derived(cards.filter((card) => {
+		if (card.variant === 'cta') return true;
 		if (activeFilters.length === 0) return true;
-		return tag !== undefined && activeFilters.includes(tag);
-	}
+		return card.tags?.some((t) => activeFilters.includes(t as Tag)) ?? false;
+	}));
 </script>
 
 <div class="min-h-screen">
@@ -185,264 +389,10 @@
 					</div>
 				</div>
 
-				<BentoGrid>
-					<!-- Aug 2025 — NOW: Indoor Positioning System -->
-					{#if isVisible('Research')}
-						<CardStack 
-							title="Indoor Positioning System"
-							content="I'm building a wifi-based hi-precision indoor positioning system as a GPS alternative indoors. Supported by gradCapital and BITS SIRE."
-							date="Aug 2025 — NOW"
-							size="1x1"
-							tag="Research"
-							type="work"
-							featured={false}
-						/>
-					{/if}
-
-					<!-- Aug 2025 — NOW: SLM Inference on Edge Devices -->
-					{#if isVisible('Research')}
-						<CardStack 
-							title="SLM Inference on Edge Devices"
-							content="A lot of mobile devices come with Neural Processing Units but they're underutilised for Small Language Model (SLM) inference processes. We're building an inference engine that solves this."
-							date="Aug 2025 — NOW"
-							size="1x1"
-							tag="Research"
-							type="project"
-						/>
-					{/if}
-
-					<!-- Apr – Aug 2025: ServiceSetu Higher-Ed Job Portal -->
-					{#if isVisible('Web Dev')}
-						<CardStack 
-							title="ServiceSetu Higher-Ed Job Portal"
-							content="Built a jobs and announcements portal for ServiceSetu, a higher ed job portal that a PhD at my college is running with her husband. They have a large following and routinely get 45-60k views a month."
-							date="Apr – Aug 2025"
-							size="1x1"
-							tag="Web Dev"
-							type="work"
-							featured={true}
-							image="servicesetu.png"
-							imageClass="bottom-10 -right-6 w-24 h-12 rotate-6"
-							href="https://servicesetu.org/?ref=kunal"
-							linkText="SERVICESTU.ORG"
-						/>
-					{/if}
-
-					<!-- Jan — May 2025: CSI Based Activity Recognition -->
-					{#if isVisible('Research')}
-						<CardStack 
-							title="CSI Based Activity Recognition"
-							content="A paper I worked on under Prof Sougata Sen where we're trying to train a model on CSI value plots of a WIFi network in a room to recognise what's going on between the sender and receiver."
-							linkText="VISIT"
-							date="Jan — May 2025"
-							size="1x1"
-							image="sense.png"
-							imageClass="-bottom-4 -right-4 w-16 h-20 rotate-6"
-							tag="Research"
-							type="project"
-						/>
-					{/if}
-
-					<!-- Jan – May 2025: Telescope Webportal -->
-					{#if isVisible('Web Dev')}
-						<CardStack 
-							title="Telescope Webportal"
-							content="I lead a team building a webportal for an automated telescope setup at SEDS Celestia, our college astronomy club's motorised telescope, so anybody could request a live image from it of the night sky."
-							date="Jan – May 2025"
-							size="1x1"
-							tag="Web Dev"
-							type="project"
-						/>
-					{/if}
-
-					<!-- Aug — Dec 2024: Smart Space at DaSH Lab -->
-					{#if isVisible('Research')}
-						<CardStack 
-							title="Smart Space at DaSH Lab"
-							content="A research project I lead under Prof Arnab Paul at DaSH lab, BITS Goa. We're set up raspberry pis and cameras in a classroom to monitor student attention and help improve teaching pedagogy. It's been a wild ride getting hardware, ML, and real classrooms to play nice together."
-							date="Aug — Dec 2024"
-							size="1x1"
-							tag="Research"
-							type="project"
-							href="https://dashlab.in"
-							image="dash.png"
-							imageClass="-top-3 -right-3 w-16 h-20 rotate-6"
-							linkText="DASHLAB.IN"
-						/>
-					{/if}
-
-					<!-- Jul – Oct 2024: Full Stack at Buttondown -->
-					{#if isVisible('Web Dev')}
-						<CardStack 
-							title="Full Stack at Buttondown"
-							content="I built a few features with Django and Vue.js. I've been generally interested in the email industry. It was a dream working with Justin."
-							date="Jul – Oct 2024"
-							size="1x2"
-							tag="Web Dev"
-							type="work"
-							featured={true}
-							href="https://buttondown.email"
-							image="buttondown.png"
-							imageClass="bottom-20 -left-5 w-20 h-20 rotate-6"
-							linkText="BUTTONDOWN.com"
-						/>
-					{/if}
-
-					<!-- May – Jun 2024: BioCompute Research -->
-					{#if isVisible('Research')}
-						<CardStack 
-							title="BioCompute Research"
-							content="Researched and wrote scripts for BioCompute — Bacterial DNA can store digital data thousands of times more densely than Seagate's current best tech. We're working on a device which would bring this in a form you can plug into your PC."
-							date="May – Jun 2024"
-							size="1x1"
-							tag="Research"
-							type="work"
-							featured={true}
-							href="https://biocomputeinc.com"
-							image="biocompute.jpeg"
-							imageClass="-top-3 right-16 w-14 h-14 rotate-6"
-							linkText="BioComputeInc.com"
-						/>
-					{/if}
-
-					<!-- Jul – Sep 2023: Dump.ink -->
-					{#if isVisible('Web Dev')}
-						<CardStack 
-							title="Dump.ink (now defunct)"
-							content="Dump is a minimal micro-blogging platform I built for Deta Space which lets anybody create and host their own microblogs for free for ever. It is completely decentralised. Deta offered to buy it from me if I turned it into a decentralised social media protocol which I couldn't work on as life got in the way. I may continue this in the future."
-							date="Jul – Sep 2023"
-							size="1x1"
-							tag="Web Dev"
-							type="project"
-						/>
-					{/if}
-
-					<!-- Jul 2023: Marketing at Deta.space -->
-					{#if isVisible('Marketing')}
-						<CardStack 
-							title="Marketing Consulting at Deta.space"
-							content="For a brief stint, Deta hired me to help them think new marketing strategies for their personal cloud product. About an year later, they pivoted to building a browser. They recently shut down."
-							date="Jul 2023"
-							size="1x1"
-							image="deta.svg"
-							imageClass="-bottom-4 -right-4 w-20 h-20 rotate-6"
-							tag="Marketing"
-							type="work"
-						/>
-					{/if}
-
-					<!-- Jan 2022 – Apr 2023: Twift.xyz -->
-					{#if isVisible('Web Dev')}
-						<CardStack 
-							title="Twift.xyz (now defunct)"
-							content='Now defunct, Twift helped creators run "reply with an 👋" giveaways on Twitter, handling sending thousands of DMs without being marked as spam. I built and designed the whole web-app and DM-ing engine while Prado (@pradologue) helped me with growing it to hundreds of users. We had to eventually shut down when the Twitter API pricing change made this too expensive to continue ($40k/month to be exact).'
-							date="Jan 2022 – Apr 2023"
-							size="1x1"
-							image="twift.png"
-							imageClass="-top-3 -right-3 w-16 h-16 rotate-6"
-							tag="Web Dev"
-							type="project"
-							featured={true}
-						/>
-					{/if}
-
-					<!-- Jan 2022 — NOW: Socialscri.be (featured, 1x2) -->
-					{#if isVisible('Web Dev')}
-						<CardStack 
-							title="Socialscri.be"
-							content="I built a SaaS tool that lets newsletter creators add social sign-up buttons (sign-up with google) to their websites without coding. I designed and built the entire thing up and grew it to a few thousand dollars in profits."
-							href="http://socialscri.be/?ref=kunal"
-							linkText="VISIT"
-							date="Jan 2022 — NOW"
-							size="1x2"
-							tag="Web Dev"
-							image="socialscribe.png"
-							imageClass="bottom-20 -right-2 w-20 h-20 rotate-6"
-							type="project"
-							featured={true}
-						/>
-					{/if}
-
-					<!-- CTA Card -->
-					<CardStack 
-						title="Work with me"
-						content="I'm always up for working on cool things and also regularly take up freelance projects. It'll be a good fit if<br><br>• involves building (websites, products, newsletters, designs, hardware)<br>• is in an industry I like (newsletters, creators, marketing, internet, consumer tech...)<br>• appreciates high-agency and contrarian-ism.<br>"
-						href="https://cal.com/kunalm/30"
-						linkText="LET'S TALK"
-						size="1x2"
-						type="cta"
-						variant="cta"
-					/>
-
-					<!-- ~May 2021 – May 2022: Content Marketing at HelloMeets -->
-					{#if isVisible('Marketing')}
-						<CardStack 
-							title="Content Marketing at HelloMeets"
-							content="Did SEO for HelloMeets — I handled the entire publishing process for the HelloMeets blog while growing it from 600 to over 45k visits a month, in 8 months on a strict budget."
-							date="~May 2021 – May 2022"
-							size="1x1"
-							image="hellomeets.png"
-							imageClass="-bottom-4 -right-4 w-16 h-16 rotate-6"
-							tag="Marketing"
-							type="work"
-						/>
-					{/if}
-
-					<!-- ~Apr – Aug 2021: Back of my Head -->
-					{#if isVisible('Content')}
-						<CardStack 
-							title="Back of my Head (now defunct)"
-							content="I ran an email newsletter rounding up cool stuff I found throughout the week. It went on the get over a thousand subscribers but I couldn't be consistent and decided to drop it. It did lead me to build Socialscribe though."
-							date="~Apr – Aug 2021"
-							size="1x1"
-							tag="Content"
-							type="project"
-						/>
-					{/if}
-
-					<!-- 2021: Design for The Morning Context -->
-					{#if isVisible('Design')}
-						<CardStack 
-							title="Design for The Morning Context"
-							content="I designed the infographic template for an newly launched, independent, subscription-based news publication from the cofounders of The Ken. Thanks Ashish K Mishra and Harveen Ahluwalia for this gig."
-							date="2021"
-							size="1x1"
-							tag="Design"
-							type="work"
-							image="themorningcontext.png"
-							imageClass="bottom-3 -right-4 w-20 h-20 rotate-6"
-							href="https://themorningcontext.com/?ref=kunalm.com"
-							linkText="THEMORNINGCONTEXT.COM"
-						/>
-					{/if}
-
-					<!-- Dec 2020 – Apr 2021: Right Click -->
-					{#if isVisible('Content')}
-						<CardStack 
-							title="Right Click (now defunct)"
-							content="I used to write a blog called Theciva about tech news and stuff like what would happen if Apple bought DuckDuckGo, flaws of India's COVID-times contact tracing app or what Google being carbon neutral meant. I also got a little bit of readers through SEO though most readers came through repost (w canonical urls) on Medium (unfortunately their partner program wasn't in India then) and HackerNoon (where I won me 3 Noonies prizes!). Theciva evolved into Right Click (had to change the name!) which I tried to turn into Morning Brew for tech (also inspired by Filter Coffee). Later, I shut it down and sold the coolest twitter username I have ever owned yet—@rightclick—to rc.xyz, an NFT art platform for the easiest $1000 of my life."
-							href="https://rightclick.substack.com/"
-							linkText="SUBSTACK"
-							date="Dec 2020 – Apr 2021"
-							size="1x1"
-							image="rightclick.png"
-							imageClass="-top-5 -right-2 w-20 h-30 rotate-6"
-							tag="Content"
-							type="project"
-						/>
-					{/if}
-
-					<!-- 2018-20: Freelance Content Writing -->
-					{#if isVisible('Content')}
-						<CardStack 
-							title="Freelance Content Writing"
-							content="Did Freelance Content Writing — In 2018-19, I wrote a bunch of articles for Mobisium, a blog that later turned into a content platform. They paid me peanuts (between ₹180-300 per 1000-2000 words) but it was my first time working for someone else and I loved it. I even pitched them a video that I did alongside a blog post. I also did a few gigs on Fiverr for their minimum $5."
-							date="2018-20"
-							size="1x1"
-							tag="Content"
-							type="work"
-						/>
-					{/if}
+				<BentoGrid items={visibleCards}>
+					{#snippet card(item)}
+						<CardStack {...item} />
+					{/snippet}
 				</BentoGrid>
 			</div>
 		</section>

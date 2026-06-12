@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { tick } from 'svelte';
 	
-	export type Tag = 'Content' | 'Design' | 'Web Dev' | 'Research' | 'Marketing' | undefined;
+	export type Tag = 'Content' | 'Design' | 'Dev' | 'Research' | 'Marketing' | undefined;
 	export type CardType = 'project' | 'work' | 'cta';
 
 	interface Props {
@@ -13,13 +13,13 @@
 		image?: string | null;
 		imageClass?: string;
 		size?: '1x1' | '1x2';
-		tag?: Tag;
+		tags?: Tag[];
 		type?: CardType;
 		variant?: 'default' | 'cta';
 		featured?: boolean;
 	}
 
-	let { title, content, date, href, linkText = 'READ MORE', image, imageClass = 'top-0 right-0 -translate-y-1/2 translate-x-1/4 w-20 h-20', size = '1x1', tag, type = 'project', variant = 'default', featured = false }: Props = $props();
+	let { title, content, date, href, linkText = 'READ MORE', image, imageClass = 'top-0 right-0 -translate-y-1/2 translate-x-1/4 w-20 h-20', size = '1x1', tags = [], type = 'project', variant = 'default', featured = false }: Props = $props();
 
 	// 1x1 = text only, 2:1 aspect ratio (twice as wide as tall)
 	// 1x2 = text + image, square aspect ratio
@@ -36,9 +36,15 @@
 	let isExpanded = $state(false);
 	let isAnimating = $state(false);
 	
+	function measureOverflow() {
+		if (textSection) {
+			isOverflowing = textSection.scrollHeight > textSection.clientHeight;
+		}
+	}
+
 	$effect(() => {
 		if (textSection && !isExpanded) {
-			isOverflowing = textSection.scrollHeight > textSection.clientHeight;
+			measureOverflow();
 		}
 	});
 
@@ -110,6 +116,9 @@
 				wrapper.style.height = '';
 				wrapper.style.transition = '';
 				isAnimating = false;
+				// Re-measure once the collapsed layout settles so the
+				// READ MORE pill comes back after collapsing
+				measureOverflow();
 			};
 			wrapper.addEventListener('transitionend', onEnd, { once: true });
 
@@ -125,12 +134,12 @@
 	const tagColors: Record<string, string> = {
 		'Content': '#703d57',
 		'Design': '#84a59d',
-		'Web Dev': '#e76f51',
+		'Dev': '#e76f51',
 		'Research': '#3d348b',
 		'Marketing': '#f4a261'
 	};
 
-	const tagColor = tag ? tagColors[tag] : '#0091ad';
+	const barColors = tags.length > 0 ? tags.map((t) => tagColors[t!]) : ['#0091ad'];
 </script>
 
 <div class="block group" class:card-1x1={!is1x2} class:card-1x2={is1x2} class:card-cta={isCta} class:card-expanded={isExpanded}>
@@ -151,9 +160,13 @@
 					</svg>
 				</div>
 			{/if}
-			<!-- Top color bar (hidden for CTA) -->
+			<!-- Top color bar (hidden for CTA) — one segment per tag -->
 			{#if !isCta}
-				<div class="card-top-bar" style="background-color: {tagColor}"></div>
+				<div class="card-top-bar">
+					{#each barColors as color}
+						<div class="card-top-bar-segment" style="background-color: {color}"></div>
+					{/each}
+				</div>
 			{/if}
 
 			<div class="card-content" class:cta-content={isCta}>
@@ -182,7 +195,7 @@
 				<!-- Sine wave SVG separator with tracking shadow (hidden for CTA) -->
 				{#if !isCta}
 				<div class="wave-container z-10">
-					{#if isOverflowing || isExpanded}
+					{#if isOverflowing || isExpanded || isAnimating}
 						<!-- svelte-ignore a11y_click_events_have_key_events -->
 						<!-- svelte-ignore a11y_no_static_element_interactions -->
 						<div class="read-more-pill" onclick={handleTextClick} class:read-more-expanded={isExpanded}>
@@ -303,16 +316,6 @@
 	/* Card sizing: 2 height units = 1 width unit */
 	/* 1x1 = text only, aspect ratio 2:1 (twice as wide as tall) */
 	/* 1x2 = text + image, aspect ratio 1:1 (square) */
-	.card-1x1 {
-		grid-column: span 1;
-		grid-row: span 1;
-	}
-
-	.card-1x2 {
-		grid-column: span 1;
-		grid-row: span 2;
-	}
-
 	.card-wrapper {
 		position: relative;
 		width: 100%;
@@ -376,6 +379,11 @@
 	.card-top-bar {
 		height: 6px;
 		flex-shrink: 0;
+		display: flex;
+	}
+
+	.card-top-bar-segment {
+		flex: 1;
 	}
 
 	.card-content {

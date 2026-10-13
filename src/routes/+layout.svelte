@@ -4,6 +4,7 @@
 	import type { Snippet } from 'svelte';
 	import CardStack, { type Tag } from '$lib/components/CardStack.svelte';
 	import BentoGrid from '$lib/components/BentoGrid.svelte';
+	import ManiculeCard from '$lib/components/ManiculeCard.svelte';
 	
 	interface Props {
 		children: Snippet;
@@ -51,10 +52,10 @@
 	const cards = [
 		{
 			title: 'Manicule (YC P26)',
-			content: "We're a team of 5 cracked engineers who write technical documentation for DevTool companies. We have helped Greptile, Supermemory, Reducto, Xpander and more get more product adoption, less support tickets and sign enterprise deals.",
 			date: 'Jan 2026 — NOW',
 			size: '1x2',
-			tags: ['Dev', 'Content'],
+			tags: ['Dev', 'Content', 'Marketing'],
+			fullWidth: true,
 			type: 'work',
 			featured: true,
 			image: 'manicule.png',
@@ -389,7 +390,11 @@
 					</div>
 				</div>
 
-				<BentoGrid items={visibleCards}>
+				{#each visibleCards.filter((card) => card.fullWidth) as item (item.title)}
+					<ManiculeCard title={item.title} date={item.date} />
+				{/each}
+
+				<BentoGrid items={visibleCards.filter((card) => !card.fullWidth)}>
 					{#snippet card(item)}
 						<CardStack {...item} />
 					{/snippet}

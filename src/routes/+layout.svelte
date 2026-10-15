@@ -88,7 +88,7 @@
 		},
 		{
 			title: 'CSI Based Activity Recognition',
-			content: "A paper I worked on under Prof Sougata Sen where we're trying to train a model on CSI value plots of a WIFi network in a room to recognise what's going on between the sender and receiver.",
+			content: "A paper I worked on under Prof Sougata Sen where we're trying to train a model on CSI value plots of a WiFi network in a room to recognise what's going on between the sender and receiver.",
 			linkText: 'VISIT',
 			date: 'Jan — May 2025',
 			size: '1x1',
@@ -107,7 +107,7 @@
 		},
 		{
 			title: 'Smart Space at DaSH Lab',
-			content: "A research project I lead under Prof Arnab Paul at DaSH lab, BITS Goa. We're set up raspberry pis and cameras in a classroom to monitor student attention and help improve teaching pedagogy. It's been a wild ride getting hardware, ML, and real classrooms to play nice together.",
+			content: "A research project I lead under Prof Arnab Paul at DaSH lab, BITS Goa. We've set up Raspberry Pis and cameras in a classroom to monitor student attention and help improve teaching pedagogy. It's been a wild ride getting hardware, ML, and real classrooms to play nice together.",
 			date: 'Aug — Dec 2024',
 			size: '1x1',
 			tags: ['Research'],
@@ -145,7 +145,7 @@
 		},
 		{
 			title: 'Dump.ink (now defunct)',
-			content: 'Dump is a minimal micro-blogging platform I built for Deta Space which lets anybody create and host their own microblogs for free for ever. It is completely decentralised. Deta offered to buy it from me if I turned it into a decentralised social media protocol which I couldn\'t work on as life got in the way. I may continue this in the future.',
+			content: 'Dump is a minimal micro-blogging platform I built for Deta Space which lets anybody create and host their own microblogs for free, forever. It is completely decentralised. Deta offered to buy it from me if I turned it into a decentralised social media protocol which I couldn\'t work on as life got in the way. I may continue this in the future.',
 			date: 'Jul – Sep 2023',
 			size: '1x1',
 			tags: ['Dev'],
@@ -153,7 +153,7 @@
 		},
 		{
 			title: 'Marketing Consulting at Deta.space',
-			content: 'For a brief stint, Deta hired me to help them think new marketing strategies for their personal cloud product. About an year later, they pivoted to building a browser. They recently shut down.',
+			content: 'For a brief stint, Deta hired me to help them think up new marketing strategies for their personal cloud product. About a year later, they pivoted to building a browser. They recently shut down.',
 			date: 'Jul 2023',
 			size: '1x1',
 			image: 'deta.svg',
@@ -174,7 +174,7 @@
 		},
 		{
 			title: 'Socialscri.be',
-			content: 'I built a SaaS tool that lets newsletter creators add social sign-up buttons (sign-up with google) to their websites without coding. I designed and built the entire thing up and grew it to a few thousand dollars in profits.',
+			content: 'I built a SaaS tool that lets newsletter creators add social sign-up buttons (sign up with Google) to their websites without coding. I designed and built the entire thing and grew it to a few thousand dollars in profits.',
 			href: 'http://socialscri.be/?ref=kunal',
 			linkText: 'VISIT',
 			date: 'Jan 2022 — NOW',
@@ -187,7 +187,7 @@
 		},
 		{
 			title: 'Work with me',
-			content: "I'm always up for working on cool things and also regularly take up freelance projects. It'll be a good fit if<br><br>• involves building (websites, products, newsletters, designs, hardware)<br>• is in an industry I like (newsletters, creators, marketing, internet, consumer tech...)<br>• appreciates high-agency and contrarian-ism.<br>",
+			content: "I'm always up for working on cool things and also regularly take up freelance projects. It'll be a good fit if it<br><br>• involves building (websites, products, newsletters, designs, hardware)<br>• is in an industry I like (newsletters, creators, marketing, internet, consumer tech...)<br>• appreciates high agency and contrarianism.<br>",
 			href: 'https://cal.com/kunalm/30',
 			linkText: "LET'S TALK",
 			size: '1x2',
@@ -206,7 +206,7 @@
 		},
 		{
 			title: 'Back of my Head (now defunct)',
-			content: "I ran an email newsletter rounding up cool stuff I found throughout the week. It went on the get over a thousand subscribers but I couldn't be consistent and decided to drop it. It did lead me to build Socialscribe though.",
+			content: "I ran an email newsletter rounding up cool stuff I found throughout the week. It went on to get over a thousand subscribers but I couldn't be consistent and decided to drop it. It did lead me to build Socialscribe though.",
 			date: '~Apr – Aug 2021',
 			size: '1x1',
 			tags: ['Content'],
@@ -214,7 +214,7 @@
 		},
 		{
 			title: 'Design for The Morning Context',
-			content: 'I designed the infographic template for an newly launched, independent, subscription-based news publication from the cofounders of The Ken. Thanks Ashish K Mishra and Harveen Ahluwalia for this gig.',
+			content: 'I designed the infographic template for a newly launched, independent, subscription-based news publication from the cofounders of The Ken. Thanks Ashish K Mishra and Harveen Ahluwalia for this gig.',
 			date: '2021',
 			size: '1x1',
 			tags: ['Design'],
@@ -226,7 +226,7 @@
 		},
 		{
 			title: 'Right Click (now defunct)',
-			content: "I used to write a blog called Theciva about tech news and stuff like what would happen if Apple bought DuckDuckGo, flaws of India's COVID-times contact tracing app or what Google being carbon neutral meant. I also got a little bit of readers through SEO though most readers came through repost (w canonical urls) on Medium (unfortunately their partner program wasn't in India then) and HackerNoon (where I won me 3 Noonies prizes!). Theciva evolved into Right Click (had to change the name!) which I tried to turn into Morning Brew for tech (also inspired by Filter Coffee). Later, I shut it down and sold the coolest twitter username I have ever owned yet—@rightclick—to rc.xyz, an NFT art platform for the easiest $1000 of my life.",
+			content: "I used to write a blog called Theciva about tech news and stuff like what would happen if Apple bought DuckDuckGo, flaws of India's COVID-times contact tracing app or what Google being carbon neutral meant. I also got a few readers through SEO, though most came through reposts (w/ canonical URLs) on Medium (unfortunately their partner program wasn't in India then) and HackerNoon (where I won 3 Noonies prizes!). Theciva evolved into Right Click (had to change the name!) which I tried to turn into Morning Brew for tech (also inspired by Filter Coffee). Later, I shut it down and sold the coolest twitter username I have ever owned yet—@rightclick—to rc.xyz, an NFT art platform for the easiest $1000 of my life.",
 			href: 'https://rightclick.substack.com/',
 			linkText: 'SUBSTACK',
 			date: 'Dec 2020 – Apr 2021',

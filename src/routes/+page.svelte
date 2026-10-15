@@ -8,7 +8,7 @@
 
 <h1 class="font-serif text-6xl mb-4">Kunal Mishra</h1>
 <div class="text-2xl ">
-    Hi! I'm Kunal, an product builder, full stack dev and an electronics major at BITS, Goa.
+    Hi! I'm Kunal, a marketing engineer, full stack dev and an electronics major at BITS, Goa.
     <br><br>
     Right now, I split my time between classes, working on research projects and building web products.
 

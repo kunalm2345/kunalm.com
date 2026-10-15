@@ -34,9 +34,27 @@
 			</header>
 
 			<div class="work-copy">
-				<p>I've led five-figure documentation revamps and content projects at Manicule, from the first brief to the final review. The work spans technical and product docs, agent SKILLS, benchmarks, and blog posts.</p>
-				<p>I also work on SEO, AEO, Reddit content, and audits of search performance and documentation. I've won new clients through my own outreach and sales calls.</p>
-				<p>Alongside client work, I help build our internal agent platform. I built the writing and review interface and pipeline to catch generic AI phrasing and help produce clear, specific writing.</p>
+				<p>As a founding engineer, I had a lot of fun working with a small, young team on everything from client work, to marketing &amp; sales and building the internal agents to do all of it at scale.</p>
+
+				<h4>Client work</h4>
+				<ul>
+					<li><strong>Docs site revamps.</strong> I have written the technical docs for some of the biggest AI DevTool companies, including Greptile, Mastra and AgentMail. For coding agents, docs are the UI. Good docs mean your customer's agents understand your product better.</li>
+					<li><strong>Benchmarks.</strong> I ran several large-scale benchmarks showing how a client's product fares against the competition. Benchmark reports are excellent for Google AI search overviews btw!</li>
+					<li><strong>Cookbooks.</strong> I built several working demos showcasing a use case for our clients' products and wrote about how they work and can be customised. For example, I wrote Mastra's cookbook on how to build Software Factories!</li>
+				</ul>
+
+				<h4>Sales and Outreach</h4>
+				<ul>
+					<li><strong>Outbound cold outreach.</strong> I like quality &gt; quantity. I find potential clients by being chronically online on X, and then talk to them to see if they need us.</li>
+					<li><strong>Audits &amp; proposals.</strong> I play around with their product, read their docs, and understand their positioning. This helps me concretely list out what they should be doing (to get discovered and used by coding agents!)</li>
+					<li><strong>Closing.</strong> The DMs and audits I send over get roughly a 40% reply rate (at around 10 emails/DMs a week). I then also take the sales call and do the client onboarding.</li>
+				</ul>
+
+				<h4>Engineering</h4>
+				<ul>
+					<li>I helped build SKILLs, prompts and agents for our internal client service app. We use it to power all content operations across over half a dozen clients at a time with a client work team of just 4.</li>
+					<li>I also built a writing platform to collaborate with coding agents on writing technical content drafts. This fast-tracks human reviews for agents' writing and makes sure it follows SEO and readability best practices while not sounding like AI slop.</li>
+				</ul>
 			</div>
 
 			<footer class="clients-section">
@@ -77,8 +95,11 @@
 	.manicule-mark { flex-shrink: 0; border-radius: .5rem; transform: rotate(6deg); }
 	:global(html.dark) .manicule-mark { background: #fff; padding: .35rem; }
 	.work-copy { max-width: 70ch; margin-top: 1.25rem; }
-	.work-copy p { margin: 0; color: var(--text-secondary); font-size: 1rem; line-height: 1.6; }
-	.work-copy p + p { margin-top: 1rem; }
+	.work-copy p, .work-copy li { margin: 0; color: var(--text-secondary); font-size: 1rem; line-height: 1.6; }
+	.work-copy strong { color: var(--text-primary); font-weight: 600; }
+	.work-copy h4 { margin: 1.5rem 0 .5rem; color: var(--text-primary); font-size: .875rem; font-weight: 600; }
+	.work-copy ul { margin: 0; padding-left: 1.25rem; list-style: disc; }
+	.work-copy li + li { margin-top: .5rem; }
 	.clients-section { margin-top: 2rem; padding-top: 1.5rem; border-top: 1px dashed var(--border-color); }
 	.client-logos { list-style: none; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 1.25rem 2rem; margin: 1.25rem 0 0; padding: 0; }
 	.client-logos li { margin: 0; min-width: 0; }

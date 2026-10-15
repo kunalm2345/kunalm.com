@@ -52,7 +52,7 @@
 	const cards = [
 		{
 			title: 'Manicule (YC P26)',
-			date: 'Jan 2026 — NOW',
+			date: 'Jan 2026 — Oct 2026',
 			size: '1x2',
 			tags: ['Dev', 'Content', 'Marketing'],
 			fullWidth: true,

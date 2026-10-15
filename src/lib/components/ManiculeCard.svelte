@@ -1,4 +1,6 @@
 <script lang="ts">
+	import Wave from './Wave.svelte';
+
 	interface Props {
 		title: string;
 		date?: string;
@@ -8,14 +10,14 @@
 	// w = wordmark width, h = icon height (rem); tuned by eye so wordmarks read the same size
 	const clients: { name: string; href: string; logo: string; showName?: boolean; w?: number; h?: number }[] = [
 		{ name: 'Greptile', href: 'https://www.greptile.com', logo: '/clients/greptile.svg', showName: true },
-		{ name: 'xpander.ai', href: 'https://xpander.ai', logo: '/clients/xpander.png', w: 6.75 },
-		{ name: 'Skyvern', href: 'https://www.skyvern.com', logo: '/clients/skyvern.png', w: 7.75 },
-		{ name: 'Context.dev', href: 'https://context.dev', logo: '/clients/context.svg', showName: true, h: 1.4 },
+		{ name: 'xpander.ai', href: 'https://xpander.ai', logo: '/clients/xpander.png', w: 7.75 },
+		{ name: 'Skyvern', href: 'https://www.skyvern.com', logo: '/clients/skyvern.png', w: 9 },
+		{ name: 'Context.dev', href: 'https://context.dev', logo: '/clients/context.svg', showName: true, h: 1.6 },
 		{ name: 'Limrun', href: 'https://limrun.com', logo: '/clients/limrun.png', showName: true },
 		{ name: 'Surge', href: 'https://surge.app', logo: 'https://surge.app/favicon.svg', showName: true },
-		{ name: 'AgentMail', href: 'https://agentmail.to', logo: '/clients/agentmail.svg', w: 6.5 },
-		{ name: 'Mastra', href: 'https://mastra.ai', logo: '/clients/mastra.svg', w: 6.25 },
-		{ name: 'OpenComputer', href: 'https://opencomputer.dev', logo: '/clients/opencomputer.svg', w: 7.5 },
+		{ name: 'AgentMail', href: 'https://agentmail.to', logo: '/clients/agentmail.svg', w: 7.5 },
+		{ name: 'Mastra', href: 'https://mastra.ai', logo: '/clients/mastra.svg', w: 7.25 },
+		{ name: 'OpenComputer', href: 'https://opencomputer.dev', logo: '/clients/opencomputer.svg', w: 8.5 },
 		{ name: 'boat', href: 'https://boat.dev', logo: 'https://boat.dev/icon.svg', showName: true }
 	];
 </script>
@@ -31,7 +33,7 @@
 					<p class="eyebrow">{date}</p>
 					<h3 id="manicule-title">{title}</h3>
 				</div>
-				<img class="manicule-mark" src="/manicule.png" alt="" width="56" height="56" />
+				<img class="manicule-mark" src="/manicule.png" alt="" width="68" height="68" />
 			</header>
 
 			<div class="work-copy">
@@ -44,6 +46,7 @@
 							<li><strong>Docs site revamps.</strong> I have written the technical docs for some of the biggest AI DevTool companies, including Greptile, Mastra and AgentMail. For coding agents, docs are the UI. Good docs mean your customer's agents understand your product better.</li>
 							<li><strong>Benchmarks.</strong> I ran several large-scale benchmarks showing how a client's product fares against the competition. Benchmark reports are excellent for Google AI search overviews btw!</li>
 							<li><strong>Cookbooks.</strong> I built several working demos showcasing a use case for our clients' products and wrote about how they work and can be customised. For example, I wrote Mastra's cookbook on how to build Software Factories!</li>
+							<li><strong>SEO/AEO content.</strong> This includes tracking your brand rankings across Google search, AI chat apps and coding agents. Then finding new opportunities for keywords and search questions that you can rank for. And finally writing new pieces of content and refreshing old ones until you start getting organic traffic.</li>
 						</ul>
 					</section>
 
@@ -59,15 +62,23 @@
 					<section>
 						<h4>Engineering</h4>
 						<ul>
-							<li>I helped build SKILLs, prompts and agents for our internal client service app. We use it to power all content operations across over half a dozen clients at a time with a client work team of just 4.</li>
-							<li>I also built a writing platform to collaborate with coding agents on writing technical content drafts. This fast-tracks human reviews for agents' writing and makes sure it follows SEO and readability best practices while not sounding like AI slop.</li>
+							<li><strong>Internal agents.</strong> I helped build SKILLs, prompts and agents for our internal client service app. We use it to power all content operations across over half a dozen clients at a time with a client work team of just 4.</li>
+							<li><strong>Writing platform.</strong> I also built a writing platform to collaborate with coding agents on writing technical content drafts. This fast-tracks human reviews for agents' writing and makes sure it follows SEO and readability best practices while not sounding like AI slop.</li>
 						</ul>
 					</section>
 				</div>
 			</div>
 
+			<div class="wave"><Wave /></div>
+
 			<footer class="clients-section">
-				<h4 class="eyebrow">CLIENTS I WORKED WITH</h4>
+				<div class="clients-head">
+					<h4 class="eyebrow">CLIENTS I WORKED WITH</h4>
+					<a class="site-link" href="https://manicule.com" target="_blank" rel="noopener noreferrer">
+						MANICULE.COM
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" width="12" height="12" aria-hidden="true"><path fill-rule="evenodd" d="M4.22 11.78a.75.75 0 0 1 0-1.06L9.44 5.5H5.75a.75.75 0 0 1 0-1.5h5.5a.75.75 0 0 1 .75.75v5.5a.75.75 0 0 1-1.5 0V6.56l-5.22 5.22a.75.75 0 0 1-1.06 0Z" clip-rule="evenodd" /></svg>
+					</a>
+				</div>
 				<ul class="client-logos">
 					{#each clients as client}
 						<li>
@@ -97,9 +108,9 @@
 	.color-bar span { flex: 1; background: #e76f51; }
 	.color-bar span:nth-child(2) { background: #703d57; }
 	.color-bar span:nth-child(3) { background: #f4a261; }
-	.card-body { padding: clamp(1.25rem, 3vw, 2.25rem); }
+	.card-body { --pad: clamp(1.25rem, 3vw, 2.25rem); padding: var(--pad); }
 	header { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
-	.eyebrow { margin: 0; color: var(--text-secondary); font-size: .75rem; font-weight: 400; line-height: 1.5; }
+	.eyebrow { margin: 0; color: var(--text-secondary); font-family: Menlo, ui-monospace, monospace; font-size: .75rem; font-weight: 400; line-height: 1.5; }
 	h3 { margin: .4rem 0 0; color: var(--text-primary); font: 1.5rem Georgia, serif; }
 	.manicule-mark { flex-shrink: 0; border-radius: .5rem; transform: rotate(6deg); }
 	:global(html.dark) .manicule-mark { background: #fff; padding: .35rem; }
@@ -108,15 +119,18 @@
 	.work-columns { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2rem; margin-top: 1.5rem; }
 	.work-copy p, .work-copy li { margin: 0; color: var(--text-secondary); font-size: 1rem; line-height: 1.6; }
 	.work-copy strong { color: var(--text-primary); font-weight: 600; }
-	.work-copy h4 { margin: 0 0 .5rem; color: var(--text-primary); font-size: .875rem; font-weight: 600; }
+	.work-copy h4 { margin: 0 0 .5rem; color: var(--text-primary); font-family: Menlo, ui-monospace, monospace; font-size: .875rem; font-weight: 600; }
 	.work-copy ul { margin: 0; padding-left: 1.25rem; list-style: disc; }
 	.work-copy li + li { margin-top: .5rem; }
-	.clients-section { margin-top: 2rem; padding-top: 1.5rem; border-top: 1px dashed var(--border-color); }
+	.wave { margin: 2rem calc(-1 * var(--pad)) 0; }
+	.clients-section { padding-top: 1.25rem; }
+	.clients-head { display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+	.site-link { display: flex; align-items: center; gap: .25rem; font: .75rem Menlo, ui-monospace, monospace; letter-spacing: .05em; }
 	.client-logos { list-style: none; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 1.25rem 2rem; margin: 1.25rem 0 0; padding: 0; }
 	.client-logos li { margin: 0; min-width: 0; }
-	.client-logos a { display: flex; gap: .5rem; justify-content: center; align-items: center; height: 2.5rem; padding: .25rem; border-radius: .25rem; color: var(--text-primary) !important; font-size: 1rem; font-weight: 600; }
+	.client-logos a { display: flex; gap: .5rem; justify-content: center; align-items: center; height: 2.75rem; padding: .25rem; border-radius: .25rem; color: var(--text-primary) !important; font-size: 1.125rem; font-weight: 600; }
 	.client-logos a:focus-visible { outline: 2px solid var(--accent-color); outline-offset: 4px; }
-	.client-logos img { width: auto; max-width: 100%; height: 1.75rem; object-fit: contain; filter: grayscale(1); }
+	.client-logos img { width: auto; max-width: 100%; height: 2rem; object-fit: contain; filter: grayscale(1); }
 	.client-logos img + span { white-space: nowrap; }
 	.client-logos img[src$="skyvern.png"] { filter: grayscale(1) brightness(.2); }
 	:global(html.dark) .client-logos a { background: #fff; color: #1f2937 !important; }

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Wave from './Wave.svelte';
 	import { tick } from 'svelte';
 	
 	export type Tag = 'Content' | 'Design' | 'Dev' | 'Research' | 'Marketing' | undefined;
@@ -205,71 +206,7 @@
 							</svg>
 						</div>
 					{/if}
-					<svg class="wave-svg" viewBox="0 0 400 16" preserveAspectRatio="none">
-						<defs>
-							<linearGradient id="shadowGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-							<stop offset="0%" stop-color="rgba(0,0,0,0.08)" />
-							<stop offset="100%" stop-color="rgba(0,0,0,0)" />
-							</linearGradient>
-						</defs>
-
-						<!-- Shadow BELOW the wave -->
-						<path
-							d="
-							M0,8
-							C7.5,4 15,12 22.5,8
-							C30,4 37.5,12 45,8
-							C52.5,4 60,12 67.5,8
-							C75,4 82.5,12 90,8
-							C97.5,4 105,12 112.5,8
-							C120,4 127.5,12 135,8
-							C142.5,4 150,12 157.5,8
-							C165,4 172.5,12 180,8
-							C187.5,4 195,12 202.5,8
-							C210,4 217.5,12 225,8
-							C232.5,4 240,12 247.5,8
-							C255,4 262.5,12 270,8
-							C277.5,4 285,12 292.5,8
-							C300,4 307.5,12 315,8
-							C322.5,4 330,12 337.5,8
-							C345,4 352.5,12 360,8
-							C367.5,4 375,12 382.5,8
-							C390,4 397.5,12 400,8
-							L400,16
-							L0,16
-							Z
-							"
-							fill="url(#shadowGrad)"
-						/>
-
-						<!-- Main wave -->
-						<path
-							d="
-							M0,8
-							C7.5,4 15,12 22.5,8
-							C30,4 37.5,12 45,8
-							C52.5,4 60,12 67.5,8
-							C75,4 82.5,12 90,8
-							C97.5,4 105,12 112.5,8
-							C120,4 127.5,12 135,8
-							C142.5,4 150,12 157.5,8
-							C165,4 172.5,12 180,8
-							C187.5,4 195,12 202.5,8
-							C210,4 217.5,12 225,8
-							C232.5,4 240,12 247.5,8
-							C255,4 262.5,12 270,8
-							C277.5,4 285,12 292.5,8
-							C300,4 307.5,12 315,8
-							C322.5,4 330,12 337.5,8
-							C345,4 352.5,12 360,8
-							C367.5,4 375,12 382.5,8
-							C390,4 397.5,12 400,8
-							"
-							fill="none"
-							stroke="rgba(0,0,0,0.12)"
-							stroke-width="1.5"
-						/>
-					</svg>
+					<Wave />
 				</div>
 				{/if}
 
@@ -484,12 +421,6 @@
 	.read-more-expanded {
 		color: #e76f51;
 		border-color: #e76f51;
-	}
-
-	.wave-svg {
-		width: 100%;
-		height: 16px;
-		display: block;
 	}
 
 	/* Image notification - sticks out from card */

@@ -1,11 +1,13 @@
 <script lang="ts">
 	import Wave from './Wave.svelte';
+	import { tagColors, type Tag } from '$lib/tags';
 
 	interface Props {
 		title: string;
 		date?: string;
+		tags?: Tag[];
 	}
-	let { title, date }: Props = $props();
+	let { title, date, tags = [] }: Props = $props();
 
 	// w = wordmark width, h = icon height (rem); tuned by eye so wordmarks read the same size
 	const clients: { name: string; href: string; logo: string; showName?: boolean; w?: number; h?: number }[] = [
@@ -26,11 +28,11 @@
 	<div class="stack-layer stack-layer-back" aria-hidden="true"></div>
 	<div class="stack-layer stack-layer-front" aria-hidden="true"></div>
 	<div class="card-surface">
-		<div class="color-bar" aria-hidden="true"><span></span><span></span><span></span></div>
+		<div class="color-bar" aria-hidden="true">{#each tags as tag}<span style:background={tagColors[tag]}></span>{/each}</div>
 		<div class="card-body">
 			<header>
 				<div>
-					<p class="eyebrow">{date}</p>
+					<p class="text-xs font-mono uppercase tracking-wider text-gray-400">{date}</p>
 					<h3 id="manicule-title">{title}</h3>
 				</div>
 				<img class="manicule-mark" src="/manicule.png" alt="" width="68" height="68" />
@@ -73,8 +75,8 @@
 
 			<footer class="clients-section">
 				<div class="clients-head">
-					<h4 class="eyebrow">CLIENTS I WORKED WITH</h4>
-					<a class="site-link" href="https://manicule.com" target="_blank" rel="noopener noreferrer">
+					<h4 class="label">CLIENTS I WORKED WITH</h4>
+					<a class="label" href="https://manicule.com" target="_blank" rel="noopener noreferrer">
 						MANICULE.COM
 						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" width="12" height="12" aria-hidden="true"><path fill-rule="evenodd" d="M4.22 11.78a.75.75 0 0 1 0-1.06L9.44 5.5H5.75a.75.75 0 0 1 0-1.5h5.5a.75.75 0 0 1 .75.75v5.5a.75.75 0 0 1-1.5 0V6.56l-5.22 5.22a.75.75 0 0 1-1.06 0Z" clip-rule="evenodd" /></svg>
 					</a>
@@ -105,12 +107,10 @@
 	.stack-layer-front { transform: rotate(-.35deg) translateY(3px); }
 	.card-surface { overflow: hidden; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: .5rem; box-shadow: 0 1px 3px rgb(0 0 0 / .1); }
 	.color-bar { display: flex; height: 6px; }
-	.color-bar span { flex: 1; background: #e76f51; }
-	.color-bar span:nth-child(2) { background: #703d57; }
-	.color-bar span:nth-child(3) { background: #f4a261; }
+	.color-bar span { flex: 1; }
 	.card-body { --pad: clamp(1.25rem, 3vw, 2.25rem); padding: var(--pad); }
 	header { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
-	.eyebrow { margin: 0; color: var(--text-secondary); font-family: Menlo, ui-monospace, monospace; font-size: .75rem; font-weight: 400; line-height: 1.5; }
+	.label { margin: 0; color: #9ca3af; font: 700 .8125rem/1.5 ui-monospace, SFMono-Regular, Menlo, monospace; text-transform: uppercase; letter-spacing: .05em; }
 	h3 { margin: .4rem 0 0; color: var(--text-primary); font: 1.5rem Georgia, serif; }
 	.manicule-mark { flex-shrink: 0; border-radius: .5rem; transform: rotate(6deg); }
 	:global(html.dark) .manicule-mark { background: #fff; padding: .35rem; }
@@ -119,13 +119,13 @@
 	.work-columns { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2rem; margin-top: 1.5rem; }
 	.work-copy p, .work-copy li { margin: 0; color: var(--text-secondary); font-size: 1rem; line-height: 1.6; }
 	.work-copy strong { color: var(--text-primary); font-weight: 600; }
-	.work-copy h4 { margin: 0 0 .5rem; color: var(--text-primary); font-family: Menlo, ui-monospace, monospace; font-size: .875rem; font-weight: 600; }
+	.work-copy h4 { margin: 0 0 .5rem; color: #9ca3af; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .875rem; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; }
 	.work-copy ul { margin: 0; padding-left: 1.25rem; list-style: disc; }
 	.work-copy li + li { margin-top: .5rem; }
 	.wave { margin: 2rem calc(-1 * var(--pad)) 0; }
 	.clients-section { padding-top: 1.25rem; }
 	.clients-head { display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
-	.site-link { display: flex; align-items: center; gap: .25rem; font: .75rem Menlo, ui-monospace, monospace; letter-spacing: .05em; }
+	a.label { display: flex; align-items: center; gap: .25rem; }
 	.client-logos { list-style: none; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 1.25rem 2rem; margin: 1.25rem 0 0; padding: 0; }
 	.client-logos li { margin: 0; min-width: 0; }
 	.client-logos a { display: flex; gap: .5rem; justify-content: center; align-items: center; height: 2.75rem; padding: .25rem; border-radius: .25rem; color: var(--text-primary) !important; font-size: 1.125rem; font-weight: 600; }

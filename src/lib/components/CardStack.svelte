@@ -1,8 +1,9 @@
 <script lang="ts">
 	import Wave from './Wave.svelte';
 	import { tick } from 'svelte';
+	import { tagColors, type Tag } from '$lib/tags';
 	
-	export type Tag = 'Content' | 'Design' | 'Dev' | 'Research' | 'Marketing' | undefined;
+	export type { Tag };
 	export type CardType = 'project' | 'work' | 'cta';
 
 	interface Props {
@@ -131,16 +132,7 @@
 		}
 	}
 
-	// Tag colors
-	const tagColors: Record<string, string> = {
-		'Content': '#703d57',
-		'Design': '#84a59d',
-		'Dev': '#e76f51',
-		'Research': '#3d348b',
-		'Marketing': '#f4a261'
-	};
-
-	const barColors = tags.length > 0 ? tags.map((t) => tagColors[t!]) : ['#0091ad'];
+	const barColors = tags.length > 0 ? tags.map((t) => tagColors[t]) : ['#0091ad'];
 </script>
 
 <div class="block group" class:card-1x1={!is1x2} class:card-1x2={is1x2} class:card-cta={isCta} class:card-expanded={isExpanded}>

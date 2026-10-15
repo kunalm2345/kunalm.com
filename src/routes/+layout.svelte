@@ -2,7 +2,8 @@
 	import '../app.css';
 	import me from '$lib/assets/me.jpeg';
 	import type { Snippet } from 'svelte';
-	import CardStack, { type Tag } from '$lib/components/CardStack.svelte';
+	import CardStack from '$lib/components/CardStack.svelte';
+	import { tagColors, type Tag } from '$lib/tags';
 	import BentoGrid from '$lib/components/BentoGrid.svelte';
 	import ManiculeCard from '$lib/components/ManiculeCard.svelte';
 	
@@ -32,13 +33,7 @@
 	// Filter state
 	let activeFilters = $state<Tag[]>([]);
 
-	const allTags: { name: Tag; color: string }[] = [
-		{ name: 'Research', color: '#3d348b' },
-		{ name: 'Dev', color: '#e76f51' },
-		{ name: 'Content', color: '#703d57' },
-		{ name: 'Design', color: '#84a59d' },
-		{ name: 'Marketing', color: '#f4a261' }
-	];
+	const allTags = (['Research', 'Dev', 'Content', 'Design', 'Marketing'] as Tag[]).map((name) => ({ name, color: tagColors[name] }));
 
 	function toggleFilter(tag: Tag) {
 		if (activeFilters.includes(tag)) {
@@ -391,7 +386,7 @@
 				</div>
 
 				{#each visibleCards.filter((card) => card.fullWidth) as item (item.title)}
-					<ManiculeCard title={item.title} date={item.date} />
+					<ManiculeCard title={item.title} date={item.date} tags={item.tags as Tag[]} />
 				{/each}
 
 				<BentoGrid items={visibleCards.filter((card) => !card.fullWidth)}>

@@ -33,24 +33,10 @@
 				<img class="manicule-mark" src="/manicule.png" alt="" width="56" height="56" />
 			</header>
 
-			<p class="intro">I write the docs, bring in the work, and build the systems behind it.</p>
-
-			<div class="work-columns">
-				<section aria-labelledby="delivery-title">
-					<p class="metric">5-figure</p>
-					<h4 id="delivery-title">Docs & content engagements led</h4>
-					<p>I've led documentation revamps and content projects, writing technical and product docs, agent SKILLS, benchmarks, and blog posts. TK pieces delivered, from the first brief to the final review.</p>
-				</section>
-				<section aria-labelledby="growth-title">
-					<p class="metric">TK</p>
-					<h4 id="growth-title">New clients closed myself</h4>
-					<p>I handle outreach, sales calls, and the close. On the delivery side, I work on SEO and AEO, Reddit, SEO audits, and docs audits: how people find a product, and what they understand when they get there.</p>
-				</section>
-				<section aria-labelledby="systems-title">
-					<p class="metric">TK</p>
-					<h4 id="systems-title">Drafts through the writing pipeline</h4>
-					<p>I work on our internal agents platform, and built its writing and review interface and pipeline. It catches generic AI phrasing and helps turn drafts into clear, specific work that reads like a person wrote it.</p>
-				</section>
+			<div class="work-copy">
+				<p>I've led five-figure documentation revamps and content projects at Manicule, from the first brief to the final review. The work spans technical and product docs, agent SKILLS, benchmarks, and blog posts.</p>
+				<p>I also work on SEO, AEO, Reddit content, and audits of search performance and documentation. I've won new clients through my own outreach and sales calls.</p>
+				<p>Alongside client work, I help build our internal agent platform. I built the writing and review interface and pipeline to catch generic AI phrasing and help produce clear, specific writing.</p>
 			</div>
 
 			<footer class="clients-section">
@@ -86,17 +72,13 @@
 	.color-bar span:nth-child(3) { background: #f4a261; }
 	.card-body { padding: clamp(1.25rem, 3vw, 2.25rem); }
 	header { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
-	.eyebrow { margin: 0; color: var(--text-secondary); font: .65rem ui-monospace, monospace; letter-spacing: .12em; text-transform: uppercase; }
+	.eyebrow { margin: 0; color: var(--text-secondary); font-size: .75rem; font-weight: 400; line-height: 1.5; }
 	h3 { margin: .4rem 0 0; color: var(--text-primary); font: 1.5rem Georgia, serif; }
 	.manicule-mark { flex-shrink: 0; border-radius: .5rem; transform: rotate(6deg); }
 	:global(html.dark) .manicule-mark { background: #fff; padding: .35rem; }
-	.intro { max-width: 42rem; margin: 1.25rem 0 1.75rem; font: clamp(1.5rem, 2.5vw, 2rem)/1.25 Georgia, serif; color: var(--text-primary); }
-	.work-columns { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2rem; }
-	.work-columns section + section { border-left: 1px solid var(--border-color); padding-left: 2rem; }
-	.metric { margin: 0 0 .4rem; color: #703d57; font: 2rem/1.1 Georgia, serif; }
-	:global(html.dark) .metric { color: #dda9c5; }
-	h4 { margin: 0 0 .75rem; color: var(--text-primary); font-size: .875rem; font-weight: 600; }
-	.work-columns section > p:last-child { margin: 0; color: var(--text-secondary); font-size: 1rem; line-height: 1.6; }
+	.work-copy { max-width: 70ch; margin-top: 1.25rem; }
+	.work-copy p { margin: 0; color: var(--text-secondary); font-size: 1rem; line-height: 1.6; }
+	.work-copy p + p { margin-top: 1rem; }
 	.clients-section { margin-top: 2rem; padding-top: 1.5rem; border-top: 1px dashed var(--border-color); }
 	.client-logos { list-style: none; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 1.25rem 2rem; margin: 1.25rem 0 0; padding: 0; }
 	.client-logos li { margin: 0; min-width: 0; }
@@ -107,8 +89,6 @@
 	.client-logos img[src$="skyvern.png"] { filter: grayscale(1) brightness(.2); }
 	:global(html.dark) .client-logos a { background: #fff; color: #1f2937 !important; }
 	@media (max-width: 768px) {
-		.work-columns { grid-template-columns: 1fr; gap: 1.5rem; }
-		.work-columns section + section { border-left: 0; border-top: 1px solid var(--border-color); padding: 1.5rem 0 0; }
 		.client-logos { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
 	}
 </style>

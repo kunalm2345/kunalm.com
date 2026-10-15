@@ -1,0 +1,13 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "sveltekit",
+  "installCommand": "npm ci",
+  "buildCommand": "npm run build",
+  "ignoreCommand": "exit 1",
+  "git": {
+    "deploymentEnabled": true
+  },
+  "github": {
+    "autoJobCancelation": false
+  }
+}

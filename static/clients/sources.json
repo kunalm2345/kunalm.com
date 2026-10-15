@@ -1,0 +1,17 @@
+{
+  "sources": {
+    "greptile.svg": "https://github.com/Muesli-HQ/muesli/blob/main/assets/sponsors/greptile.svg",
+    "xpander.png": "https://github.com/xpander-ai/xpander.ai/blob/main/images/Purple%20Logo%20Black%20Text.png",
+    "skyvern.png": "https://github.com/skyvern-ai/skyvern/blob/main/fern/images/skyvern_logo.png",
+    "context.svg": "https://github.com/context-dot-dev/cursor-plugin/blob/main/assets/logo.svg",
+    "limrun.png": "https://github.com/limrun-inc/skills/blob/main/assets/icon.png",
+    "agentmail.svg": "https://github.com/agentmail-to/agentmail-docs/blob/main/fern/assets/logos/agentmail-logo-landscape-light.svg",
+    "mastra.svg": "https://github.com/pheralb/svgl/blob/main/static/library/mastra-wordmark-light.svg",
+    "opencomputer.svg": "https://opencomputer.dev/logos/opencomputer.svg"
+  },
+  "remoteSources": {
+    "Surge": "https://surge.app/favicon.svg",
+    "boat": "https://boat.dev/icon.svg"
+  },
+  "note": "Surge and boat use official site icons with visible company names. These two assets are hosted remotely; their domains are blocked by the execution environment network policy. If an icon fails to load, its name remains visible."
+}

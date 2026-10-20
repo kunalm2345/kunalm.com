@@ -139,7 +139,7 @@
 			</div>
 			<!-- Social icons -->
 			<nav class="list-none">
-				<ul class="flex flex-wrap gap-3 items-center">
+				<ul class="flex flex-wrap justify-between gap-3 items-center">
 					<li class="list-none">
 						<a href="http://x.com/knlmsh/" target="_blank" rel="noopener noreferrer" aria-label="Twitter" class="social-icon-btn twitter-button social-x">
 							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-4">
@@ -167,6 +167,11 @@
 							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5">
 								<path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
 							</svg>
+						</a>
+					</li>
+					<li class="list-none">
+						<a href="https://cal.com/kunalm/30/" target="_blank" rel="noopener noreferrer" aria-label="Cal.com" class="social-icon-btn social-cal">
+							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 9.4 24 5.2" fill="currentColor" aria-hidden="true"><path d="M2.408 14.488C1.035 14.488 0 13.4 0 12.058c0-1.346.982-2.443 2.408-2.443.758 0 1.282.233 1.691.765l-.66.55a1.343 1.343 0 0 0-1.03-.442c-.93 0-1.44.711-1.44 1.57 0 .86.559 1.557 1.44 1.557.413 0 .765-.147 1.043-.443l.651.573c-.391.51-.929.743-1.695.743zM6.948 10.913h.89v3.49h-.89v-.51c-.185.362-.493.604-1.083.604-.943 0-1.695-.82-1.695-1.826 0-1.007.752-1.825 1.695-1.825.585 0 .898.241 1.083.604zm.026 1.758c0-.546-.374-.998-.964-.998-.568 0-.938.457-.938.998 0 .528.37.998.938.998.586 0 .964-.456.964-.998zM8.467 9.503h.89v4.895h-.89zM9.752 13.937a.53.53 0 0 1 .542-.528c.313 0 .533.242.533.528a.527.527 0 0 1-.533.537.534.534 0 0 1-.542-.537zM14.23 13.839c-.33.403-.832.658-1.426.658a1.806 1.806 0 0 1-1.84-1.826c0-1.007.778-1.825 1.84-1.825.572 0 1.07.241 1.4.622l-.687.577c-.172-.215-.396-.376-.713-.376-.568 0-.938.456-.938.998 0 .541.37.997.938.997.343 0 .58-.179.757-.42zM14.305 12.671c0-1.007.78-1.825 1.84-1.825 1.061 0 1.84.818 1.84 1.825 0 1.007-.779 1.826-1.84 1.826-1.06-.005-1.84-.82-1.84-1.826zm2.778 0c0-.546-.37-.998-.938-.998-.568-.004-.937.452-.937.998 0 .542.37.998.937.998.568 0 .938-.456.938-.998zM24 12.269v2.13h-.89v-1.911c0-.604-.281-.864-.704-.864-.396 0-.678.197-.678.864v1.91h-.89v-1.91c0-.604-.285-.864-.704-.864-.396 0-.744.197-.744.864v1.91h-.89v-3.49h.89v.484c.185-.376.52-.564 1.035-.564.489 0 .898.241 1.123.649.224-.417.554-.65 1.153-.65.731.005 1.299.56 1.299 1.442z"/></svg>
 						</a>
 					</li>
 					<li class="list-none">
@@ -404,6 +409,7 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		min-height: 2.375rem;
 		padding: 0.5rem;
 		color: #fff !important;
 		background: var(--brand);
@@ -434,20 +440,28 @@
 		--brand: #0a66c2;
 	}
 
+	/* The logo is a wordmark, so this one is a pill like the X button */
+	.social-cal {
+		--brand: #292929;
+		padding: 0.5rem 0.75rem;
+	}
+
+	.social-cal svg {
+		height: 1rem;
+		width: auto;
+	}
+
 	/* The near-black tiles need an edge against the dark card */
 	:global(html.dark) .social-x,
-	:global(html.dark) .social-github {
+	:global(html.dark) .social-github,
+	:global(html.dark) .social-cal {
 		border-color: rgba(255, 255, 255, 0.18);
 	}
 
-	/* Inline-code chip; the link's global bold teal style is overridden on the code element */
+	/* Styled on the code element so the link's global bold teal style doesn't apply */
 	.email-code code {
-		display: inline-block;
-		padding: 0.2rem 0.45rem;
-		font: 400 12px/1.5 Menlo, ui-monospace, SFMono-Regular, monospace;
+		font: italic 400 14px/1.5 Menlo, ui-monospace, SFMono-Regular, monospace;
 		color: var(--text-primary);
-		background: rgba(175, 184, 193, 0.2);
-		border-radius: 0.375rem;
 		transition: color 0.2s ease;
 	}
 

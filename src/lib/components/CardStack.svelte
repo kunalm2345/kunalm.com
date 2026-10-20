@@ -216,7 +216,7 @@
 							{href} 
 							target={isExternal ? '_blank' : undefined} 
 							rel={isExternal ? 'noopener noreferrer' : undefined}
-							class="link-text flex items-center gap-1 text-xs font-mono uppercase tracking-wider transition-colors text-gray-400 hover:text-[#e76f51]" 
+							class="link-text squiggle-link flex items-center gap-1 text-xs font-mono uppercase tracking-wider transition-colors text-gray-400 hover:text-[#e76f51]" 
 						>
 							{linkText}
 							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="size-3">
@@ -263,7 +263,7 @@
 	.card-layer {
 		position: absolute;
 		inset: 0;
-		background: var(--bg-primary);
+		background: var(--bg-card);
 		border-radius: 0.125rem;
 		border: 1px solid var(--border-color);
 		box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
@@ -291,7 +291,7 @@
 	.card-main {
 		position: absolute;
 		inset: 0;
-		background: var(--bg-primary);
+		background: var(--bg-card);
 		border-radius: 0.5rem;
 		border: 1px solid var(--border-color);
 		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
@@ -383,7 +383,7 @@
 		align-items: center;
 		gap: 0.25rem;
 		padding: 0.25rem 0.75rem;
-		background: var(--bg-primary);
+		background: var(--bg-card);
 		border: 1px solid #e5e7eb;
 		border-radius: 9999px;
 		font-size: 0.625rem;

@@ -6,6 +6,7 @@
 	import { tagColors, type Tag } from '$lib/tags';
 	import BentoGrid from '$lib/components/BentoGrid.svelte';
 	import ManiculeCard from '$lib/components/ManiculeCard.svelte';
+	import Wave from '$lib/components/Wave.svelte';
 	
 	interface Props {
 		children: Snippet;
@@ -358,6 +359,7 @@
 	{#if isHomePage}
 		<section class="second-fold">
 			<div class="max-w-screen-xl mx-auto px-6">
+				<div class="section-wave"><Wave /></div>
 				<!-- Filter header with title and buttons -->
 				<div class="flex flex-wrap items-center justify-between gap-4 mb-8">
 					<h2 class="text-2xl font-serif">Projects & Work Experience</h2>
@@ -401,7 +403,7 @@
 	<!-- Footer -->
 	<footer class="site-footer">
 		<div class="max-w-screen-xl mx-auto px-6">
-			<div class="footer-divider"></div>
+			<div class="footer-divider"><Wave /></div>
 			<div class="footer-content">
 				<span class="footer-text">© 2025 KUNAL MISHRA</span>
 				<div class="flex items-center gap-4">
@@ -416,7 +418,7 @@
 							</svg>
 						{/if}
 					</button>
-					<a href="https://github.com/kunalm2345/kunalm.com" target="_blank" rel="noopener noreferrer" class="footer-link">
+					<a href="https://github.com/kunalm2345/kunalm.com" target="_blank" rel="noopener noreferrer" class="footer-link squiggle-link">
 						VIEW SOURCE CODE
 						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="size-5">
 							<path fill-rule="evenodd" d="M4.22 11.78a.75.75 0 0 1 0-1.06L9.44 5.5H5.75a.75.75 0 0 1 0-1.5h5.5a.75.75 0 0 1 .75.75v5.5a.75.75 0 0 1-1.5 0V6.56l-5.22 5.22a.75.75 0 0 1-1.06 0Z" clip-rule="evenodd" />
@@ -487,9 +489,11 @@
 		margin-top: 1rem;
 	}
 
+	.section-wave {
+		margin-bottom: 3rem;
+	}
+
 	.footer-divider {
-		height: 1px;
-		background: #e5e7eb;
 		margin-bottom: 1.5rem;
 	}
 

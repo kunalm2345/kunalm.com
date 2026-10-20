@@ -76,7 +76,7 @@
 			<footer class="clients-section">
 				<div class="clients-head">
 					<h4 class="label">CLIENTS I WORKED WITH</h4>
-					<a class="label" href="https://manicule.com" target="_blank" rel="noopener noreferrer">
+					<a class="label squiggle-link" href="https://manicule.com" target="_blank" rel="noopener noreferrer">
 						MANICULE.COM
 						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" width="12" height="12" aria-hidden="true"><path fill-rule="evenodd" d="M4.22 11.78a.75.75 0 0 1 0-1.06L9.44 5.5H5.75a.75.75 0 0 1 0-1.5h5.5a.75.75 0 0 1 .75.75v5.5a.75.75 0 0 1-1.5 0V6.56l-5.22 5.22a.75.75 0 0 1-1.06 0Z" clip-rule="evenodd" /></svg>
 					</a>
@@ -102,10 +102,10 @@
 
 <style>
 	.manicule-card { position: relative; isolation: isolate; margin-bottom: 2.5rem; }
-	.stack-layer { position: absolute; inset: 0; border: 1px solid var(--border-color); border-radius: .5rem; background: var(--bg-primary); z-index: -1; }
+	.stack-layer { position: absolute; inset: 0; border: 1px solid var(--border-color); border-radius: .5rem; background: var(--bg-card); z-index: -1; }
 	.stack-layer-back { transform: rotate(.65deg) translateY(5px); }
 	.stack-layer-front { transform: rotate(-.35deg) translateY(3px); }
-	.card-surface { overflow: hidden; background: var(--bg-primary); border: 1px solid var(--border-color); border-radius: .5rem; box-shadow: 0 1px 3px rgb(0 0 0 / .1); }
+	.card-surface { overflow: hidden; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: .5rem; box-shadow: 0 1px 3px rgb(0 0 0 / .1); }
 	.color-bar { display: flex; height: 6px; }
 	.color-bar span { flex: 1; }
 	.card-body { --pad: clamp(1.25rem, 3vw, 2.25rem); padding: var(--pad); }

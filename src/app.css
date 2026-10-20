@@ -111,11 +111,18 @@
 	.no-single-line-list > li {
 		@apply block no-underline !important;
 	}
+
+	.squiggle-link:hover {
+		text-decoration: underline wavy;
+		text-decoration-thickness: 1px;
+		text-underline-offset: 4px;
+	}
 }
 
 /* Dark mode styles */
 :root {
-	--bg-primary: #faf9f6;
+	--bg-primary: #f5f4ef;
+	--bg-card: #ffffff;
 	--text-primary: #1f2937;
 	--text-secondary: #6b7280;
 	--text-muted: #9ca3af;
@@ -125,6 +132,7 @@
 
 html.dark {
 	--bg-primary: #0f172a;
+	--bg-card: #1e293b;
 	--text-primary: #f1f5f9;
 	--text-secondary: #cbd5e1;
 	--text-muted: #94a3b8;
@@ -143,10 +151,6 @@ html.dark .card-main p {
 
 html.dark .card-main .font-serif {
 	color: var(--text-primary);
-}
-
-html.dark .footer-divider {
-	background: var(--border-color);
 }
 
 html.dark .footer-text,

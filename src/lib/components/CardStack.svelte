@@ -174,12 +174,12 @@
 					onclick={handleTextClick}
 				>
 					{#if title}
-						<p class="font-serif text-xl" class:text-white={isCta}>
+						<p class="font-serif text-xl" class:cta-title={isCta}>
 							{title}
 						</p>
 					{/if}
 					{#if content}
-						<p class="text-xl font-normal mt-1" class:text-white={isCta} class:text-gray-600={!isCta}>
+						<p class="text-xl font-normal mt-1 text-gray-600">
 							{@html content}
 						</p>
 					{/if}
@@ -207,7 +207,7 @@
 				<!-- Footer section: Date and Link -->
 				<div class="footer-section" class:cta-footer={isCta}>
 					{#if date}
-						<p class="text-xs font-mono uppercase tracking-wider" class:text-white={isCta} class:text-gray-400={!isCta}>{date}</p>
+						<p class="text-xs font-mono uppercase tracking-wider text-gray-400">{date}</p>
 					{:else}
 						<span></span>
 					{/if}
@@ -216,11 +216,7 @@
 							{href} 
 							target={isExternal ? '_blank' : undefined} 
 							rel={isExternal ? 'noopener noreferrer' : undefined}
-							class="link-text flex items-center gap-1 text-xs font-mono uppercase tracking-wider transition-colors" 
-							class:text-white={isCta}
-							class:hover:opacity-80={isCta}
-							class:text-gray-400={!isCta}
-							class:hover:text-[#e76f51]={!isCta}
+							class="link-text flex items-center gap-1 text-xs font-mono uppercase tracking-wider transition-colors text-gray-400 hover:text-[#e76f51]" 
 						>
 							{linkText}
 							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="size-3">
@@ -267,9 +263,9 @@
 	.card-layer {
 		position: absolute;
 		inset: 0;
-		background: white;
+		background: var(--bg-primary);
 		border-radius: 0.125rem;
-		border: 1px solid #e5e7eb;
+		border: 1px solid var(--border-color);
 		box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 		transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 	}
@@ -295,9 +291,9 @@
 	.card-main {
 		position: absolute;
 		inset: 0;
-		background: white;
+		background: var(--bg-primary);
 		border-radius: 0.5rem;
-		border: 1px solid #e5e7eb;
+		border: 1px solid var(--border-color);
 		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 		transition: box-shadow 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 		overflow: hidden;
@@ -387,7 +383,7 @@
 		align-items: center;
 		gap: 0.25rem;
 		padding: 0.25rem 0.75rem;
-		background: white;
+		background: var(--bg-primary);
 		border: 1px solid #e5e7eb;
 		border-radius: 9999px;
 		font-size: 0.625rem;
@@ -436,12 +432,13 @@
 	}
 
 	/* CTA variant styles */
-	.cta-layer {
-		background: #d4532a !important;
+	.cta-layer,
+	.cta-main {
+		border-color: var(--accent-color);
 	}
 
-	.cta-main {
-		background: #e76f51 !important;
+	.card-main.cta-main .cta-title {
+		color: var(--accent-color);
 	}
 
 	.cta-content {

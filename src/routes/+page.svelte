@@ -144,7 +144,7 @@
 		align-items: center;
 		gap: 0.25rem;
 		padding: 0.25rem 0.75rem;
-		background: white;
+		background: var(--bg-primary);
 		border: 1px solid #e5e7eb;
 		border-radius: 9999px;
 		font-size: 0.625rem;

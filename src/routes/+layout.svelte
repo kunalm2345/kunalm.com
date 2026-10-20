@@ -291,7 +291,7 @@
 							name="email" 
 							id="bd-email" 
 							placeholder="Enter your email"
-							class="flex-1 px-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#e76f51] focus:border-transparent"
+							class="flex-1 px-4 py-2 bg-transparent border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#e76f51] focus:border-transparent"
 						/>
 						<button 
 							type="submit" 
@@ -307,11 +307,11 @@
 				<nav class="list-none">
 					<ul class="flex gap-3 items-center">
 						<li class="list-none">
-							<a href="http://x.com/knlmsh/" target="_blank" rel="noopener noreferrer" aria-label="Twitter" class="twitter-button">
-								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" class="size-4">
+							<a href="http://x.com/knlmsh/" target="_blank" rel="noopener noreferrer" aria-label="Twitter" class="social-icon-btn twitter-button">
+								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-4">
 									<path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
 								</svg>
-								<span class="font-mono text-sm text-white">@knlmsh</span>
+								<span class="font-mono text-sm">@knlmsh</span>
 							</a>
 						</li>
 						<li class="list-none">
@@ -434,7 +434,7 @@
 	}
 
 	.filter-btn {
-		background: white;
+		background: transparent;
 		border: 1.5px solid var(--tag-color);
 		cursor: pointer;
 	}
@@ -452,7 +452,6 @@
 		align-items: center;
 		justify-content: center;
 		padding: 0.5rem;
-		background: white;
 		color: #6b7280;
 		border: 1px solid #e5e7eb;
 		border-radius: 0.5rem;
@@ -465,18 +464,8 @@
 	}
 
 	.twitter-button {
-		display: flex;
-		align-items: center;
 		gap: 0.5rem;
 		padding: 0.5rem 0.75rem;
-		background: black;
-		color: white;
-		border-radius: 0.5rem;
-		transition: background-color 0.2s ease;
-	}
-
-	.twitter-button:hover {
-		background: #333;
 	}
 
 	.dark-mode-toggle {

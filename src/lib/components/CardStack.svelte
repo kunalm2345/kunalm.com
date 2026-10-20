@@ -147,14 +147,16 @@
 		};
 	}
 
-	// Bounded so no stack leans far: card 2 at 1.2–2°, card 3 a further 1.4–1.8°, fanning either way
+	// The two back cards lean in opposite directions (which one goes which way is random), bounded so no stack looks off:
+	// card 2 at 0.6–1.2°, card 3 at 1.2–2°
 	const random = seededRandom(title ?? linkText);
-	const fan = random() < 0.5 ? -1 : 1;
-	const tilt2 = fan * (1.2 + random() * 0.8);
-	const tilt3 = tilt2 + fan * (1.4 + random() * 0.4);
+	const dir2 = random() < 0.5 ? -1 : 1;
+	const dir3 = -dir2;
+	const tilt2 = dir2 * (0.6 + random() * 0.6);
+	const tilt3 = dir3 * (1.2 + random() * 0.8);
 </script>
 
-<div class="block group" class:card-1x1={!is1x2} class:card-1x2={is1x2} class:card-cta={isCta} class:card-expanded={isExpanded} style:--fan={fan} style:--tilt-2="{tilt2.toFixed(2)}deg" style:--tilt-3="{tilt3.toFixed(2)}deg">
+<div class="block group" class:card-1x1={!is1x2} class:card-1x2={is1x2} class:card-cta={isCta} class:card-expanded={isExpanded} style:--dir-2={dir2} style:--dir-3={dir3} style:--tilt-2="{tilt2.toFixed(2)}deg" style:--tilt-3="{tilt3.toFixed(2)}deg">
 	<div class="card-wrapper" bind:this={wrapperEl}>
 		<!-- Card 3 (bottom of stack) -->
 		<div class="card-layer card-layer-3" class:cta-layer={isCta}></div>
@@ -304,11 +306,11 @@
 	}
 
 	.group:hover .card-layer-3 {
-		transform: rotate(calc(var(--tilt-3) + var(--fan) * 2.5deg)) translateY(4px) translateX(calc(var(--fan) * 4px));
+		transform: rotate(calc(var(--tilt-3) + var(--dir-3) * 2deg)) translateY(4px) translateX(calc(var(--dir-3) * 4px));
 	}
 
 	.group:hover .card-layer-2 {
-		transform: rotate(calc(var(--tilt-2) + var(--fan) * 1.3deg)) translateY(2px) translateX(calc(var(--fan) * 2px));
+		transform: rotate(calc(var(--tilt-2) + var(--dir-2) * 1deg)) translateY(2px) translateX(calc(var(--dir-2) * 2px));
 	}
 
 	/* Height of the strip between the tear line and the bottom of the stack, where card 2 shows */
@@ -383,7 +385,7 @@
 		mask-image: linear-gradient(to bottom, black calc(100% - 24px), transparent 100%);
 	}
 
-	/* Expanded card: content flows naturally, card 3 fades and card 2 lies flat under the tear */
+	/* Expanded card: content flows naturally; the back cards keep their tilt and hover fan */
 	.card-expanded {
 		z-index: 10;
 	}
@@ -397,14 +399,8 @@
 		flex: none;
 	}
 
-	.card-expanded .card-layer-3 {
-		opacity: 0;
-		transform: none !important;
-		pointer-events: none;
-	}
-
-	.card-expanded .card-layer-2 {
-		transform: none !important;
+	.card-expanded .torn .card-content {
+		padding-bottom: 1rem;
 	}
 
 	.card-expanded .text-section {

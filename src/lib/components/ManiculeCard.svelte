@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { tick } from 'svelte';
 	import Wave from './Wave.svelte';
 	import { tagColors, type Tag } from '$lib/tags';
 
@@ -22,12 +23,36 @@
 		{ name: 'OpenComputer', href: 'https://opencomputer.dev', logo: '/clients/opencomputer.svg', w: 8.5 },
 		{ name: 'boat', href: 'https://boat.dev', logo: 'https://boat.dev/icon.svg', showName: true }
 	];
+
+	let bodyEl: HTMLElement;
+	let isExpanded = $state(false);
+	let isAnimating = false;
+
+	// Animates max-height between the collapsed CSS value and the content's full height
+	async function toggleExpand() {
+		if (isAnimating) return;
+		isAnimating = true;
+		bodyEl.style.maxHeight = `${bodyEl.offsetHeight}px`;
+		bodyEl.offsetHeight;
+		isExpanded = !isExpanded;
+		await tick();
+		const expanding = isExpanded;
+		bodyEl.style.maxHeight = expanding ? `${bodyEl.scrollHeight}px` : '';
+		const done = (event?: TransitionEvent) => {
+			if (event && event.target !== bodyEl) return;
+			bodyEl.removeEventListener('transitionend', done);
+			if (expanding) bodyEl.style.maxHeight = 'none';
+			isAnimating = false;
+		};
+		bodyEl.addEventListener('transitionend', done);
+		setTimeout(() => isAnimating && done(), 500);
+	}
 </script>
 
 <article class="manicule-card" aria-labelledby="manicule-title">
 	<div class="card-surface">
 		<div class="color-bar" aria-hidden="true">{#each tags as tag}<span style:background={tagColors[tag]}></span>{/each}</div>
-		<div class="card-body">
+		<div id="manicule-body" class="card-body" class:collapsed={!isExpanded} bind:this={bodyEl}>
 			<header>
 				<div>
 					<p class="text-xs font-mono uppercase tracking-wider text-gray-400">{date}</p>
@@ -69,7 +94,13 @@
 				</div>
 			</div>
 		</div>
-		<div class="tear"><Wave /></div>
+		<div class="tear">
+			<button type="button" class="read-more-pill" class:expanded={isExpanded} onclick={toggleExpand} aria-expanded={isExpanded} aria-controls="manicule-body">
+				<span>{isExpanded ? 'SHOW LESS' : 'READ MORE'}</span>
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" width="12" height="12" class:rotate-180={isExpanded} aria-hidden="true"><path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg>
+			</button>
+			<Wave />
+		</div>
 	</div>
 	<!-- Second sheet: the client list shows through where the top sheet is torn -->
 	<div class="stack-layer stack-layer-front">
@@ -110,8 +141,13 @@
 	.stack-layer-back { z-index: 0; transform: rotate(.65deg) translateY(5px); }
 	.color-bar { display: flex; height: 6px; }
 	.color-bar span { flex: 1; }
-	.card-body { padding: var(--pad); }
+	.card-body { padding: var(--pad); overflow: hidden; transition: max-height 450ms cubic-bezier(0.4, 0, 0.2, 1); }
+	/* Collapsed to about twice a project card's visible sheet (168px at desktop) */
+	.card-body.collapsed { max-height: 20.5rem; -webkit-mask-image: linear-gradient(to bottom, black calc(100% - 3rem), transparent); mask-image: linear-gradient(to bottom, black calc(100% - 3rem), transparent); }
 	.tear { position: absolute; left: 0; right: 0; bottom: -8px; height: 16px; z-index: 1; }
+	.read-more-pill { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 20; display: flex; align-items: center; gap: .25rem; padding: .25rem .75rem; background: var(--bg-card); border: 1px solid #e5e7eb; border-radius: 9999px; font: 700 .625rem ui-monospace, monospace; text-transform: uppercase; letter-spacing: .05em; white-space: nowrap; color: #6b7280; box-shadow: 0 1px 3px rgba(0, 0, 0, .1); transition: all .2s ease; cursor: pointer; }
+	.manicule-card:hover .read-more-pill, .read-more-pill.expanded { color: #e76f51; border-color: #e76f51; }
+	.read-more-pill svg { transition: transform .2s ease; }
 	header { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
 	.label { margin: 0; color: #9ca3af; font: 700 .8125rem/1.5 ui-monospace, SFMono-Regular, Menlo, monospace; text-transform: uppercase; letter-spacing: .05em; }
 	h3 { margin: .4rem 0 0; color: var(--text-primary); }
@@ -122,7 +158,7 @@
 	.work-columns { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2rem; margin-top: 1.5rem; }
 	.work-copy p, .work-copy li { margin: 0; color: var(--text-secondary); font-size: 1.125rem; line-height: 1.6; }
 	.work-copy strong { color: var(--text-primary); font-weight: 600; }
-	.work-copy h4 { margin: 0 0 .5rem; color: #9ca3af; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .875rem; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; }
+	.work-copy h4 { margin: 0 0 .5rem; color: #e76f51; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .875rem; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; }
 	.work-copy ul { margin: 0; padding-left: 1.25rem; list-style: disc; }
 	.work-copy li + li { margin-top: .5rem; }
 	.clients-section { grid-row: 2; padding: calc(1.25rem + 8px) var(--pad) var(--pad); }

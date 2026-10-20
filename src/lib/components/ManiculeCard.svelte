@@ -161,7 +161,7 @@
 	.work-copy h4 { margin: 0 0 .5rem; color: #e76f51; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .875rem; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; }
 	.work-copy ul { margin: 0; padding-left: 1.25rem; list-style: disc; }
 	.work-copy li + li { margin-top: .5rem; }
-	.clients-section { grid-row: 2; padding: calc(1.25rem + 8px) var(--pad) var(--pad); }
+	.clients-section { grid-row: 2; padding: calc(0.75rem + 8px) var(--pad) max(1rem, var(--pad) - 0.75rem); }
 	.clients-head { display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
 	a.label { display: flex; align-items: center; gap: .25rem; }
 	.client-logos { list-style: none; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 1.25rem 2rem; margin: 1.25rem 0 0; padding: 0; }

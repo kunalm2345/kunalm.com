@@ -139,9 +139,9 @@
 			</div>
 			<!-- Social icons -->
 			<nav class="list-none">
-				<ul class="flex flex-wrap gap-3 items-center">
+				<ul class="flex flex-wrap gap-4 items-center">
 					<li class="list-none">
-						<a href="http://x.com/knlmsh/" target="_blank" rel="noopener noreferrer" aria-label="Twitter" class="social-icon-btn twitter-button">
+						<a href="http://x.com/knlmsh/" target="_blank" rel="noopener noreferrer" aria-label="Twitter" class="social-icon-btn">
 							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-4">
 								<path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
 							</svg>
@@ -409,48 +409,33 @@
 		padding: calc(1.25rem + 8px) var(--pad) var(--pad);
 	}
 
-	/* !important beats the global teal link color */
+	/* Borderless, and as tall as the 14px email's line box; !important beats the global teal link color */
 	.social-icon-btn {
 		display: flex;
 		align-items: center;
-		justify-content: center;
-		min-height: 2.375rem;
-		padding: 0.5rem;
+		gap: 0.375rem;
+		height: 1.25rem;
 		color: #6b7280 !important;
-		border: 1px solid #e5e7eb;
-		border-radius: 0.5rem;
-		transition: color 0.2s ease, border-color 0.2s ease;
+		transition: color 0.2s ease;
 	}
 
-	:global(html.dark) .social-icon-btn {
-		color: var(--text-muted) !important;
-		border-color: var(--border-color);
-	}
-
-	.social-icon-btn:hover,
-	:global(html.dark) .social-icon-btn:hover {
+	.social-icon-btn:hover {
 		color: #e76f51 !important;
-		border-color: #e76f51;
 	}
 
-	/* The logo is a wordmark, so this one is a pill like the X button */
-	.social-cal {
-		padding: 0.5rem 0.75rem;
+	.social-icon-btn svg {
+		width: 14px;
+		height: 14px;
 	}
 
+	/* The Cal.com logo is a wordmark, so it keeps its own aspect ratio */
 	.social-cal svg {
-		height: 1rem;
 		width: auto;
 	}
 
 	/* Same look as the card footer links, but semibold instead of the global bold */
 	.email-link {
 		font-weight: 600 !important;
-	}
-
-	.twitter-button {
-		gap: 0.5rem;
-		padding: 0.5rem 0.75rem;
 	}
 
 	.expandable-section {

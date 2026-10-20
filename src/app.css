@@ -163,11 +163,6 @@ html.dark .dark-mode-toggle {
 	color: var(--text-muted);
 }
 
-html.dark .social-icon-btn {
-	border-color: var(--border-color);
-	color: var(--text-muted);
-}
-
 html.dark input[type="email"] {
 	border-color: var(--border-color);
 	color: var(--text-primary);

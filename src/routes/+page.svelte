@@ -141,7 +141,7 @@
 			<nav class="list-none">
 				<ul class="flex flex-wrap gap-3 items-center">
 					<li class="list-none">
-						<a href="http://x.com/knlmsh/" target="_blank" rel="noopener noreferrer" aria-label="Twitter" class="social-icon-btn twitter-button">
+						<a href="http://x.com/knlmsh/" target="_blank" rel="noopener noreferrer" aria-label="Twitter" class="social-icon-btn twitter-button social-x">
 							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-4">
 								<path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
 							</svg>
@@ -149,33 +149,33 @@
 						</a>
 					</li>
 					<li class="list-none">
-						<a href="http://github.com/kunalm2345/" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="social-icon-btn">
+						<a href="http://github.com/kunalm2345/" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="social-icon-btn social-github">
 							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5">
 								<path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
 							</svg>
 						</a>
 					</li>
 					<li class="list-none">
-						<a href="http://instagr.am/knlmsh/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="social-icon-btn">
+						<a href="http://instagr.am/knlmsh/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="social-icon-btn social-instagram">
 							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5">
 								<path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
 							</svg>
 						</a>
 					</li>
 					<li class="list-none">
-						<a href="https://www.linkedin.com/in/kunal-mishra-8238bb187/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="social-icon-btn">
+						<a href="https://www.linkedin.com/in/kunal-mishra-8238bb187/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="social-icon-btn social-linkedin">
 							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5">
 								<path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
 							</svg>
 						</a>
 					</li>
 					<li class="list-none">
-						<a href="https://cal.com/kunalm/30/" target="_blank" rel="noopener noreferrer" aria-label="Cal.com" class="social-icon-btn">
+						<a href="https://cal.com/kunalm/30/" target="_blank" rel="noopener noreferrer" aria-label="Cal.com" class="social-icon-btn social-cal">
 							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 134 134" fill="currentColor" class="size-5"><path d="M33.84,50.25c4.13,7.45,8.89,14.6,15.07,21.12c6.2,6.56,13.91,12.53,23.89,17.63c0.74,0.36,1.44,0.36,2.07,0.11 c0.95-0.36,1.92-1.15,2.87-2.1c0.74-0.74,1.66-1.92,2.62-3.21c3.84-5.05,8.59-11.32,15.3-8.18c0.15,0.07,0.26,0.15,0.41,0.21 l22.38,12.87c0.07,0.04,0.15,0.11,0.21,0.15c2.95,2.03,4.17,5.16,4.2,8.71c0,3.61-1.33,7.67-3.28,11.1 c-2.58,4.53-6.38,7.53-10.76,9.51c-4.17,1.92-8.81,2.95-13.27,3.61c-7,1.03-13.56,0.37-20.27-1.69 c-6.56-2.03-13.17-5.38-20.39-9.84l-0.53-0.34c-3.31-2.07-6.89-4.28-10.4-6.89C31.12,93.32,18.03,79.31,9.5,63.89 C2.35,50.95-1.55,36.98,0.58,23.67c1.18-7.3,4.31-13.94,9.77-18.32c4.76-3.84,11.17-5.94,19.47-5.2c0.95,0.07,1.8,0.62,2.25,1.44 l14.35,24.26c2.1,2.72,2.36,5.42,1.21,8.12c-0.95,2.21-2.87,4.25-5.49,6.15c-0.77,0.66-1.69,1.33-2.66,2.03 c-3.21,2.33-6.86,5.02-5.61,8.18L33.84,50.25L33.84,50.25L33.84,50.25z"/></svg>
 						</a>
 					</li>
 					<li class="list-none">
-						<a href="mailto:kunalm@duck.com" aria-label="Email" class="social-icon-btn">
+						<a href="mailto:kunalm@duck.com" aria-label="Email" class="social-icon-btn social-email">
 							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5">
 								<path d="M1.5 8.67v8.58a3 3 0 0 0 3 3h15a3 3 0 0 0 3-3V8.67l-8.928 5.493a3 3 0 0 1-3.144 0L1.5 8.67Z" />
 								<path d="M22.5 6.908V6.75a3 3 0 0 0-3-3h-15a3 3 0 0 0-3 3v.158l9.714 5.978a1.5 1.5 0 0 0 1.572 0L22.5 6.908Z" />
@@ -201,22 +201,20 @@
 <style>
 	/* About 1.75x a project card in the 3-column grid (77rem content, two 1.75rem gaps), but never narrower than 36rem */
 	.hero-card {
-		--pad: clamp(1.5rem, 5vw, 2.5rem);
+		--pad: clamp(1.25rem, 4vw, 2rem);
 		position: relative;
 		isolation: isolate;
 		display: grid;
 		grid-template-rows: auto auto;
 		width: min(100%, max(36rem, (min(100%, 77rem) - 3.5rem) * 7 / 12));
-		margin: 0 auto 5rem;
+		margin: clamp(1.5rem, 4vw, 2.5rem) auto 5rem;
 	}
 
-	/* The card hangs from the top of the viewport, so it has no top border or top corners */
 	.stack-layer,
 	.hero-surface {
 		grid-column: 1;
 		background: var(--bg-card);
 		border: 1px solid var(--border-color);
-		border-top: none;
 	}
 
 	.hero-surface {
@@ -268,7 +266,7 @@
 	}
 
 	.hero-body {
-		padding: calc(var(--pad) + 0.5rem) var(--pad) 2.5rem;
+		padding: calc(var(--pad) + 0.5rem) var(--pad) 2rem;
 	}
 
 	.polaroid {
@@ -360,11 +358,12 @@
 		}
 	}
 
-	/* Straddles the top sheet's bottom edge: the wave line is the tear, its shadow falls on the sheet below */
+	/* Straddles the top sheet's bottom edge: the wave line is the tear, its shadow falls on the sheet below.
+	   Kept inside the side borders so its fill doesn't paint over them. */
 	.tear {
 		position: absolute;
-		left: -1px;
-		right: -1px;
+		left: 0;
+		right: 0;
 		bottom: -8px;
 		height: 16px;
 		z-index: 10;
@@ -410,20 +409,55 @@
 		padding: calc(1.25rem + 8px) var(--pad) var(--pad);
 	}
 
+	/* Brand-colored tiles; !important beats the global teal link color */
 	.social-icon-btn {
 		display: flex;
 		align-items: center;
 		justify-content: center;
 		padding: 0.5rem;
-		color: #6b7280;
-		border: 1px solid #e5e7eb;
+		color: #fff !important;
+		background: var(--brand);
+		border: 1px solid var(--brand);
 		border-radius: 0.5rem;
-		transition: all 0.2s ease;
+		transition: filter 0.2s ease, transform 0.2s ease;
 	}
 
 	.social-icon-btn:hover {
-		color: #e76f51;
-		border-color: #e76f51;
+		filter: brightness(1.12);
+		transform: translateY(-1px);
+	}
+
+	.social-x {
+		--brand: #000;
+	}
+
+	.social-github {
+		--brand: #181717;
+	}
+
+	.social-instagram {
+		--brand: #d6249f;
+		background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285aeb 90%);
+	}
+
+	.social-linkedin {
+		--brand: #0a66c2;
+	}
+
+	.social-cal {
+		--brand: #111827;
+	}
+
+	/* duck.com address, so DuckDuckGo orange */
+	.social-email {
+		--brand: #de5833;
+	}
+
+	/* The near-black tiles need an edge against the dark card */
+	:global(html.dark) .social-x,
+	:global(html.dark) .social-github,
+	:global(html.dark) .social-cal {
+		border-color: rgba(255, 255, 255, 0.18);
 	}
 
 	.twitter-button {

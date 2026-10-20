@@ -50,6 +50,7 @@
 		}
 	});
 
+	const ROW_EXTRA_PX = 20;
 	const TRANSITION_DURATION = 450;
 	const EASING = 'cubic-bezier(0.4, 0, 0.2, 1)';
 
@@ -101,8 +102,8 @@
 			const startHeight = wrapper.offsetHeight;
 			wrapper.style.height = `${startHeight}px`;
 
-			// 2. Calculate collapsed target height from aspect ratio
-			const targetHeight = is1x2 ? wrapper.offsetWidth : wrapper.offsetWidth / 2;
+			// 2. Calculate collapsed target height (matches the .card-wrapper::before spacer)
+			const targetHeight = is1x2 ? wrapper.offsetWidth + 2 * ROW_EXTRA_PX : wrapper.offsetWidth / 2 + ROW_EXTRA_PX;
 
 			// 3. Apply collapsed state
 			isExpanded = false;
@@ -133,9 +134,27 @@
 	}
 
 	const barColors = tags.length > 0 ? tags.map((t) => tagColors[t]) : ['#0091ad'];
+
+	// Seeded by the title so each stack keeps the same fan on every load and server/client markup agree
+	function seededRandom(seed: string) {
+		let h = 2166136261;
+		for (let i = 0; i < seed.length; i++) h = Math.imul(h ^ seed.charCodeAt(i), 16777619);
+		return () => {
+			h = Math.imul(h ^ (h >>> 15), 2246822507);
+			h = Math.imul(h ^ (h >>> 13), 3266489909);
+			h ^= h >>> 16;
+			return (h >>> 0) / 4294967296;
+		};
+	}
+
+	// Bounded so no stack leans far: card 2 at 1.2–2°, card 3 a further 1.4–1.8°, fanning either way
+	const random = seededRandom(title ?? linkText);
+	const fan = random() < 0.5 ? -1 : 1;
+	const tilt2 = fan * (1.2 + random() * 0.8);
+	const tilt3 = tilt2 + fan * (1.4 + random() * 0.4);
 </script>
 
-<div class="block group" class:card-1x1={!is1x2} class:card-1x2={is1x2} class:card-cta={isCta} class:card-expanded={isExpanded}>
+<div class="block group" class:card-1x1={!is1x2} class:card-1x2={is1x2} class:card-cta={isCta} class:card-expanded={isExpanded} style:--fan={fan} style:--tilt-2="{tilt2.toFixed(2)}deg" style:--tilt-3="{tilt3.toFixed(2)}deg">
 	<div class="card-wrapper" bind:this={wrapperEl}>
 		<!-- Card 3 (bottom of stack) -->
 		<div class="card-layer card-layer-3" class:cta-layer={isCta}></div>
@@ -181,7 +200,7 @@
 							</p>
 						{/if}
 						{#if content}
-							<p class="text-xl font-normal mt-1 text-gray-600">
+							<p class="text-lg font-normal mt-1 text-gray-600">
 								{@html content}
 							</p>
 						{/if}
@@ -241,54 +260,55 @@
 {/snippet}
 
 <style>
-	/* Card sizing: 2 height units = 1 width unit */
-	/* 1x1 = text only, aspect ratio 2:1 (twice as wide as tall) */
-	/* 1x2 = text + image, aspect ratio 1:1 (square) */
 	.card-wrapper {
 		position: relative;
 		width: 100%;
 		overflow: visible;
 	}
 
-	.card-1x1 .card-wrapper {
-		aspect-ratio: 2 / 1;
+	/* A width-relative spacer sets the height: a 1x1 row is half the width plus ROW_EXTRA_PX, a 1x2 card spans two rows */
+	.card-wrapper::before {
+		content: '';
+		display: block;
 	}
 
-	.card-1x2 .card-wrapper {
-		aspect-ratio: 1 / 1;
+	.card-1x1 .card-wrapper::before {
+		padding-top: calc(50% + 20px);
+	}
+
+	.card-1x2 .card-wrapper::before {
+		padding-top: calc(100% + 40px);
 	}
 
 	/* When expanded, wrapper grows to fit content */
-	.card-expanded .card-wrapper {
-		aspect-ratio: unset !important;
+	.card-expanded .card-wrapper::before {
+		display: none;
 	}
 
 	.card-layer {
 		position: absolute;
 		inset: 0;
 		background: var(--bg-card);
-		border-radius: 0.125rem;
+		border-radius: 0 0 0.5rem 0.5rem;
 		border: 1px solid var(--border-color);
 		box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 		transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 	}
 
 	.card-layer-3 {
-        border-radius: 0.5rem;
-		transform: rotate(2.5deg) translateY(2px);
+		transform: rotate(var(--tilt-3)) translateY(2px);
 	}
 
 	.card-layer-2 {
-        border-radius: 0.5rem;
-		transform: rotate(1.2deg) translateY(1px);
+		transform: rotate(var(--tilt-2)) translateY(1px);
 	}
 
 	.group:hover .card-layer-3 {
-		transform: rotate(5deg) translateY(4px) translateX(4px);
+		transform: rotate(calc(var(--tilt-3) + var(--fan) * 2.5deg)) translateY(4px) translateX(calc(var(--fan) * 4px));
 	}
 
 	.group:hover .card-layer-2 {
-		transform: rotate(2.5deg) translateY(2px) translateX(2px);
+		transform: rotate(calc(var(--tilt-2) + var(--fan) * 1.3deg)) translateY(2px) translateX(calc(var(--fan) * 2px));
 	}
 
 	/* Height of the strip between the tear line and the bottom of the stack, where card 2 shows */
@@ -312,7 +332,7 @@
 		display: flex;
 		flex-direction: column;
 		background: var(--bg-card);
-		border-radius: 0.5rem;
+		border-radius: 0 0 0.5rem 0.5rem;
 		border: 1px solid var(--border-color);
 		filter: drop-shadow(0 1px 1.5px rgba(0, 0, 0, 0.1));
 		pointer-events: auto;
@@ -321,15 +341,13 @@
 	.sheet.torn {
 		margin-bottom: var(--tear-gap);
 		border-bottom: none;
-		border-radius: 0.5rem 0.5rem 0 0;
+		border-radius: 0;
 	}
 
 	.card-top-bar {
 		height: 6px;
 		flex-shrink: 0;
 		display: flex;
-		overflow: hidden;
-		border-radius: calc(0.5rem - 1px) calc(0.5rem - 1px) 0 0;
 	}
 
 	.card-top-bar-segment {
@@ -402,11 +420,12 @@
 		height: auto !important;
 	}
 
-	/* Straddles the sheet's bottom edge: the wave line is the tear, its shadow falls on card 2 */
+	/* Straddles the sheet's bottom edge: the wave line is the tear, its shadow falls on card 2.
+	   Kept inside the side borders so its fill doesn't paint over them. */
 	.tear {
 		position: absolute;
-		left: -1px;
-		right: -1px;
+		left: 0;
+		right: 0;
 		bottom: -8px;
 		height: 16px;
 		z-index: 10;

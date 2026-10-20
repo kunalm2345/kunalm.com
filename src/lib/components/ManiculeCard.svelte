@@ -31,7 +31,7 @@
 			<header>
 				<div>
 					<p class="text-xs font-mono uppercase tracking-wider text-gray-400">{date}</p>
-					<h3 id="manicule-title">{title}</h3>
+					<h3 id="manicule-title" class="font-serif text-xl">{title}</h3>
 				</div>
 				<img class="manicule-mark" src="/manicule.png" alt="" width="68" height="68" />
 			</header>
@@ -103,24 +103,24 @@
 <style>
 	.manicule-card { --pad: clamp(1.25rem, 3vw, 2.25rem); position: relative; isolation: isolate; display: grid; grid-template-rows: auto auto; margin-bottom: 2.5rem; }
 	/* The top sheet fills row 1; the second sheet spans both rows and its subgrid puts the client list in row 2, below the tear */
-	.card-surface, .stack-layer { grid-column: 1; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: .5rem; }
-	.card-surface { grid-row: 1; position: relative; z-index: 2; border-bottom: none; border-radius: .5rem .5rem 0 0; filter: drop-shadow(0 1px 1.5px rgb(0 0 0 / .1)); }
+	.card-surface, .stack-layer { grid-column: 1; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 0 0 .5rem .5rem; }
+	.card-surface { grid-row: 1; position: relative; z-index: 2; border-bottom: none; border-radius: 0; filter: drop-shadow(0 1px 1.5px rgb(0 0 0 / .1)); }
 	.stack-layer { grid-row: 1 / 3; }
 	.stack-layer-front { z-index: 1; display: grid; grid-template-rows: subgrid; transform: rotate(-.35deg) translateY(3px); }
 	.stack-layer-back { z-index: 0; transform: rotate(.65deg) translateY(5px); }
-	.color-bar { display: flex; height: 6px; overflow: hidden; border-radius: calc(.5rem - 1px) calc(.5rem - 1px) 0 0; }
+	.color-bar { display: flex; height: 6px; }
 	.color-bar span { flex: 1; }
 	.card-body { padding: var(--pad); }
-	.tear { position: absolute; left: -1px; right: -1px; bottom: -8px; height: 16px; z-index: 1; }
+	.tear { position: absolute; left: 0; right: 0; bottom: -8px; height: 16px; z-index: 1; }
 	header { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
 	.label { margin: 0; color: #9ca3af; font: 700 .8125rem/1.5 ui-monospace, SFMono-Regular, Menlo, monospace; text-transform: uppercase; letter-spacing: .05em; }
-	h3 { margin: .4rem 0 0; color: var(--text-primary); font: 1.5rem Georgia, serif; }
+	h3 { margin: .4rem 0 0; color: var(--text-primary); }
 	.manicule-mark { flex-shrink: 0; border-radius: .5rem; transform: rotate(6deg); }
 	:global(html.dark) .manicule-mark { background: #fff; padding: .35rem; }
 	.work-copy { margin-top: 1.25rem; }
 	.work-copy .intro { max-width: 70ch; }
 	.work-columns { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2rem; margin-top: 1.5rem; }
-	.work-copy p, .work-copy li { margin: 0; color: var(--text-secondary); font-size: 1rem; line-height: 1.6; }
+	.work-copy p, .work-copy li { margin: 0; color: var(--text-secondary); font-size: 1.125rem; line-height: 1.6; }
 	.work-copy strong { color: var(--text-primary); font-weight: 600; }
 	.work-copy h4 { margin: 0 0 .5rem; color: #9ca3af; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .875rem; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; }
 	.work-copy ul { margin: 0; padding-left: 1.25rem; list-style: disc; }

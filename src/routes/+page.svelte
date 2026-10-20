@@ -15,24 +15,23 @@
 <section class="hero-card" aria-label="About me">
 	<div class="stack-layer stack-layer-back" aria-hidden="true"></div>
 	<div class="stack-layer stack-layer-front" aria-hidden="true"></div>
+	<div class="polaroid rotate-6">
+		<img
+			src={me}
+			alt="me, kunal"
+			class="w-28 h-auto border-white border-x-8 border-t-8"
+		/>
+		<p
+			class="text-center handwritten font-bold bg-white px-0 mx-0 py-1 border-x-8 border-white text-sm"
+		>
+			Kunal Mishra
+		</p>
+	</div>
 	<div class="hero-surface">
 		<div class="color-bar" aria-hidden="true">{#each barColors as color}<span style:background={color}></span>{/each}</div>
 
 		<div class="hero-body">
-			<div class="polaroid rotate-6 w-fit">
-				<img
-					src={me}
-					alt="me, kunal"
-					class="w-28 h-auto border-white border-x-8 border-t-8"
-				/>
-				<p
-					class="text-center handwritten font-bold bg-white px-0 mx-0 py-1 border-x-8 border-white text-sm"
-				>
-					Kunal Mishra
-				</p>
-			</div>
-
-			<h1 class="font-serif text-5xl sm:text-6xl mb-4">Kunal Mishra</h1>
+			<h1 class="font-serif text-5xl sm:text-6xl mb-6">Kunal Mishra</h1>
 			<div class="text-2xl">
 				Hi! I'm Kunal, a marketing engineer, full stack dev and an electronics major at BITS, Goa.
 				<br><br>
@@ -198,8 +197,35 @@
 	}
 
 	.polaroid {
-		margin-bottom: 3rem;
+		position: absolute;
+		z-index: 15;
+		top: 1.5rem;
+		right: 1.25rem;
 		box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+		transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	}
+
+	.polaroid:hover {
+		transform: scale(1.05);
+	}
+
+	/* Too narrow to sit beside the name, so the text starts below the photo */
+	@media (max-width: 767px) {
+		.hero-body {
+			padding-top: 11.5rem;
+		}
+	}
+
+	/* Hangs off the right edge; the text keeps clear of it */
+	@media (min-width: 768px) {
+		.polaroid {
+			top: 1.75rem;
+			right: -1.25rem;
+		}
+
+		.hero-body {
+			padding-right: calc(var(--pad) + 5.5rem);
+		}
 	}
 
 	.hero-wave {

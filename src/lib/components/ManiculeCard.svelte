@@ -54,11 +54,9 @@
 		<div class="color-bar" aria-hidden="true">{#each tags as tag}<span style:background={tagColors[tag]}></span>{/each}</div>
 		<div id="manicule-body" class="card-body" class:collapsed={!isExpanded} bind:this={bodyEl}>
 			<header>
-				<div>
-					<p class="text-xs font-mono uppercase tracking-wider text-gray-400">{date}</p>
-					<h3 id="manicule-title" class="font-serif text-xl">{title}</h3>
-				</div>
 				<img class="manicule-mark" src="/manicule.png" alt="" width="68" height="68" />
+				<p class="mb-0 text-xs font-mono uppercase tracking-wider text-gray-400">{date}</p>
+				<h3 id="manicule-title" class="font-serif text-xl">{title}</h3>
 			</header>
 
 			<div class="work-copy">
@@ -132,7 +130,7 @@
 </article>
 
 <style>
-	.manicule-card { --pad: clamp(1.25rem, 3vw, 2.25rem); position: relative; isolation: isolate; display: grid; grid-template-rows: auto auto; margin-bottom: 2.5rem; }
+	.manicule-card { --pad: clamp(1.25rem, 2.5vw, 1.75rem); position: relative; isolation: isolate; display: grid; grid-template-rows: auto auto; margin-bottom: 2.5rem; }
 	/* The top sheet fills row 1; the second sheet spans both rows and its subgrid puts the client list in row 2, below the tear */
 	.card-surface, .stack-layer { grid-column: 1; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 0 0 .5rem .5rem; }
 	.card-surface { grid-row: 1; position: relative; z-index: 2; border-bottom: none; border-radius: 0; filter: drop-shadow(0 1px 1.5px rgb(0 0 0 / .1)); }
@@ -141,19 +139,20 @@
 	.stack-layer-back { z-index: 0; transform: rotate(.65deg) translateY(5px); }
 	.color-bar { display: flex; height: 6px; }
 	.color-bar span { flex: 1; }
-	.card-body { padding: var(--pad); overflow: hidden; transition: max-height 450ms cubic-bezier(0.4, 0, 0.2, 1); }
+	/* Same 1rem top padding as the grid cards */
+	.card-body { padding: 1rem var(--pad) var(--pad); overflow: hidden; transition: max-height 450ms cubic-bezier(0.4, 0, 0.2, 1); }
 	/* Collapsed to about twice a project card's visible sheet (168px at desktop) */
 	.card-body.collapsed { max-height: 20.5rem; -webkit-mask-image: linear-gradient(to bottom, black calc(100% - 3rem), transparent); mask-image: linear-gradient(to bottom, black calc(100% - 3rem), transparent); }
 	.tear { position: absolute; left: 0; right: 0; bottom: -8px; height: 16px; z-index: 1; }
 	.read-more-pill { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 20; display: flex; align-items: center; gap: .25rem; padding: .25rem .75rem; background: var(--bg-card); border: 1px solid #e5e7eb; border-radius: 9999px; font: 700 .625rem ui-monospace, monospace; text-transform: uppercase; letter-spacing: .05em; white-space: nowrap; color: #6b7280; box-shadow: 0 1px 3px rgba(0, 0, 0, .1); transition: all .2s ease; cursor: pointer; }
 	.manicule-card:hover .read-more-pill, .read-more-pill.expanded { color: #e76f51; border-color: #e76f51; }
 	.read-more-pill svg { transition: transform .2s ease; }
-	header { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
 	.label { margin: 0; color: #9ca3af; font: 700 .8125rem/1.5 ui-monospace, SFMono-Regular, Menlo, monospace; text-transform: uppercase; letter-spacing: .05em; }
-	h3 { margin: .4rem 0 0; color: var(--text-primary); }
-	.manicule-mark { flex-shrink: 0; border-radius: .5rem; transform: rotate(6deg); }
+	h3 { margin: .25rem 0 0; color: var(--text-primary); }
+	/* Floated so the logo's height doesn't push the intro away from the title */
+	.manicule-mark { float: right; margin: 0 0 .5rem 1rem; border-radius: .5rem; transform: rotate(6deg); }
 	:global(html.dark) .manicule-mark { background: #fff; padding: .35rem; }
-	.work-copy { margin-top: 1.25rem; }
+	.work-copy { margin-top: .25rem; }
 	.work-copy .intro { max-width: 70ch; }
 	.work-columns { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2rem; margin-top: 1.5rem; }
 	.work-copy p, .work-copy li { margin: 0; color: var(--text-secondary); font-size: 1.125rem; line-height: 1.6; }

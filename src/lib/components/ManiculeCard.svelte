@@ -161,12 +161,12 @@
 	.work-copy h4 { margin: 0 0 .5rem; color: #e76f51; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .875rem; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; }
 	.work-copy ul { margin: 0; padding-left: 1.25rem; list-style: disc; }
 	.work-copy li + li { margin-top: .5rem; }
-	.clients-section { grid-row: 2; padding: calc(0.75rem + 8px) var(--pad) max(1rem, var(--pad) - 0.75rem); }
+	.clients-section { grid-row: 2; padding: calc(0.5rem + 8px) var(--pad) max(1rem, var(--pad) - 0.75rem); }
 	.clients-head { display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
 	a.label { display: flex; align-items: center; gap: .25rem; }
-	.client-logos { list-style: none; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 1.25rem 2rem; margin: 1.25rem 0 0; padding: 0; }
+	.client-logos { list-style: none; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: .5rem 2rem; margin: .75rem 0 0; padding: 0; }
 	.client-logos li { margin: 0; min-width: 0; }
-	.client-logos a { display: flex; gap: .5rem; justify-content: center; align-items: center; height: 2.75rem; padding: .25rem; border-radius: .25rem; color: var(--text-primary) !important; font-size: 1.125rem; font-weight: 600; }
+	.client-logos a { display: flex; gap: .5rem; justify-content: center; align-items: center; height: 2.25rem; padding: .125rem .25rem; border-radius: .25rem; color: var(--text-primary) !important; font-size: 1.125rem; font-weight: 600; }
 	.client-logos a:focus-visible { outline: 2px solid var(--accent-color); outline-offset: 4px; }
 	.client-logos img { width: auto; max-width: 100%; height: 2rem; object-fit: contain; filter: grayscale(1); }
 	.client-logos img + span { white-space: nowrap; }
@@ -174,6 +174,6 @@
 	:global(html.dark) .client-logos a { background: #fff; color: #1f2937 !important; }
 	@media (max-width: 768px) {
 		.work-columns { grid-template-columns: 1fr; }
-		.client-logos { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+		.client-logos { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .5rem 1rem; }
 	}
 </style>

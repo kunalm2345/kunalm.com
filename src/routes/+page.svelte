@@ -139,7 +139,7 @@
 			</div>
 			<!-- Social icons -->
 			<nav class="list-none">
-				<ul class="flex flex-wrap gap-4 items-center">
+				<ul class="flex flex-wrap gap-6 items-center">
 					<li class="list-none">
 						<a href="http://x.com/knlmsh/" target="_blank" rel="noopener noreferrer" aria-label="Twitter" class="social-icon-btn">
 							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-4">
@@ -413,7 +413,7 @@
 	.social-icon-btn {
 		display: flex;
 		align-items: center;
-		gap: 0.375rem;
+		gap: 0.5rem;
 		height: 1.25rem;
 		color: #6b7280 !important;
 		transition: color 0.2s ease;
@@ -424,8 +424,8 @@
 	}
 
 	.social-icon-btn svg {
-		width: 14px;
-		height: 14px;
+		width: 17px;
+		height: 17px;
 	}
 
 	/* The Cal.com logo is a wordmark, so it keeps its own aspect ratio */

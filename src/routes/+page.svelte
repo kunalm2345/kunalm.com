@@ -1,4 +1,7 @@
 <script lang="ts">
+	import { tick } from 'svelte';
+	import { fade } from 'svelte/transition';
+	import { cubicOut } from 'svelte/easing';
 	import me from '$lib/assets/me.jpeg';
 	import Wave from '$lib/components/Wave.svelte';
 	import { tagColors, type Tag } from '$lib/tags';
@@ -10,23 +13,74 @@
 	}
 
 	const barColors = (['Research', 'Dev', 'Content', 'Design', 'Marketing'] as Tag[]).map((tag) => tagColors[tag]);
+
+	let thumbEl: HTMLButtonElement;
+	let closeEl: HTMLButtonElement | undefined = $state();
+	let photoOpen = $state(false);
+	let thumbHidden = $state(false);
+	let usedKeyboard = false;
+
+	// A click with detail 0 came from Enter/Space, not a pointer
+	async function openPhoto(event: MouseEvent) {
+		usedKeyboard = event.detail === 0;
+		photoOpen = true;
+		thumbHidden = true;
+		await tick();
+		closeEl?.focus({ preventScroll: true });
+	}
+
+	function closePhoto(viaKeyboard: boolean) {
+		usedKeyboard ||= viaKeyboard;
+		photoOpen = false;
+	}
+
+	// Only keyboard users get focus handed back, so pointer users don't see a focus ring on the thumbnail
+	async function restoreThumb() {
+		thumbHidden = false;
+		if (!usedKeyboard) return;
+		await tick();
+		thumbEl.focus({ preventScroll: true });
+	}
+
+	// Flies the enlarged postcard to and from wherever the thumbnail sits, matching its tilt and size
+	function zoomFromThumb(node: HTMLElement) {
+		const from = thumbEl.getBoundingClientRect();
+		const to = node.getBoundingClientRect();
+		const hovered = thumbEl.matches(':hover');
+		const dx = from.left + from.width / 2 - (to.left + to.width / 2);
+		const dy = from.top + from.height / 2 - (to.top + to.height / 2);
+		const startScale = ((hovered ? 1.05 : 1) * thumbEl.offsetWidth) / node.offsetWidth;
+		const startRotation = hovered ? 0 : 6;
+		// Shadow offsets are scaled with the card, so start from the thumbnail's shadow divided by the start scale
+		const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
+		return {
+			duration: 450,
+			easing: cubicOut,
+			css: (t: number, u: number) =>
+				`transform: translate(${dx * u}px, ${dy * u}px) rotate(${startRotation * u}deg) scale(${lerp(startScale, 1, t)});` +
+				`box-shadow: 0 ${lerp(1 / startScale, 24, t)}px ${lerp(4 / startScale, 60, t)}px rgba(0, 0, 0, ${lerp(0.15, 0.35, t)});`
+		};
+	}
+
+	$effect(() => {
+		if (!photoOpen) return;
+		const html = document.documentElement;
+		const scrollbar = window.innerWidth - html.clientWidth;
+		html.style.overflow = 'hidden';
+		html.style.paddingRight = scrollbar ? `${scrollbar}px` : '';
+		return () => {
+			html.style.overflow = '';
+			html.style.paddingRight = '';
+		};
+	});
 </script>
 
+<svelte:window onkeydown={(event) => photoOpen && event.key === 'Escape' && closePhoto(true)} />
+
 <section class="hero-card" aria-label="About me">
-	<div class="stack-layer stack-layer-back" aria-hidden="true"></div>
-	<div class="stack-layer stack-layer-front" aria-hidden="true"></div>
-	<div class="polaroid rotate-6">
-		<img
-			src={me}
-			alt="me, kunal"
-			class="w-28 h-auto border-white border-x-8 border-t-8"
-		/>
-		<p
-			class="text-center handwritten font-bold bg-white px-0 mx-0 py-1 border-x-8 border-white text-sm"
-		>
-			Kunal Mishra
-		</p>
-	</div>
+	<button type="button" class="polaroid rotate-6" class:thumb-hidden={thumbHidden} bind:this={thumbEl} onclick={openPhoto} aria-label="Enlarge photo">
+		<span class="postcard"><img src={me} alt="me, kunal" /></span>
+	</button>
 	<div class="hero-surface">
 		<div class="color-bar" aria-hidden="true">{#each barColors as color}<span style:background={color}></span>{/each}</div>
 
@@ -46,7 +100,7 @@
 			</div>
 		</div>
 
-		<div class="hero-wave">
+		<div class="tear">
 			<button type="button" class="read-more-pill" class:expanded={isExpanded} onclick={toggleExpand} aria-expanded={isExpanded} aria-controls="about-more">
 				<span>{isExpanded ? 'THAT\'S ENOUGH' : 'READ MORE ABOUT ME'}</span>
 				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="size-3" class:rotate-180={isExpanded}>
@@ -55,8 +109,11 @@
 			</button>
 			<Wave />
 		</div>
+	</div>
 
-		<div class="hero-footer flex flex-col lg:flex-row lg:items-center gap-6">
+	<!-- Second sheet: the newsletter and social links show through where the top sheet is torn -->
+	<div class="stack-layer stack-layer-front">
+		<div class="hero-footer flex flex-col gap-6">
 			<!-- Newsletter form -->
 			<div class="flex-1 min-w-0">
 				<p class="text-[#e76f51] font-mono text-xs uppercase tracking-wider mb-3">Subscribe to get my weeknotes newsletter</p>
@@ -80,10 +137,8 @@
 					</button>
 				</form>
 			</div>
-			<!-- Vertical separator -->
-			<div class="hidden lg:block w-px h-16 shrink-0 bg-gray-300 dark-separator"></div>
 			<!-- Social icons -->
-			<nav class="list-none lg:shrink-0">
+			<nav class="list-none">
 				<ul class="flex flex-wrap gap-3 items-center">
 					<li class="list-none">
 						<a href="http://x.com/knlmsh/" target="_blank" rel="noopener noreferrer" aria-label="Twitter" class="social-icon-btn twitter-button">
@@ -131,38 +186,64 @@
 			</nav>
 		</div>
 	</div>
+	<div class="stack-layer stack-layer-back" aria-hidden="true"></div>
 </section>
 
+{#if photoOpen}
+	<div class="photo-dialog" role="dialog" aria-modal="true" aria-label="Photo of Kunal">
+		<button type="button" class="photo-backdrop" aria-label="Close photo" bind:this={closeEl} onclick={(event) => closePhoto(event.detail === 0)} transition:fade={{ duration: 300 }}></button>
+		<div class="postcard postcard-large" transition:zoomFromThumb onoutroend={restoreThumb}>
+			<img src={me} alt="me, kunal" />
+		</div>
+	</div>
+{/if}
+
 <style>
+	/* About 1.75x a project card in the 3-column grid (77rem content, two 1.75rem gaps), but never narrower than 36rem */
 	.hero-card {
+		--pad: clamp(1.5rem, 5vw, 2.5rem);
 		position: relative;
 		isolation: isolate;
-		max-width: 52rem;
+		display: grid;
+		grid-template-rows: auto auto;
+		width: min(100%, max(36rem, (min(100%, 77rem) - 3.5rem) * 7 / 12));
 		margin: 0 auto 5rem;
 	}
 
 	/* The card hangs from the top of the viewport, so it has no top border or top corners */
 	.stack-layer,
 	.hero-surface {
+		grid-column: 1;
 		background: var(--bg-card);
 		border: 1px solid var(--border-color);
 		border-top: none;
-		border-radius: 0 0 0.5rem 0.5rem;
 	}
 
+	.hero-surface {
+		grid-row: 1;
+		position: relative;
+		z-index: 2;
+		border-bottom: none;
+		filter: drop-shadow(0 1px 1.5px rgba(0, 0, 0, 0.1));
+	}
+
+	/* The lower sheets span the whole card; the front one's subgrid puts the footer in row 2, below the tear */
 	.stack-layer {
-		position: absolute;
-		inset: 0;
-		z-index: -1;
+		grid-row: 1 / 3;
+		border-radius: 0 0 0.5rem 0.5rem;
 		box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 		transform-origin: top center;
 	}
 
 	.stack-layer-back {
+		z-index: 0;
 		transform: rotate(0.6deg) translateY(6px);
 	}
 
 	.stack-layer-front {
+		z-index: 1;
+		display: grid;
+		grid-template-rows: subgrid;
 		transform: rotate(-0.4deg) translateY(3px);
 	}
 
@@ -177,12 +258,6 @@
 		}
 	}
 
-	.hero-surface {
-		--pad: clamp(1.5rem, 5vw, 2.5rem);
-		overflow: hidden;
-		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-	}
-
 	.color-bar {
 		display: flex;
 		height: 6px;
@@ -193,7 +268,7 @@
 	}
 
 	.hero-body {
-		padding: calc(var(--pad) + 0.5rem) var(--pad) 0;
+		padding: calc(var(--pad) + 0.5rem) var(--pad) 2.5rem;
 	}
 
 	.polaroid {
@@ -201,12 +276,69 @@
 		z-index: 15;
 		top: 1.5rem;
 		right: 1.25rem;
+		padding: 0;
+		border: 0;
+		background: none;
+		cursor: zoom-in;
 		box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
 		transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 	}
 
 	.polaroid:hover {
 		transform: scale(1.05);
+	}
+
+	.polaroid:focus-visible {
+		outline: 2px solid var(--accent-color);
+		outline-offset: 4px;
+	}
+
+	.polaroid.thumb-hidden {
+		visibility: hidden;
+	}
+
+	/* Sized in em so the enlarged copy is the same postcard, scaled: 8px frame, 96px photo, 28px blank strip */
+	.postcard {
+		display: block;
+		font-size: 8px;
+		padding: 1em 1em 3.5em;
+		background: #fff;
+	}
+
+	.postcard img {
+		display: block;
+		width: 12em;
+		height: 12em;
+		object-fit: cover;
+	}
+
+	.photo-dialog {
+		position: fixed;
+		inset: 0;
+		z-index: 100;
+		display: grid;
+		place-items: center;
+	}
+
+	.photo-backdrop {
+		position: absolute;
+		inset: 0;
+		border: 0;
+		padding: 0;
+		background: rgba(0, 0, 0, 0.6);
+		cursor: zoom-out;
+	}
+
+	.photo-backdrop:focus {
+		outline: none;
+	}
+
+	/* 14em wide by 16.5em tall, so it fits within 85% of the width and roughly 85% of the height */
+	.postcard-large {
+		position: relative;
+		font-size: calc(min(85vw, 30rem, 72vh) / 14);
+		box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+		pointer-events: none;
 	}
 
 	/* Too narrow to sit beside the name, so the text starts below the photo */
@@ -228,10 +360,14 @@
 		}
 	}
 
-	.hero-wave {
-		position: relative;
+	/* Straddles the top sheet's bottom edge: the wave line is the tear, its shadow falls on the sheet below */
+	.tear {
+		position: absolute;
+		left: -1px;
+		right: -1px;
+		bottom: -8px;
 		height: 16px;
-		margin-top: 2rem;
+		z-index: 10;
 	}
 
 	.read-more-pill {
@@ -270,7 +406,8 @@
 	}
 
 	.hero-footer {
-		padding: 1.25rem var(--pad) var(--pad);
+		grid-row: 2;
+		padding: calc(1.25rem + 8px) var(--pad) var(--pad);
 	}
 
 	.social-icon-btn {

@@ -25,8 +25,6 @@
 </script>
 
 <article class="manicule-card" aria-labelledby="manicule-title">
-	<div class="stack-layer stack-layer-back" aria-hidden="true"></div>
-	<div class="stack-layer stack-layer-front" aria-hidden="true"></div>
 	<div class="card-surface">
 		<div class="color-bar" aria-hidden="true">{#each tags as tag}<span style:background={tagColors[tag]}></span>{/each}</div>
 		<div class="card-body">
@@ -70,45 +68,50 @@
 					</section>
 				</div>
 			</div>
-
-			<div class="wave"><Wave /></div>
-
-			<footer class="clients-section">
-				<div class="clients-head">
-					<h4 class="label">CLIENTS I WORKED WITH</h4>
-					<a class="label squiggle-link" href="https://manicule.com" target="_blank" rel="noopener noreferrer">
-						MANICULE.COM
-						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" width="12" height="12" aria-hidden="true"><path fill-rule="evenodd" d="M4.22 11.78a.75.75 0 0 1 0-1.06L9.44 5.5H5.75a.75.75 0 0 1 0-1.5h5.5a.75.75 0 0 1 .75.75v5.5a.75.75 0 0 1-1.5 0V6.56l-5.22 5.22a.75.75 0 0 1-1.06 0Z" clip-rule="evenodd" /></svg>
-					</a>
-				</div>
-				<ul class="client-logos">
-					{#each clients as client}
-						<li>
-							<a href={client.href} target="_blank" rel="noopener noreferrer" aria-label={client.name}>
-								{#if client.logo}
-									<img src={client.logo} style:width={client.w ? `${client.w}rem` : null} style:height={client.h ? `${client.h}rem` : null} alt={client.showName ? '' : client.name} loading="lazy" onerror={(event) => event.currentTarget.setAttribute('hidden', '')} />
-									{#if client.showName}<span aria-hidden="true">{client.name}</span>{/if}
-								{:else}
-									<span>{client.name}</span>
-								{/if}
-							</a>
-						</li>
-					{/each}
-				</ul>
-			</footer>
 		</div>
+		<div class="tear"><Wave /></div>
 	</div>
+	<!-- Second sheet: the client list shows through where the top sheet is torn -->
+	<div class="stack-layer stack-layer-front">
+		<footer class="clients-section">
+			<div class="clients-head">
+				<h4 class="label">CLIENTS I WORKED WITH</h4>
+				<a class="label squiggle-link" href="https://manicule.com" target="_blank" rel="noopener noreferrer">
+					MANICULE.COM
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" width="12" height="12" aria-hidden="true"><path fill-rule="evenodd" d="M4.22 11.78a.75.75 0 0 1 0-1.06L9.44 5.5H5.75a.75.75 0 0 1 0-1.5h5.5a.75.75 0 0 1 .75.75v5.5a.75.75 0 0 1-1.5 0V6.56l-5.22 5.22a.75.75 0 0 1-1.06 0Z" clip-rule="evenodd" /></svg>
+				</a>
+			</div>
+			<ul class="client-logos">
+				{#each clients as client}
+					<li>
+						<a href={client.href} target="_blank" rel="noopener noreferrer" aria-label={client.name}>
+							{#if client.logo}
+								<img src={client.logo} style:width={client.w ? `${client.w}rem` : null} style:height={client.h ? `${client.h}rem` : null} alt={client.showName ? '' : client.name} loading="lazy" onerror={(event) => event.currentTarget.setAttribute('hidden', '')} />
+								{#if client.showName}<span aria-hidden="true">{client.name}</span>{/if}
+							{:else}
+								<span>{client.name}</span>
+							{/if}
+						</a>
+					</li>
+				{/each}
+			</ul>
+		</footer>
+	</div>
+	<div class="stack-layer stack-layer-back" aria-hidden="true"></div>
 </article>
 
 <style>
-	.manicule-card { position: relative; isolation: isolate; margin-bottom: 2.5rem; }
-	.stack-layer { position: absolute; inset: 0; border: 1px solid var(--border-color); border-radius: .5rem; background: var(--bg-card); z-index: -1; }
-	.stack-layer-back { transform: rotate(.65deg) translateY(5px); }
-	.stack-layer-front { transform: rotate(-.35deg) translateY(3px); }
-	.card-surface { overflow: hidden; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: .5rem; box-shadow: 0 1px 3px rgb(0 0 0 / .1); }
-	.color-bar { display: flex; height: 6px; }
+	.manicule-card { --pad: clamp(1.25rem, 3vw, 2.25rem); position: relative; isolation: isolate; display: grid; grid-template-rows: auto auto; margin-bottom: 2.5rem; }
+	/* The top sheet fills row 1; the second sheet spans both rows and its subgrid puts the client list in row 2, below the tear */
+	.card-surface, .stack-layer { grid-column: 1; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: .5rem; }
+	.card-surface { grid-row: 1; position: relative; z-index: 2; border-bottom: none; border-radius: .5rem .5rem 0 0; filter: drop-shadow(0 1px 1.5px rgb(0 0 0 / .1)); }
+	.stack-layer { grid-row: 1 / 3; }
+	.stack-layer-front { z-index: 1; display: grid; grid-template-rows: subgrid; transform: rotate(-.35deg) translateY(3px); }
+	.stack-layer-back { z-index: 0; transform: rotate(.65deg) translateY(5px); }
+	.color-bar { display: flex; height: 6px; overflow: hidden; border-radius: calc(.5rem - 1px) calc(.5rem - 1px) 0 0; }
 	.color-bar span { flex: 1; }
-	.card-body { --pad: clamp(1.25rem, 3vw, 2.25rem); padding: var(--pad); }
+	.card-body { padding: var(--pad); }
+	.tear { position: absolute; left: -1px; right: -1px; bottom: -8px; height: 16px; z-index: 1; }
 	header { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
 	.label { margin: 0; color: #9ca3af; font: 700 .8125rem/1.5 ui-monospace, SFMono-Regular, Menlo, monospace; text-transform: uppercase; letter-spacing: .05em; }
 	h3 { margin: .4rem 0 0; color: var(--text-primary); font: 1.5rem Georgia, serif; }
@@ -122,8 +125,7 @@
 	.work-copy h4 { margin: 0 0 .5rem; color: #9ca3af; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .875rem; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; }
 	.work-copy ul { margin: 0; padding-left: 1.25rem; list-style: disc; }
 	.work-copy li + li { margin-top: .5rem; }
-	.wave { margin: 2rem calc(-1 * var(--pad)) 0; }
-	.clients-section { padding-top: 1.25rem; }
+	.clients-section { grid-row: 2; padding: calc(1.25rem + 8px) var(--pad) var(--pad); }
 	.clients-head { display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
 	a.label { display: flex; align-items: center; gap: .25rem; }
 	.client-logos { list-style: none; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 1.25rem 2rem; margin: 1.25rem 0 0; padding: 0; }

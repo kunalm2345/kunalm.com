@@ -140,91 +140,71 @@
 		<!-- Card 3 (bottom of stack) -->
 		<div class="card-layer card-layer-3" class:cta-layer={isCta}></div>
 
-		<!-- Card 2 (middle of stack) -->
-		<div class="card-layer card-layer-2" class:cta-layer={isCta}></div>
+		<!-- Card 2: the date and link are on this sheet and show through where card 1 is torn -->
+		<div class="card-layer card-layer-2" class:cta-layer={isCta}>
+			{#if !isCta}{@render footer()}{/if}
+		</div>
 
-		<!-- Card 1 (top of stack - main card) -->
-		<div class="card-main" class:cta-main={isCta}>
-			<!-- Featured star icon -->
-			{#if featured}
-				<div class="featured-star">
-					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5">
-						<path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z" clip-rule="evenodd" />
-					</svg>
-				</div>
-			{/if}
-			<!-- Top color bar (hidden for CTA) — one segment per tag -->
-			{#if !isCta}
-				<div class="card-top-bar">
-					{#each barColors as color}
-						<div class="card-top-bar-segment" style="background-color: {color}"></div>
-					{/each}
-				</div>
-			{/if}
-
-			<div class="card-content" class:cta-content={isCta}>
-				<!-- Text content area -->
-				<!-- svelte-ignore a11y_click_events_have_key_events -->
-				<!-- svelte-ignore a11y_no_static_element_interactions -->
-				<div 
-					class="text-section" 
-					class:text-section-overflow={isOverflowing && !isCta && !isExpanded} 
-					class:text-section-clickable={(isOverflowing || isExpanded) && !isCta}
-					bind:this={textSection}
-					onclick={handleTextClick}
-				>
-					{#if title}
-						<p class="font-serif text-xl" class:cta-title={isCta}>
-							{title}
-						</p>
-					{/if}
-					{#if content}
-						<p class="text-xl font-normal mt-1 text-gray-600">
-							{@html content}
-						</p>
-					{/if}
-				</div>
-
-				<!-- Sine wave SVG separator with tracking shadow (hidden for CTA) -->
+		<!-- Card 1 (top of stack) -->
+		<div class="card-main">
+			<div class="sheet" class:torn={!isCta} class:cta-main={isCta}>
+				{#if featured}
+					<div class="featured-star">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5">
+							<path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z" clip-rule="evenodd" />
+						</svg>
+					</div>
+				{/if}
+				<!-- Top color bar (hidden for CTA) — one segment per tag -->
 				{#if !isCta}
-				<div class="wave-container z-10">
-					{#if isOverflowing || isExpanded || isAnimating}
-						<!-- svelte-ignore a11y_click_events_have_key_events -->
-						<!-- svelte-ignore a11y_no_static_element_interactions -->
-						<div class="read-more-pill" onclick={handleTextClick} class:read-more-expanded={isExpanded}>
-							<span>{isExpanded ? 'SHOW LESS' : 'READ MORE'}</span>
-							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="size-3" class:rotate-180={isExpanded}>
-								<path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
-							</svg>
-						</div>
-					{/if}
-					<Wave />
-				</div>
+					<div class="card-top-bar">
+						{#each barColors as color}
+							<div class="card-top-bar-segment" style="background-color: {color}"></div>
+						{/each}
+					</div>
 				{/if}
 
-	
+				<div class="card-content" class:cta-content={isCta}>
+					<!-- Text content area -->
+					<!-- svelte-ignore a11y_click_events_have_key_events -->
+					<!-- svelte-ignore a11y_no_static_element_interactions -->
+					<div 
+						class="text-section" 
+						class:text-section-overflow={isOverflowing && !isCta && !isExpanded} 
+						class:text-section-clickable={(isOverflowing || isExpanded) && !isCta}
+						bind:this={textSection}
+						onclick={handleTextClick}
+					>
+						{#if title}
+							<p class="font-serif text-xl" class:cta-title={isCta}>
+								{title}
+							</p>
+						{/if}
+						{#if content}
+							<p class="text-xl font-normal mt-1 text-gray-600">
+								{@html content}
+							</p>
+						{/if}
+					</div>
 
-				<!-- Footer section: Date and Link -->
-				<div class="footer-section" class:cta-footer={isCta}>
-					{#if date}
-						<p class="text-xs font-mono uppercase tracking-wider text-gray-400">{date}</p>
-					{:else}
-						<span></span>
-					{/if}
-					{#if href}
-						<a 
-							{href} 
-							target={isExternal ? '_blank' : undefined} 
-							rel={isExternal ? 'noopener noreferrer' : undefined}
-							class="link-text squiggle-link flex items-center gap-1 text-xs font-mono uppercase tracking-wider transition-colors text-gray-400 hover:text-[#e76f51]" 
-						>
-							{linkText}
-							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="size-3">
-								<path fill-rule="evenodd" d="M4.22 11.78a.75.75 0 0 1 0-1.06L9.44 5.5H5.75a.75.75 0 0 1 0-1.5h5.5a.75.75 0 0 1 .75.75v5.5a.75.75 0 0 1-1.5 0V6.56l-5.22 5.22a.75.75 0 0 1-1.06 0Z" clip-rule="evenodd" />
-							</svg>
-						</a>
-					{/if}
+					{#if isCta}{@render footer()}{/if}
 				</div>
+
+				{#if !isCta}
+					<div class="tear">
+						{#if isOverflowing || isExpanded || isAnimating}
+							<!-- svelte-ignore a11y_click_events_have_key_events -->
+							<!-- svelte-ignore a11y_no_static_element_interactions -->
+							<div class="read-more-pill" onclick={handleTextClick} class:read-more-expanded={isExpanded}>
+								<span>{isExpanded ? 'SHOW LESS' : 'READ MORE'}</span>
+								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="size-3" class:rotate-180={isExpanded}>
+									<path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
+								</svg>
+							</div>
+						{/if}
+						<Wave />
+					</div>
+				{/if}
 			</div>
 		</div>
 
@@ -236,6 +216,29 @@
 		{/if}
 	</div>
 </div>
+
+{#snippet footer()}
+	<div class="footer-section" class:cta-footer={isCta}>
+		{#if date}
+			<p class="text-xs font-mono uppercase tracking-wider text-gray-400">{date}</p>
+		{:else}
+			<span></span>
+		{/if}
+		{#if href}
+			<a 
+				{href} 
+				target={isExternal ? '_blank' : undefined} 
+				rel={isExternal ? 'noopener noreferrer' : undefined}
+				class="link-text squiggle-link flex items-center gap-1 text-xs font-mono uppercase tracking-wider transition-colors text-gray-400 hover:text-[#e76f51]" 
+			>
+				{linkText}
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="size-3">
+					<path fill-rule="evenodd" d="M4.22 11.78a.75.75 0 0 1 0-1.06L9.44 5.5H5.75a.75.75 0 0 1 0-1.5h5.5a.75.75 0 0 1 .75.75v5.5a.75.75 0 0 1-1.5 0V6.56l-5.22 5.22a.75.75 0 0 1-1.06 0Z" clip-rule="evenodd" />
+				</svg>
+			</a>
+		{/if}
+	</div>
+{/snippet}
 
 <style>
 	/* Card sizing: 2 height units = 1 width unit */
@@ -288,23 +291,45 @@
 		transform: rotate(2.5deg) translateY(2px) translateX(2px);
 	}
 
+	/* Height of the strip between the tear line and the bottom of the stack, where card 2 shows */
+	.card-wrapper {
+		--tear-gap: 3rem;
+	}
+
+	/* Card 1 itself is unpainted so card 2 shows through below its sheet */
 	.card-main {
 		position: absolute;
 		inset: 0;
+		display: flex;
+		flex-direction: column;
+		pointer-events: none;
+	}
+
+	.sheet {
+		position: relative;
+		flex: 1;
+		min-height: 0;
+		display: flex;
+		flex-direction: column;
 		background: var(--bg-card);
 		border-radius: 0.5rem;
 		border: 1px solid var(--border-color);
-		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-		transition: box-shadow 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-		overflow: hidden;
-		display: flex;
-		flex-direction: column;
+		filter: drop-shadow(0 1px 1.5px rgba(0, 0, 0, 0.1));
+		pointer-events: auto;
+	}
+
+	.sheet.torn {
+		margin-bottom: var(--tear-gap);
+		border-bottom: none;
+		border-radius: 0.5rem 0.5rem 0 0;
 	}
 
 	.card-top-bar {
 		height: 6px;
 		flex-shrink: 0;
 		display: flex;
+		overflow: hidden;
+		border-radius: calc(0.5rem - 1px) calc(0.5rem - 1px) 0 0;
 	}
 
 	.card-top-bar-segment {
@@ -319,6 +344,10 @@
 		position: relative;
 		min-height: 0;
 		overflow: hidden;
+	}
+
+	.torn .card-content {
+		padding-bottom: 0.5rem;
 	}
 
 	.text-section {
@@ -336,7 +365,7 @@
 		mask-image: linear-gradient(to bottom, black calc(100% - 24px), transparent 100%);
 	}
 
-	/* Expanded card — elevated, layers fade, content flows naturally */
+	/* Expanded card: content flows naturally, card 3 fades and card 2 lies flat under the tear */
 	.card-expanded {
 		z-index: 10;
 	}
@@ -344,13 +373,20 @@
 	.card-expanded .card-main {
 		position: relative;
 		height: auto !important;
-		box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
 	}
 
-	.card-expanded .card-layer {
+	.card-expanded .sheet {
+		flex: none;
+	}
+
+	.card-expanded .card-layer-3 {
 		opacity: 0;
 		transform: none !important;
 		pointer-events: none;
+	}
+
+	.card-expanded .card-layer-2 {
+		transform: none !important;
 	}
 
 	.card-expanded .text-section {
@@ -366,11 +402,14 @@
 		height: auto !important;
 	}
 
-	.wave-container {
-		position: relative;
+	/* Straddles the sheet's bottom edge: the wave line is the tear, its shadow falls on card 2 */
+	.tear {
+		position: absolute;
+		left: -1px;
+		right: -1px;
+		bottom: -8px;
 		height: 16px;
-		margin: 0rem -1rem 0 -1rem;
-		flex-shrink: 0;
+		z-index: 10;
 	}
 
 	.read-more-pill {
@@ -431,13 +470,21 @@
 		flex-shrink: 0;
 	}
 
+	.card-layer-2 > .footer-section {
+		position: absolute;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		padding: 0 1rem 1rem;
+	}
+
 	/* CTA variant styles */
 	.cta-layer,
 	.cta-main {
 		border-color: var(--accent-color);
 	}
 
-	.card-main.cta-main .cta-title {
+	.sheet.cta-main .cta-title {
 		color: var(--accent-color);
 	}
 

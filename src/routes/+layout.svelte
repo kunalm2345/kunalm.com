@@ -261,10 +261,9 @@
 	{#if isHomePage}
 		<section class="second-fold">
 			<div class="max-w-screen-xl mx-auto px-6">
-				<!-- Filter header with title and buttons -->
-				<div class="flex flex-wrap items-center justify-between gap-4 mb-8">
-					<h2 class="text-2xl font-serif">Projects & Work Experience</h2>
-					<div class="flex flex-wrap gap-2">
+				<!-- Filter buttons -->
+				<div class="flex justify-center mb-8">
+					<div class="flex flex-wrap justify-center gap-2">
 						{#each allTags as { name, color }}
 							<button
 								type="button"
@@ -337,7 +336,7 @@
 	}
 
 	.filter-btn {
-		background: transparent;
+		background: var(--bg-card);
 		border: 1.5px solid var(--tag-color);
 		cursor: pointer;
 	}

@@ -153,6 +153,10 @@ html.dark .card-main .font-serif {
 	color: var(--text-primary);
 }
 
+html.dark .footer-divider {
+	background: var(--border-color);
+}
+
 html.dark .footer-text,
 html.dark .footer-link,
 html.dark .dark-mode-toggle {

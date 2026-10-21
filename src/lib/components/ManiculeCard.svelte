@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { tick } from 'svelte';
 	import Wave from './Wave.svelte';
 	import { tagColors, type Tag } from '$lib/tags';
 
@@ -22,20 +23,40 @@
 		{ name: 'OpenComputer', href: 'https://opencomputer.dev', logo: '/clients/opencomputer.svg', w: 8.5 },
 		{ name: 'boat', href: 'https://boat.dev', logo: 'https://boat.dev/icon.svg', showName: true }
 	];
+
+	let bodyEl: HTMLElement;
+	let isExpanded = $state(false);
+	let isAnimating = false;
+
+	// Animates max-height between the collapsed CSS value and the content's full height
+	async function toggleExpand() {
+		if (isAnimating) return;
+		isAnimating = true;
+		bodyEl.style.maxHeight = `${bodyEl.offsetHeight}px`;
+		bodyEl.offsetHeight;
+		isExpanded = !isExpanded;
+		await tick();
+		const expanding = isExpanded;
+		bodyEl.style.maxHeight = expanding ? `${bodyEl.scrollHeight}px` : '';
+		const done = (event?: TransitionEvent) => {
+			if (event && event.target !== bodyEl) return;
+			bodyEl.removeEventListener('transitionend', done);
+			if (expanding) bodyEl.style.maxHeight = 'none';
+			isAnimating = false;
+		};
+		bodyEl.addEventListener('transitionend', done);
+		setTimeout(() => isAnimating && done(), 500);
+	}
 </script>
 
 <article class="manicule-card" aria-labelledby="manicule-title">
-	<div class="stack-layer stack-layer-back" aria-hidden="true"></div>
-	<div class="stack-layer stack-layer-front" aria-hidden="true"></div>
 	<div class="card-surface">
 		<div class="color-bar" aria-hidden="true">{#each tags as tag}<span style:background={tagColors[tag]}></span>{/each}</div>
-		<div class="card-body">
+		<div id="manicule-body" class="card-body" class:collapsed={!isExpanded} bind:this={bodyEl}>
 			<header>
-				<div>
-					<p class="text-xs font-mono uppercase tracking-wider text-gray-400">{date}</p>
-					<h3 id="manicule-title">{title}</h3>
-				</div>
 				<img class="manicule-mark" src="/manicule.png" alt="" width="68" height="68" />
+				<p class="mb-0 text-xs font-mono uppercase tracking-wider text-gray-400">{date}</p>
+				<h3 id="manicule-title" class="font-serif text-xl">{title}</h3>
 			</header>
 
 			<div class="work-copy">
@@ -70,65 +91,81 @@
 					</section>
 				</div>
 			</div>
-
-			<div class="wave"><Wave /></div>
-
-			<footer class="clients-section">
-				<div class="clients-head">
-					<h4 class="label">CLIENTS I WORKED WITH</h4>
-					<a class="label" href="https://manicule.com" target="_blank" rel="noopener noreferrer">
-						MANICULE.COM
-						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" width="12" height="12" aria-hidden="true"><path fill-rule="evenodd" d="M4.22 11.78a.75.75 0 0 1 0-1.06L9.44 5.5H5.75a.75.75 0 0 1 0-1.5h5.5a.75.75 0 0 1 .75.75v5.5a.75.75 0 0 1-1.5 0V6.56l-5.22 5.22a.75.75 0 0 1-1.06 0Z" clip-rule="evenodd" /></svg>
-					</a>
-				</div>
-				<ul class="client-logos">
-					{#each clients as client}
-						<li>
-							<a href={client.href} target="_blank" rel="noopener noreferrer" aria-label={client.name}>
-								{#if client.logo}
-									<img src={client.logo} style:width={client.w ? `${client.w}rem` : null} style:height={client.h ? `${client.h}rem` : null} alt={client.showName ? '' : client.name} loading="lazy" onerror={(event) => event.currentTarget.setAttribute('hidden', '')} />
-									{#if client.showName}<span aria-hidden="true">{client.name}</span>{/if}
-								{:else}
-									<span>{client.name}</span>
-								{/if}
-							</a>
-						</li>
-					{/each}
-				</ul>
-			</footer>
+		</div>
+		<div class="tear">
+			<button type="button" class="read-more-pill" class:expanded={isExpanded} onclick={toggleExpand} aria-expanded={isExpanded} aria-controls="manicule-body">
+				<span>{isExpanded ? 'SHOW LESS' : 'READ MORE'}</span>
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" width="12" height="12" class:rotate-180={isExpanded} aria-hidden="true"><path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" /></svg>
+			</button>
+			<Wave />
 		</div>
 	</div>
+	<!-- Second sheet: the client list shows through where the top sheet is torn -->
+	<div class="stack-layer stack-layer-front">
+		<footer class="clients-section">
+			<div class="clients-head">
+				<h4 class="label">CLIENTS I WORKED WITH</h4>
+				<a class="label squiggle-link" href="https://manicule.com" target="_blank" rel="noopener noreferrer">
+					MANICULE.COM
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" width="12" height="12" aria-hidden="true"><path fill-rule="evenodd" d="M4.22 11.78a.75.75 0 0 1 0-1.06L9.44 5.5H5.75a.75.75 0 0 1 0-1.5h5.5a.75.75 0 0 1 .75.75v5.5a.75.75 0 0 1-1.5 0V6.56l-5.22 5.22a.75.75 0 0 1-1.06 0Z" clip-rule="evenodd" /></svg>
+				</a>
+			</div>
+			<ul class="client-logos">
+				{#each clients as client}
+					<li>
+						<a href={client.href} target="_blank" rel="noopener noreferrer" aria-label={client.name}>
+							{#if client.logo}
+								<img src={client.logo} style:width={client.w ? `${client.w}rem` : null} style:height={client.h ? `${client.h}rem` : null} alt={client.showName ? '' : client.name} loading="lazy" onerror={(event) => event.currentTarget.setAttribute('hidden', '')} />
+								{#if client.showName}<span aria-hidden="true">{client.name}</span>{/if}
+							{:else}
+								<span>{client.name}</span>
+							{/if}
+						</a>
+					</li>
+				{/each}
+			</ul>
+		</footer>
+	</div>
+	<div class="stack-layer stack-layer-back" aria-hidden="true"></div>
 </article>
 
 <style>
-	.manicule-card { position: relative; isolation: isolate; margin-bottom: 2.5rem; }
-	.stack-layer { position: absolute; inset: 0; border: 1px solid var(--border-color); border-radius: .5rem; background: var(--bg-secondary); z-index: -1; }
-	.stack-layer-back { transform: rotate(.65deg) translateY(5px); }
-	.stack-layer-front { transform: rotate(-.35deg) translateY(3px); }
-	.card-surface { overflow: hidden; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: .5rem; box-shadow: 0 1px 3px rgb(0 0 0 / .1); }
+	.manicule-card { --pad: clamp(1.25rem, 2.5vw, 1.75rem); position: relative; isolation: isolate; display: grid; grid-template-rows: auto auto; margin-bottom: 2.5rem; }
+	/* The top sheet fills row 1; the second sheet spans both rows and its subgrid puts the client list in row 2, below the tear */
+	.card-surface, .stack-layer { grid-column: 1; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 0 0 .5rem .5rem; }
+	.card-surface { grid-row: 1; position: relative; z-index: 2; border-bottom: none; border-radius: 0; filter: drop-shadow(0 1px 1.5px rgb(0 0 0 / .1)); }
+	.stack-layer { grid-row: 1 / 3; }
+	.stack-layer-front { z-index: 1; display: grid; grid-template-rows: subgrid; transform: rotate(-.35deg) translateY(3px); }
+	.stack-layer-back { z-index: 0; transform: rotate(.65deg) translateY(5px); }
 	.color-bar { display: flex; height: 6px; }
 	.color-bar span { flex: 1; }
-	.card-body { --pad: clamp(1.25rem, 3vw, 2.25rem); padding: var(--pad); }
-	header { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+	/* Same 1rem top padding as the grid cards */
+	.card-body { padding: 1rem var(--pad) var(--pad); overflow: hidden; transition: max-height 450ms cubic-bezier(0.4, 0, 0.2, 1); }
+	/* Collapsed to about twice a project card's visible sheet (168px at desktop) */
+	.card-body.collapsed { max-height: 20.5rem; -webkit-mask-image: linear-gradient(to bottom, black calc(100% - 3rem), transparent); mask-image: linear-gradient(to bottom, black calc(100% - 3rem), transparent); }
+	.tear { position: absolute; left: 0; right: 0; bottom: -8px; height: 16px; z-index: 1; }
+	.read-more-pill { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 20; display: flex; align-items: center; gap: .25rem; padding: .25rem .75rem; background: var(--bg-card); border: 1px solid #e5e7eb; border-radius: 9999px; font: 700 .625rem ui-monospace, monospace; text-transform: uppercase; letter-spacing: .05em; white-space: nowrap; color: #6b7280; box-shadow: 0 1px 3px rgba(0, 0, 0, .1); transition: all .2s ease; cursor: pointer; }
+	.manicule-card:hover .read-more-pill, .read-more-pill.expanded { color: #e76f51; border-color: #e76f51; }
+	.read-more-pill svg { transition: transform .2s ease; }
 	.label { margin: 0; color: #9ca3af; font: 700 .8125rem/1.5 ui-monospace, SFMono-Regular, Menlo, monospace; text-transform: uppercase; letter-spacing: .05em; }
-	h3 { margin: .4rem 0 0; color: var(--text-primary); font: 1.5rem Georgia, serif; }
-	.manicule-mark { flex-shrink: 0; border-radius: .5rem; transform: rotate(6deg); }
+	h3 { margin: .25rem 0 0; color: var(--text-primary); }
+	/* Floated so the logo's height doesn't push the intro away from the title */
+	.manicule-mark { float: right; margin: 0 0 .5rem 1rem; border-radius: .5rem; transform: rotate(6deg); }
 	:global(html.dark) .manicule-mark { background: #fff; padding: .35rem; }
-	.work-copy { margin-top: 1.25rem; }
+	.work-copy { margin-top: .25rem; }
 	.work-copy .intro { max-width: 70ch; }
 	.work-columns { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2rem; margin-top: 1.5rem; }
-	.work-copy p, .work-copy li { margin: 0; color: var(--text-secondary); font-size: 1rem; line-height: 1.6; }
+	.work-copy p, .work-copy li { margin: 0; color: var(--text-secondary); font-size: 1.125rem; line-height: 1.6; }
 	.work-copy strong { color: var(--text-primary); font-weight: 600; }
-	.work-copy h4 { margin: 0 0 .5rem; color: #9ca3af; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .875rem; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; }
+	.work-copy h4 { margin: 0 0 .5rem; color: #e76f51; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .875rem; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; }
 	.work-copy ul { margin: 0; padding-left: 1.25rem; list-style: disc; }
 	.work-copy li + li { margin-top: .5rem; }
-	.wave { margin: 2rem calc(-1 * var(--pad)) 0; }
-	.clients-section { padding-top: 1.25rem; }
+	.clients-section { grid-row: 2; padding: calc(0.5rem + 8px) var(--pad) max(1rem, var(--pad) - 0.75rem); }
 	.clients-head { display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
 	a.label { display: flex; align-items: center; gap: .25rem; }
-	.client-logos { list-style: none; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 1.25rem 2rem; margin: 1.25rem 0 0; padding: 0; }
+	.client-logos { list-style: none; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: .5rem 2rem; margin: .75rem 0 0; padding: 0; }
 	.client-logos li { margin: 0; min-width: 0; }
-	.client-logos a { display: flex; gap: .5rem; justify-content: center; align-items: center; height: 2.75rem; padding: .25rem; border-radius: .25rem; color: var(--text-primary) !important; font-size: 1.125rem; font-weight: 600; }
+	.client-logos a { display: flex; gap: .5rem; justify-content: center; align-items: center; height: 2.25rem; padding: .125rem .25rem; border-radius: .25rem; color: var(--text-primary) !important; font-size: 1.125rem; font-weight: 600; }
 	.client-logos a:focus-visible { outline: 2px solid var(--accent-color); outline-offset: 4px; }
 	.client-logos img { width: auto; max-width: 100%; height: 2rem; object-fit: contain; filter: grayscale(1); }
 	.client-logos img + span { white-space: nowrap; }
@@ -136,6 +173,6 @@
 	:global(html.dark) .client-logos a { background: #fff; color: #1f2937 !important; }
 	@media (max-width: 768px) {
 		.work-columns { grid-template-columns: 1fr; }
-		.client-logos { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+		.client-logos { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .5rem 1rem; }
 	}
 </style>

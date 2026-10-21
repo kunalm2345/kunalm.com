@@ -4,7 +4,7 @@
 
 @layer components {
 	blockquote {
-		@apply border-l-4 bg-orange-200 border-orange-400 p-4;
+		@apply border-l-4 border-orange-400 p-4;
 	}
 
 	p {
@@ -111,12 +111,18 @@
 	.no-single-line-list > li {
 		@apply block no-underline !important;
 	}
+
+	.squiggle-link:hover {
+		text-decoration: underline wavy;
+		text-decoration-thickness: 1px;
+		text-underline-offset: 4px;
+	}
 }
 
 /* Dark mode styles */
 :root {
-	--bg-primary: #faf9f6;
-	--bg-secondary: #ffffff;
+	--bg-primary: #f5f4ef;
+	--bg-card: #ffffff;
 	--text-primary: #1f2937;
 	--text-secondary: #6b7280;
 	--text-muted: #9ca3af;
@@ -126,7 +132,7 @@
 
 html.dark {
 	--bg-primary: #0f172a;
-	--bg-secondary: #1e293b;
+	--bg-card: #1e293b;
 	--text-primary: #f1f5f9;
 	--text-secondary: #cbd5e1;
 	--text-muted: #94a3b8;
@@ -139,22 +145,12 @@ html.dark body {
 	color: var(--text-primary);
 }
 
-html.dark .card-layer,
-html.dark .card-main {
-	background: var(--bg-secondary) !important;
-	border-color: var(--border-color) !important;
-}
-
 html.dark .card-main p {
 	color: var(--text-secondary);
 }
 
 html.dark .card-main .font-serif {
 	color: var(--text-primary);
-}
-
-html.dark .filter-btn {
-	background: var(--bg-secondary);
 }
 
 html.dark .footer-divider {
@@ -167,24 +163,16 @@ html.dark .dark-mode-toggle {
 	color: var(--text-muted);
 }
 
-html.dark .social-icon-btn {
-	background: var(--bg-secondary);
-	border-color: var(--border-color);
-	color: var(--text-muted);
-}
-
-html.dark input[type=\"email\"] {
-	background: var(--bg-secondary);
+html.dark input[type="email"] {
 	border-color: var(--border-color);
 	color: var(--text-primary);
 }
 
-html.dark input[type=\"email\"]::placeholder {
+html.dark input[type="email"]::placeholder {
 	color: var(--text-muted);
 }
 
 html.dark .read-more-pill {
-	background: var(--bg-secondary);
 	border-color: var(--border-color);
 	color: var(--text-muted);
 }
@@ -196,11 +184,6 @@ html.dark .wave-svg path[stroke] {
 
 html.dark .wave-svg path[fill^="url"] {
 	opacity: 0.6;
-}
-
-/* Dark mode vertical separator */
-html.dark .dark-separator {
-	background: var(--border-color);
 }
 
 /* Dark mode photo label text - stays dark on white bg */

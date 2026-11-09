@@ -60,15 +60,15 @@
 			</header>
 
 			<div class="work-copy">
-				<p class="intro">As a founding engineer, I had a lot of fun working with a small, young team on everything from client work, to marketing &amp; sales and building the internal agents to do all of it at scale.</p>
+				<p class="intro">As a founding engineer, I joined Manicule before we got into YC and I had a lot of fun working with a small, young team. I did everything from client work, to marketing &amp; sales, and to building internal agents to do all of it at scale.</p>
 
 				<div class="work-columns">
 					<section>
 						<h4>Client work</h4>
 						<ul>
-							<li><strong>Docs site revamps.</strong> I have written the technical docs for some of the biggest AI DevTool companies, including Greptile, Mastra and AgentMail. For coding agents, docs are the UI. Good docs mean your customer's agents understand your product better.</li>
-							<li><strong>Benchmarks.</strong> I ran several large-scale benchmarks showing how a client's product fares against the competition. Benchmark reports are excellent for Google AI search overviews btw!</li>
-							<li><strong>Cookbooks.</strong> I built several working demos showcasing a use case for our clients' products and wrote about how they work and can be customised. For example, I wrote Mastra's cookbook on how to build Software Factories!</li>
+							<li><strong>Technical Documentation.</strong> I wrote the docs for Greptile, AgentMail, and some more AI DevTool startups. For coding agents, docs are the UI. Good docs mean your customer's agents find and understand your product better.</li>
+							<li><strong>Benchmarks.</strong> I ran several benchmarks showing how a client's product fares against the competition. Benchmark reports are excellent for Google AI search overviews btw!</li>
+							<li><strong>Cookbooks.</strong> I built several working demos showcasing a use case for our clients' products and wrote about it. These are massive attention drivers on social media and reddit. For example, I wrote Mastra's cookbook on how to build Software Factories!</li>
 							<li><strong>SEO/AEO content.</strong> This includes tracking your brand rankings across Google search, AI chat apps and coding agents. Then finding new opportunities for keywords and search questions that you can rank for. And finally writing new pieces of content and refreshing old ones until you start getting organic traffic.</li>
 						</ul>
 					</section>
@@ -76,16 +76,16 @@
 					<section>
 						<h4>Sales and Outreach</h4>
 						<ul>
-							<li><strong>Outbound cold outreach.</strong> I like quality &gt; quantity. I find potential clients by being chronically online on X, and then talk to them to see if they need us.</li>
+							<li><strong>Outbound.</strong> I like quality &gt; quantity. I built agents for finding potential clients, then researching about their products, founders and the team, whether they are hiring for devrel/growth and if they have recently raised. I then did a quick audit tailored to their goals and methods. I start engaging with their posts or chatting with them on how they work.</li>
 							<li><strong>Audits &amp; proposals.</strong> I play around with their product, read their docs, and understand their positioning. This helps me concretely list out what they should be doing (to get discovered and used by coding agents!)</li>
-							<li><strong>Closing.</strong> The DMs and audits I send over get roughly a 40% reply rate (at around 10 emails/DMs a week). I then also take the sales call and do the client onboarding.</li>
+							<li><strong>Closing.</strong> The emails, DMs and audits I send get roughly a 40% reply rate because I send no more than ~10 a week. I then also take the sales call and do the client onboarding.</li>
 						</ul>
 					</section>
 
 					<section>
 						<h4>Engineering</h4>
 						<ul>
-							<li><strong>Internal agents.</strong> I helped build SKILLs, prompts and agents for our internal client service app. We use it to power all content operations across over half a dozen clients at a time with a client work team of just 4.</li>
+							<li><strong>Internal agents.</strong> I helped build skills, prompts and agents for our internal client service app. We use it to power all content operations across over half a dozen clients at a time with a service team of just 4 humans. We use Supermemory to manage client context, run slack bots on client slack channels,</li>
 							<li><strong>Writing platform.</strong> I also built a writing platform to collaborate with coding agents on writing technical content drafts. This fast-tracks human reviews for agents' writing and makes sure it follows SEO and readability best practices while not sounding like AI slop.</li>
 						</ul>
 					</section>

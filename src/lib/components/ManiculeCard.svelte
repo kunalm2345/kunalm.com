@@ -85,7 +85,7 @@
 					<section>
 						<h4>Engineering</h4>
 						<ul>
-							<li><strong>Internal agents.</strong> I helped build skills, prompts and agents for our internal client service app. We use it to power all content operations across over half a dozen clients at a time with a service team of just 4 humans. We use Supermemory to manage client context, run slack bots on client slack channels,</li>
+							<li><strong>Internal agent platform.</strong> I helped build skills, prompts and agents for our internal client service app. We use it to power all content operations across over half a dozen clients at a time with a service team of just 4 humans.</li>
 							<li><strong>Writing platform.</strong> I also built a writing platform to collaborate with coding agents on writing technical content drafts. This fast-tracks human reviews for agents' writing and makes sure it follows SEO and readability best practices while not sounding like AI slop.</li>
 						</ul>
 					</section>

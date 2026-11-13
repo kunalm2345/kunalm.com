@@ -7,7 +7,11 @@
     "limrun.png": "https://github.com/limrun-inc/skills/blob/main/assets/icon.png",
     "agentmail.svg": "https://github.com/agentmail-to/agentmail-docs/blob/main/fern/assets/logos/agentmail-logo-landscape-light.svg",
     "mastra.svg": "https://github.com/pheralb/svgl/blob/main/static/library/mastra-wordmark-light.svg",
-    "opencomputer.svg": "https://opencomputer.dev/logos/opencomputer.svg"
+    "opencomputer.svg": "https://opencomputer.dev/logos/opencomputer.svg",
+    "buttondown.png": "https://static-assets.buttondown.com/images/icons/icon@192.png",
+    "biocompute.png": "https://biocomputeinc.com/faviconfinal.png",
+    "deta.png": "https://github.com/deta.png",
+    "tmc.png": "https://assets.themorningcontext.com/next2/_next/static/media/tmc-header-logo.2674f4de.png"
   },
   "remoteSources": {
     "Surge": "https://surge.app/favicon.svg",

@@ -7,12 +7,12 @@
 	import { tagColors, type Tag } from '$lib/tags';
 
 	let isExpanded = $state(false);
-	
+
 	function toggleExpand() {
 		isExpanded = !isExpanded;
 	}
 
-	const barColors = (['Research', 'Dev', 'Content', 'Design', 'Marketing'] as Tag[]).map((tag) => tagColors[tag]);
+	const barColors = (['Research', 'Engineering', 'Content', 'Design', 'Marketing'] as Tag[]).map((tag) => tagColors[tag]);
 
 	let thumbEl: HTMLButtonElement;
 	let closeEl: HTMLButtonElement | undefined = $state();
@@ -87,15 +87,21 @@
 		<div class="hero-body">
 			<h1 class="hero-name font-serif text-4xl sm:text-5xl md:text-6xl mb-6">Kunal Mishra</h1>
 			<div class="text-2xl">
-				Hi! I'm Kunal, a marketing engineer, full stack dev and an electronics major at BITS, Goa.
-				<br><br>
-				Right now, I split my time between classes, working on research projects and building web products.
+				Hi! I'm Kunal, I like working with devtool, infra or AI startups on product engineering and technical marketing (I think these are closely related roles!).
 			</div>
 
 			<div id="about-more" class="expandable-section" class:expanded={isExpanded}>
 				<div class="text-2xl">
-					I fell in love with computers and the Internet when I was 10.
-					Ever since, I have written a few newsletters, did SEO, designing and consultant-work for startups and built a bunch of saas products that earned me some pocket money.
+					Right now, I spend my time:
+					<ul class="list-disc pl-8">
+						<li>indie-hacking small products</li>
+						<li>working on CS systems/networks research</li>
+						<li>scrolling twitter and reading abt marketing, agents, startups and health</li>
+					</ul>
+					<br>
+					I'm 21, graduating from BITS Pilani, Goa next year.
+                    <br><br>
+					I have spent my childhood on the internet, making friends, building SaaS web-apps, running newsletters, doing content/SEO gigs and consulting work.
 				</div>
 			</div>
 		</div>
@@ -113,29 +119,31 @@
 
 	<!-- Second sheet: the newsletter and social links show through where the top sheet is torn -->
 	<div class="stack-layer stack-layer-front">
-		<div class="hero-footer flex flex-col gap-6">
+		<div class="hero-footer flex flex-col gap-3">
 			<!-- Newsletter form -->
 			<div class="flex-1 min-w-0">
-				<p class="text-[#e76f51] font-mono text-sm font-semibold uppercase tracking-wider mb-3">Subscribe to get my weeknotes newsletter</p>
+				<p class="text-[#e76f51] font-mono text-sm font-semibold uppercase tracking-wider">Contact me</p>
+				<!-- Newsletter signup, hidden for now (add mb-3 back to the label above when restoring)
 				<form
 					action="https://buttondown.com/api/emails/embed-subscribe/kunal"
 					method="post"
 					class="flex flex-col sm:flex-row gap-3"
 				>
-					<input 
-						type="email" 
-						name="email" 
-						id="bd-email" 
+					<input
+						type="email"
+						name="email"
+						id="bd-email"
 						placeholder="Enter your email"
 						class="flex-1 min-w-0 px-4 py-2 bg-transparent border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#e76f51] focus:border-transparent"
 					/>
-					<button 
-						type="submit" 
+					<button
+						type="submit"
 						class="px-6 py-2 bg-[#e76f51] text-white text-sm font-mono uppercase tracking-wider rounded-lg hover:bg-[#d4532a] transition-colors"
 					>
 						Subscribe
 					</button>
 				</form>
+				-->
 			</div>
 			<!-- Social icons -->
 			<nav class="list-none">
@@ -207,7 +215,7 @@
 		display: grid;
 		grid-template-rows: auto auto;
 		width: min(100%, max(36rem, (min(100%, 77rem) - 3.5rem) * 7 / 12));
-		margin: clamp(1.5rem, 4vw, 2.5rem) auto 5rem;
+		margin: clamp(1.5rem, 4vw, 2.5rem) auto 3rem;
 	}
 
 	.stack-layer,
@@ -500,7 +508,7 @@
 	}
 
 	.expandable-section.expanded {
-		max-height: 500px;
+		max-height: 1200px;
 		margin-top: 1.5rem;
 		opacity: 1;
 	}

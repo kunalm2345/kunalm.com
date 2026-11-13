@@ -156,7 +156,7 @@
 	const tilt3 = dir3 * (1.2 + random() * 0.8);
 </script>
 
-<div class="block group" class:card-1x1={!is1x2} class:card-1x2={is1x2} class:card-cta={isCta} class:card-expanded={isExpanded} style:--dir-2={dir2} style:--dir-3={dir3} style:--tilt-2="{tilt2.toFixed(2)}deg" style:--tilt-3="{tilt3.toFixed(2)}deg">
+<div class="block group" class:card-1x1={!is1x2} class:card-1x2={is1x2} class:card-cta={isCta} class:card-expanded={isExpanded} class:card-fit={!content && !is1x2} style:--dir-2={dir2} style:--dir-3={dir3} style:--tilt-2="{tilt2.toFixed(2)}deg" style:--tilt-3="{tilt3.toFixed(2)}deg">
 	<div class="card-wrapper" bind:this={wrapperEl}>
 		<!-- Card 3 (bottom of stack) -->
 		<div class="card-layer card-layer-3" class:cta-layer={isCta}></div>
@@ -283,7 +283,9 @@
 	}
 
 	/* When expanded, wrapper grows to fit content */
-	.card-expanded .card-wrapper::before {
+	/* card-fit: a card with no body text is only as tall as its title */
+	.card-expanded .card-wrapper::before,
+	.card-fit .card-wrapper::before {
 		display: none;
 	}
 
@@ -370,6 +372,11 @@
 		padding-bottom: 0.5rem;
 	}
 
+	/* Title-only cards: same space below the title as above it */
+	.card-fit .torn .card-content {
+		padding-bottom: 1rem;
+	}
+
 	.text-section {
 		flex: 1;
 		overflow: hidden;
@@ -390,12 +397,14 @@
 		z-index: 10;
 	}
 
-	.card-expanded .card-main {
+	.card-expanded .card-main,
+	.card-fit .card-main {
 		position: relative;
 		height: auto !important;
 	}
 
-	.card-expanded .sheet {
+	.card-expanded .sheet,
+	.card-fit .sheet {
 		flex: none;
 	}
 
@@ -476,6 +485,7 @@
 	.group:hover .image-notification {
 		transform: scale(1.05);
 	}
+
 
 	.footer-section {
 		display: flex;

@@ -36,6 +36,6 @@
 		"@tiptap/starter-kit": "^3.4.3",
 		"@vercel/functions": "^3.11.3",
 		"marked": "^15.0.4",
-		"returnmd": "file:vendor/returnmd-0.1.0.tgz"
+		"returnmd": "file:vendor/returnmd-0.2.0.tgz"
 	}
 }
